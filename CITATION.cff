@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+authors:
+- family-names: "Oliveira"
+  given-names: "Bruno Vitorelli Tacca"
+  orcid: "https://orcid.org/0000-0002-2996-8360"
+title: "Project Title CHANGE-ME"
+url: "https://github.com/brunotacca/???CHANGE-ME???"
+year: 2022
+version: 0.0.0-WIP
+preferred-citation:
+  type: software
+  authors:
+  - family-names: "Oliveira"
+    given-names: "Bruno Vitorelli Tacca"
+    orcid: "https://orcid.org/0000-0002-2996-8360"
+  title: "Project Title CHANGE-ME"
+  url: "https://github.com/brunotacca/???CHANGE-ME???""
+  year: 2022
+  version: 0.0.0-WIP

@@ -1,6 +1,6 @@
 ---
 name: Documentation error
-about: You are reading this project documentation but it was wrong, confusing, something looks wrong or could be better.
+about: You are reading this project documentation but it was wrong, confusing, something looks bad or could be better.
 title: ''
 labels: ''
 assignees: ''

@@ -10,7 +10,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 
 - Spring (easy DI setup (Spring IoC))
 - SpringBoot (Quick Spring project setup)
-- Maven MultiModules (Hard Architectural Boundaries)
+- Maven MultiModules (Enforced Architectural Boundaries)
 
 **Extras:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real world application, the test suit doesn't go further than integration and unit tests.
 

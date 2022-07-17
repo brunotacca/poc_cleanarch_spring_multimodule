@@ -9,9 +9,9 @@ assignees: ''
 <!-- Thank you for helping!
 
      If you are looking for support, please check out our documentation or consider asking a question on our Discussions:
-      * https://github.com/brunotacca/???CHANGE-ME???/discussions
-      * https://github.com/brunotacca/???CHANGE-ME???/blob/main/docs/GET_STARTED.md
-      * https://github.com/brunotacca/???CHANGE-ME???/blob/main/docs/SUPPORT.md
+      * https://github.com/brunotacca/poc_cleanarch_spring_multimodules/discussions
+      * https://github.com/brunotacca/poc_cleanarch_spring_multimodules/blob/main/docs/GET_STARTED.md
+      * https://github.com/brunotacca/poc_cleanarch_spring_multimodules/blob/main/docs/SUPPORT.md
 
      If you have found a bug or if our documentation doesn't have an answer
      to what you're looking for, then fill out the template below. 

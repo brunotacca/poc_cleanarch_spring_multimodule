@@ -4,8 +4,8 @@ authors:
 - family-names: "Oliveira"
   given-names: "Bruno Vitorelli Tacca"
   orcid: "https://orcid.org/0000-0002-2996-8360"
-title: "POC SpringBoot CleanArchitecture with Maven Multimodules"
-url: "https://github.com/brunotacca/poc_cleanarch_spring_multimodules"
+title: "POC SpringBoot CleanArchitecture with Maven Multimodule"
+url: "https://github.com/brunotacca/poc_cleanarch_spring_multimodule"
 year: 2022
 version: 0.0.0-WIP
 preferred-citation:
@@ -14,7 +14,7 @@ preferred-citation:
   - family-names: "Oliveira"
     given-names: "Bruno Vitorelli Tacca"
     orcid: "https://orcid.org/0000-0002-2996-8360"
-  title: "POC SpringBoot CleanArchitecture with Maven Multimodules"
-  url: "https://github.com/brunotacca/poc_cleanarch_spring_multimodules"
+  title: "POC SpringBoot CleanArchitecture with Maven Multimodule"
+  url: "https://github.com/brunotacca/poc_cleanarch_spring_multimodule"
   year: 2022
   version: 0.0.0-WIP

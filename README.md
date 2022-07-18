@@ -1,16 +1,16 @@
-# Clean Architecture + SpringBoot + MultiModules
+# Clean Architecture + SpringBoot + MultiModule
 
-SpringBoot project structured with Clean Architecture enforced by Maven MultiModules with whipped cream (Automated Tests) and a cherry added on top (Code Quality Analysis).
+SpringBoot project structured with Clean Architecture enforced by Maven MultiModule with whipped cream (Automated Tests) and a cherry added on top (Code Quality Analysis).
 
 ![](https://img.shields.io/badge/Status-WIP-orange)
 
 ### Proof of Concept:
 
-Simple application (domain complexity) with hard architectural boundaries enforced by maven multimodules following Clean Architectural guidelines using Spring to make DI easy.
+Simple application (domain complexity) with hard architectural boundaries enforced by maven multimodule following Clean Architectural guidelines using Spring to make DI easy.
 
 - Spring (easy DI setup (Spring IoC))
 - SpringBoot (Quick Spring project setup)
-- Maven MultiModules (Enforced Architectural Boundaries)
+- Maven MultiModule (Enforced Architectural Boundaries)
 
 **Extras:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real world application, the test suit doesn't go further than integration and unit tests.
 

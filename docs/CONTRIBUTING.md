@@ -40,14 +40,14 @@ if you feel ready after those readings, then first and foremost choose or open a
 
 `#TODO CHANGE-ME REVIEW-ME`
 
-Take a couple of minutes to [search if an issue already exists](https://docs.github.com/en/github/searching-for-information-on-github/searching-on-github/searching-issues-and-pull-requests#search-by-the-title-body-or-comments). If a related issue doesn't exist, you can open a new issue using a relevant [issue form](https://github.com/brunotacca/poc_cleanarch_spring_multimodules/issues/new/choose). There will be some options for you to choose then you can follow the guidelines provided on the template, make sure to read it all, and don't be afraid to send it. If you want to submit new computing methods, open an issue as a feature request.
+Take a couple of minutes to [search if an issue already exists](https://docs.github.com/en/github/searching-for-information-on-github/searching-on-github/searching-issues-and-pull-requests#search-by-the-title-body-or-comments). If a related issue doesn't exist, you can open a new issue using a relevant [issue form](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/issues/new/choose). There will be some options for you to choose then you can follow the guidelines provided on the template, make sure to read it all, and don't be afraid to send it. If you want to submit new computing methods, open an issue as a feature request.
 
 
 #### Solve an issue
 
 `#TODO CHANGE-ME`
 
-Scan through our [existing issues](https://github.com/brunotacca/poc_cleanarch_spring_multimodules/issues) to find one that interests you. As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix.
+Scan through our [existing issues](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/issues) to find one that interests you. As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix.
 
 ### 2. Make Changes
 

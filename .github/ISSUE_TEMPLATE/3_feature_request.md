@@ -10,9 +10,9 @@ assignees: ''
 <!-- Thank you for helping!
 
      If you are looking for support, please check out our documentation or consider asking a question on our Discussions:
-      * https://github.com/brunotacca/poc_cleanarch_spring_multimodules/discussions
-      * https://github.com/brunotacca/poc_cleanarch_spring_multimodules/blob/main/docs/GET_STARTED.md
-      * https://github.com/brunotacca/poc_cleanarch_spring_multimodules/blob/main/docs/SUPPORT.md
+      * https://github.com/brunotacca/poc_cleanarch_spring_multimodule/discussions
+      * https://github.com/brunotacca/poc_cleanarch_spring_multimodule/blob/main/docs/GET_STARTED.md
+      * https://github.com/brunotacca/poc_cleanarch_spring_multimodule/blob/main/docs/SUPPORT.md
 
 -->
 

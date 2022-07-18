@@ -22,7 +22,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - SonarQube
 - GitHub Actions
 
-### Table of Contents
+### Documents
 
 * [Setup and Configuration](docs/GET_STARTED.md)
 * [Project Architecture](docs/PROJECT_ARCHITECTURE.md)

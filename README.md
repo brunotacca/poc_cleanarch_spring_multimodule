@@ -22,6 +22,11 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - SonarQube
 - GitHub Actions
 
+**Extra 3:** Reactive java project, just because.
+
+- Spring Webflux
+- Project Reactor
+
 ### Documents
 
 * [Setup and Configuration](docs/GET_STARTED.md)

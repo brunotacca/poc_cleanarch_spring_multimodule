@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>com.brunotacca</groupId>
-  <artifactId>adapter.gateways</artifactId>
+  <artifactId>adapter.presenters</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
 </project>

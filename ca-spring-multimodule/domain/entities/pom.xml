@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>com.brunotacca</groupId>
-  <artifactId>entities</artifactId>
+  <artifactId>domain.entities</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
 </project>

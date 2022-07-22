@@ -6,4 +6,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [Unreleased]
 
-[Unreleased]: https://github.com/brunotacca/poc_cleanarch_spring_multimodule/b841832...HEAD
+[Unreleased]: https://github.com/brunotacca/poc_cleanarch_spring_multimodule/compare/b841832...HEAD

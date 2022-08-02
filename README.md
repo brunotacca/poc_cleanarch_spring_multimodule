@@ -27,7 +27,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - Spring Webflux
 - Project Reactor
 
-**Extra 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. Check out the [Project Domain].
+**Extra 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
 
 ### Documents
 

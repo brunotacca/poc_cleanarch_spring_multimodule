@@ -10,7 +10,7 @@
     <relativePath /> <!-- lookup parent from maven repository -->
   </parent>
 
-  <groupId>com.brunotacca</groupId>
+  <groupId>com.brunotacca.caspringmultimodule</groupId>
   <artifactId>ca-spring-multimodule</artifactId>
 
   <version>0.0.1-SNAPSHOT</version>

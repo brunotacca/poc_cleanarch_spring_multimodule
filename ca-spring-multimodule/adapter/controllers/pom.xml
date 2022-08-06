@@ -4,13 +4,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.brunotacca</groupId>
+    <groupId>com.brunotacca.caspringmultimodule</groupId>
     <artifactId>adapter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.brunotacca</groupId>
-  <artifactId>adapter.controllers</artifactId>
+  <groupId>com.brunotacca.caspringmultimodule</groupId>
+  <artifactId>adapter-controllers</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
 </project>

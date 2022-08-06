@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.brunotacca.domain.entities.CustomDisplayNameGenerator;
-import com.brunotacca.domain.entities.shared.exceptions.DomainException;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 public class CustomerFactoryTest {
@@ -21,7 +21,7 @@ public class CustomerFactoryTest {
   private Address validAddress = mock(Address.class, Mockito.RETURNS_DEEP_STUBS);
 
   @Test
-  void shouldCreateCustomerWithId() throws DomainException {
+  void shouldCreateCustomerWithId() throws BusinessException {
     Customer validCustomer = CustomerFactory.create(validName, validEmail, validAddress);
 
     assertNotNull(validCustomer);
@@ -34,13 +34,13 @@ public class CustomerFactoryTest {
 
   @Test
   void shouldThrowWhenInvalidProperties() {
-    assertThrows(DomainException.class, () -> {
+    assertThrows(BusinessException.class, () -> {
       CustomerFactory.create(null, validEmail, validAddress);  
     });  
-    assertThrows(DomainException.class, () -> {
+    assertThrows(BusinessException.class, () -> {
       CustomerFactory.create(validName, null, validAddress);  
     });  
-    assertThrows(DomainException.class, () -> {
+    assertThrows(BusinessException.class, () -> {
       CustomerFactory.create(validName, validEmail, null);  
     });  
   }

@@ -3,7 +3,7 @@ package com.brunotacca.domain.entities.customer;
 import static com.brunotacca.domain.entities.shared.utils.ValidationUtils.*;
 
 import com.brunotacca.domain.entities.shared.entities.BaseValueObject;
-import com.brunotacca.domain.entities.shared.exceptions.DomainException;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
 
 import lombok.EqualsAndHashCode;
@@ -18,7 +18,7 @@ public class Address extends BaseValueObject {
   private final String zip;
   private final String city;
 
-  public Address(String street, String number, String zip, String city) throws DomainException {
+  public Address(String street, String number, String zip, String city) throws BusinessException {
     this.street = street;
     this.number = number;
     this.zip = zip;
@@ -27,7 +27,7 @@ public class Address extends BaseValueObject {
   }
 
   @Override
-  public void validate() throws DomainException {
+  public void validate() throws BusinessException {
     if(isNullOrEmpty(this.street)) throw new RequiredFieldException("street");
     if(isNullOrEmpty(this.number)) throw new RequiredFieldException("number");
     if(isNullOrEmpty(this.zip)) throw new RequiredFieldException("zip");

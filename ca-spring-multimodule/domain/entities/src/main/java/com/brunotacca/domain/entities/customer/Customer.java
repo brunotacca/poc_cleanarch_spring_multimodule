@@ -1,6 +1,6 @@
 package com.brunotacca.domain.entities.customer;
 
-import com.brunotacca.domain.entities.shared.exceptions.DomainException;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 
 public interface Customer {
   
@@ -10,9 +10,9 @@ public interface Customer {
   public Address getAddress();
   public Boolean isActive();
   
-  public Customer changeName(String newName) throws DomainException;
-  public Customer changeEmail(String newEmail) throws DomainException;
-  public Customer changeAddress(Address newAddr) throws DomainException;
+  public Customer changeName(String newName) throws BusinessException;
+  public Customer changeEmail(String newEmail) throws BusinessException;
+  public Customer changeAddress(Address newAddr) throws BusinessException;
   public Customer activate();
   public Customer deactivate();
 

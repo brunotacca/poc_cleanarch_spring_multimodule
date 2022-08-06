@@ -1,8 +1,8 @@
 package com.brunotacca.domain.entities.shared.exceptions.causes;
 
-import com.brunotacca.domain.entities.shared.exceptions.DomainException;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 
-public class RequiredFieldException extends DomainException {
+public class RequiredFieldException extends BusinessException {
 
   public final static String PATTERN = "Field %s is required.";
   

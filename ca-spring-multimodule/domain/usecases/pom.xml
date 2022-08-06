@@ -10,7 +10,15 @@
   </parent>
 
   <groupId>com.brunotacca</groupId>
-  <artifactId>domain.usecases</artifactId>
+  <artifactId>domain-usecases</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>domain-entities</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 
 </project>

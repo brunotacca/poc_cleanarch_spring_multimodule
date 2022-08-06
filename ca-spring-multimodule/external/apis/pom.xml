@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>com.brunotacca</groupId>
-  <artifactId>external.apis</artifactId>
+  <artifactId>external-apis</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <dependencies>

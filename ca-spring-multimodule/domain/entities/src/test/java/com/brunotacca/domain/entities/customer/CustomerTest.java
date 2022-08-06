@@ -26,7 +26,7 @@ public class CustomerTest {
   @BeforeEach
   void beforeEach() {
     try {
-      this.validCustomer = CustomerFactory.create(validName, validEmail, validAddress);
+      this.validCustomer = CustomerFactory.createCustomer(validName, validEmail, validAddress);
     } catch (Exception e) {
       fail(e.getMessage());
     }

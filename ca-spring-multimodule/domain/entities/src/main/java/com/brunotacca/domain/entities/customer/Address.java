@@ -11,14 +11,14 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class Address extends BaseValueObject {
+class Address extends BaseValueObject {
   
   private final String street;
   private final String number;
   private final String zip;
   private final String city;
 
-  public Address(String street, String number, String zip, String city) throws BusinessException {
+  protected Address(String street, String number, String zip, String city) throws BusinessException {
     this.street = street;
     this.number = number;
     this.zip = zip;

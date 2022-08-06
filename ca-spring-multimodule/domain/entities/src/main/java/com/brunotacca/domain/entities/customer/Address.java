@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-class Address extends BaseValueObject {
+public class Address extends BaseValueObject {
   
   private final String street;
   private final String number;

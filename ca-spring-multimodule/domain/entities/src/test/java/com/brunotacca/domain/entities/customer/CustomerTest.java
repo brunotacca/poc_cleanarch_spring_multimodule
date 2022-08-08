@@ -23,10 +23,12 @@ public class CustomerTest {
   private Address validAddress = mock(Address.class, Mockito.RETURNS_DEEP_STUBS);
   private Customer validCustomer;
 
+  private final CustomerFactory customerFactory = new CustomerFactory();
+
   @BeforeEach
   void beforeEach() {
     try {
-      this.validCustomer = CustomerFactory.createCustomer(validName, validEmail, validAddress);
+      this.validCustomer = customerFactory.createCustomer(validName, validEmail, validAddress);
     } catch (Exception e) {
       fail(e.getMessage());
     }

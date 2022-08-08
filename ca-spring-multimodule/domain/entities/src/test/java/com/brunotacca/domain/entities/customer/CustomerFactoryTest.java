@@ -26,12 +26,14 @@ public class CustomerFactoryTest {
   private final String validZip = "000000-000";
   private final String validCity = "city";
 
+  private final CustomerFactory customerFactory = new CustomerFactory();
+
   @Nested
   class ForCustomerIt {
     @Test
     void shouldCreateCustomerWithId() {
       try {
-        Customer validCustomer = CustomerFactory.createCustomer(validName, validEmail, validAddress);
+        Customer validCustomer = customerFactory.createCustomer(validName, validEmail, validAddress);
     
         assertNotNull(validCustomer);
         assertNotNull(validCustomer.getId());
@@ -48,13 +50,13 @@ public class CustomerFactoryTest {
     @Test
     void shouldThrowWhenCreatingCustomerWithInvalidProperties() {
       assertThrows(BusinessException.class, () -> {
-        CustomerFactory.createCustomer(null, validEmail, validAddress);  
+        customerFactory.createCustomer(null, validEmail, validAddress);  
       });  
       assertThrows(BusinessException.class, () -> {
-        CustomerFactory.createCustomer(validName, null, validAddress);  
+        customerFactory.createCustomer(validName, null, validAddress);  
       });  
       assertThrows(BusinessException.class, () -> {
-        CustomerFactory.createCustomer(validName, validEmail, null);  
+        customerFactory.createCustomer(validName, validEmail, null);  
       });  
     }  
   }
@@ -64,7 +66,7 @@ public class CustomerFactoryTest {
     @Test
     void shouldCreateAnAddress() {
       try {
-        Address validAddress = CustomerFactory.createAddress(validStreet, validNumber, validZip, validCity);
+        Address validAddress = customerFactory.createAddress(validStreet, validNumber, validZip, validCity);
     
         assertNotNull(validAddress);
         assertEquals(validAddress.getStreet(), validStreet);
@@ -79,16 +81,16 @@ public class CustomerFactoryTest {
     @Test
     void shouldThrowWhenCreatingAddressWithInvalidProperties() {
       assertThrows(BusinessException.class, () -> {
-        CustomerFactory.createAddress(null, validNumber, validZip, validCity);
+        customerFactory.createAddress(null, validNumber, validZip, validCity);
       });  
       assertThrows(BusinessException.class, () -> {
-        CustomerFactory.createAddress(validStreet, null, validZip, validCity);
+        customerFactory.createAddress(validStreet, null, validZip, validCity);
       });  
       assertThrows(BusinessException.class, () -> {
-        CustomerFactory.createAddress(validStreet, validNumber, null, validCity);
+        customerFactory.createAddress(validStreet, validNumber, null, validCity);
       });  
       assertThrows(BusinessException.class, () -> {
-        CustomerFactory.createAddress(validStreet, validNumber, validZip, null);
+        customerFactory.createAddress(validStreet, validNumber, validZip, null);
       });  
     }  
   }

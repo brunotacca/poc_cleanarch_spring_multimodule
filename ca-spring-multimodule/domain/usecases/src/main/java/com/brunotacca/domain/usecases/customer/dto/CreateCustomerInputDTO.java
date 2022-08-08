@@ -1,4 +1,4 @@
-package com.brunotacca.domain.usecases.customer.create;
+package com.brunotacca.domain.usecases.customer.dto;
 
 public record CreateCustomerInputDTO(
   String name,

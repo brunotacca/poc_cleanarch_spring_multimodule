@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.With;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-class TheCustomer extends BaseEntity implements Customer {
+class DefaultCustomer extends BaseEntity implements Customer {
 
   private final String id;
 
@@ -28,7 +28,7 @@ class TheCustomer extends BaseEntity implements Customer {
   @With(AccessLevel.PRIVATE)
   private final Boolean active;
 
-  protected TheCustomer(String id, String name, String email, Address address) throws BusinessException {
+  protected DefaultCustomer(String id, String name, String email, Address address) throws BusinessException {
     this.id = id;
     this.name = name;
     this.email = email;
@@ -74,21 +74,21 @@ class TheCustomer extends BaseEntity implements Customer {
 
   @Override
   public Customer changeName(String newName) throws BusinessException {
-    TheCustomer c = this.name == newName ? this : this.withName(newName);
+    DefaultCustomer c = this.name == newName ? this : this.withName(newName);
     c.validate();
     return c;
   }
 
   @Override
   public Customer changeEmail(String newEmail) throws BusinessException {
-    TheCustomer c = this.email == newEmail ? this : this.withEmail(newEmail);
+    DefaultCustomer c = this.email == newEmail ? this : this.withEmail(newEmail);
     c.validate();
     return c;
   }
 
   @Override
   public Customer changeAddress(Address newAddr) throws BusinessException {
-    TheCustomer c = this.address == newAddr ? this : this.withAddress(newAddr); 
+    DefaultCustomer c = this.address == newAddr ? this : this.withAddress(newAddr); 
     c.validate();
     return c;
   }

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -31,8 +30,7 @@ public class CustomerFactoryTest {
   @Nested
   class ForCustomerIt {
     @Test
-    void shouldCreateCustomerWithId() {
-      try {
+    void shouldCreateCustomerWithId() throws BusinessException {
         Customer validCustomer = customerFactory.createCustomer(validName, validEmail, validAddress);
     
         assertNotNull(validCustomer);
@@ -41,10 +39,6 @@ public class CustomerFactoryTest {
         assertEquals(validCustomer.getName(), validName);
         assertEquals(validCustomer.getEmail(), validEmail);
         assertEquals(validCustomer.getAddress(), validAddress);
-
-      } catch (Exception e) {
-        fail(e.getMessage());
-      }
     }
   
     @Test
@@ -64,8 +58,7 @@ public class CustomerFactoryTest {
   @Nested
   class ForAddressIt {
     @Test
-    void shouldCreateAnAddress() {
-      try {
+    void shouldCreateAnAddress() throws BusinessException {
         Address validAddress = customerFactory.createAddress(validStreet, validNumber, validZip, validCity);
     
         assertNotNull(validAddress);
@@ -73,9 +66,6 @@ public class CustomerFactoryTest {
         assertEquals(validAddress.getNumber(), validNumber);
         assertEquals(validAddress.getZip(), validZip);
         assertEquals(validAddress.getCity(), validCity);
-      } catch (Exception e) {
-        fail(e.getMessage());
-      }
     }
   
     @Test

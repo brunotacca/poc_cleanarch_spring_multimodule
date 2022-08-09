@@ -2,7 +2,6 @@ package com.brunotacca.domain.entities.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -12,26 +11,23 @@ import org.mockito.Mockito;
 
 import static org.mockito.Mockito.mock;
 
+import java.util.UUID;
+
 import com.brunotacca.domain.entities.CustomDisplayNameGenerator;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class CustomerTest {
+public class DefaultCustomerTest {
 
   private String validName = "Foo Bar";
   private String validEmail = "foo@bar.com";
   private Address validAddress = mock(Address.class, Mockito.RETURNS_DEEP_STUBS);
   private Customer validCustomer;
 
-  private final CustomerFactory customerFactory = new CustomerFactory();
-
   @BeforeEach
-  void beforeEach() {
-    try {
-      this.validCustomer = customerFactory.createCustomer(validName, validEmail, validAddress);
-    } catch (Exception e) {
-      fail(e.getMessage());
-    }
+  void beforeEach() throws BusinessException {
+    this.validCustomer = new DefaultCustomer(UUID.randomUUID().toString(), validName, validEmail, validAddress);
   }
 
   @Nested
@@ -73,54 +69,34 @@ public class CustomerTest {
   class CustomerPropertiesShouldChange {
 
     @Test
-    void withValidName() {
-      try {
-        String newValidName = "Bruno Tacca";
-        Customer c = validCustomer.changeName(newValidName);
-        assertEquals(c.getName(), newValidName);
-      } catch (Exception e) {
-        fail(e.getMessage());
-      }
-
+    void withValidName() throws BusinessException {
+      String newValidName = "Bruno Tacca";
+      Customer c = validCustomer.changeName(newValidName);
+      assertEquals(c.getName(), newValidName);
     }
 
     @Test
-    void withValidEmail() {
-      try {
-        String newValidEmail = "brunotacca@gmail.com";
-        Customer c = validCustomer.changeEmail(newValidEmail);
-        assertEquals(c.getEmail(), newValidEmail);
-      } catch (Exception e) {
-        fail(e.getMessage());
-      }
-
+    void withValidEmail() throws BusinessException {
+      String newValidEmail = "brunotacca@gmail.com";
+      Customer c = validCustomer.changeEmail(newValidEmail);
+      assertEquals(c.getEmail(), newValidEmail);
     }
 
     @Test
-    void withValidAddress() {
-      try {
-        Address newValidAddress = new Address("street", "123-A", "00000-000", "city");
-        Customer c = validCustomer.changeAddress(newValidAddress);
-        assertEquals(c.getAddress(), newValidAddress);
-      } catch (Exception e) {
-        fail(e.getMessage());
-      }
-
+    void withValidAddress() throws BusinessException {
+      Address newValidAddress = new Address("street", "123-A", "00000-000", "city");
+      Customer c = validCustomer.changeAddress(newValidAddress);
+      assertEquals(c.getAddress(), newValidAddress);
     }
 
     @Test
     void whenActivatingOrDeactivating() {
-      try {
-        Customer c = validCustomer.deactivate();
-        assertEquals(c.isActive(), false);
-        Customer c2 = validCustomer.activate();
-        assertEquals(c2.isActive(), true);
-        Customer c3 = validCustomer.deactivate();
-        assertEquals(c3.isActive(), false);
-      } catch (Exception e) {
-        fail(e.getMessage());
-      }
-
+      Customer c = validCustomer.deactivate();
+      assertEquals(c.isActive(), false);
+      Customer c2 = validCustomer.activate();
+      assertEquals(c2.isActive(), true);
+      Customer c3 = validCustomer.deactivate();
+      assertEquals(c3.isActive(), false);
     }
 
   }

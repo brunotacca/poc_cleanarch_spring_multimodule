@@ -101,8 +101,7 @@ public class CreateCustomerUseCaseTest {
     @Test
     void whenDataAccessThrows() throws BusinessException, DataAccessException {
       prepareStubs();
-      // when(customerDataAccessMock.save(any())).thenThrow(new DataAccessException(""));
-      doThrow(new DataAccessException("")).when(customerDataAccessMock).save(any());
+      doThrow(new DataAccessException("Test cause")).when(customerDataAccessMock).save(any());
       assertThrows(DataAccessException.class,() -> createCustomerUseCase.execute(validInputDTO));
     }
 

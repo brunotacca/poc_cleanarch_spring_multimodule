@@ -7,7 +7,7 @@ import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 public class CustomerFactory {
 
   public Customer createCustomer(String name, String email, Address address) throws BusinessException {
-    final Customer customer = new TheCustomer(UUID.randomUUID().toString(), name, email, address);
+    final Customer customer = new DefaultCustomer(UUID.randomUUID().toString(), name, email, address);
     return customer;
   }
   

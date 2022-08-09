@@ -1,13 +1,13 @@
 package com.brunotacca.domain.entities.customer;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import com.brunotacca.domain.entities.CustomDisplayNameGenerator;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
@@ -19,12 +19,8 @@ public class AddressTest {
   private final String validCity = "city";
 
   @Test
-  void shouldCreateValidAddress() {
-    try {
-      new Address(validStreet, validNumber, validZip, validCity);
-    } catch (Exception e) {
-      fail(e.getMessage());
-    }
+  void shouldCreateValidAddress() throws BusinessException {
+    new Address(validStreet, validNumber, validZip, validCity);
   }
   
 

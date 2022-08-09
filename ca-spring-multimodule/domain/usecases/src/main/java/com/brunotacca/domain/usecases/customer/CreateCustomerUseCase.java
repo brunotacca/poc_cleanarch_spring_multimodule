@@ -41,7 +41,7 @@ class CreateCustomerUseCase extends UseCase.InputOutput<CreateCustomerInputDTO, 
     }
 
     // Create
-    customerDataAccess.save(customer);
+    customerDataAccess.save(customer); // this throws
 
     // Convert respose to output
     CustomerOutputDTO outputDTO = customerMapper.fromCustomer(customer);

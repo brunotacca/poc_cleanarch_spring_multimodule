@@ -18,6 +18,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>adapter-controllers</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
 </project>

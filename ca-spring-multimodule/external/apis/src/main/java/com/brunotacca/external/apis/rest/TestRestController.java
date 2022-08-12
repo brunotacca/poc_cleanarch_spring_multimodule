@@ -25,6 +25,8 @@ public class TestRestController {
     CustomerOutputDTO output = customerController.createCustomer(new CreateCustomerInputDTO("name", "email", "street", "number", "city", "zip"));
 
     System.err.println("Customer: "+output);
+
+    System.out.println("trying sonar commit");
   }
 
 }

@@ -4,6 +4,8 @@ SpringBoot project structured with Clean Architecture enforced by Maven MultiMod
 
 ![](https://img.shields.io/badge/Status-WIP-orange)
 
+[![Sonar Analysis](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml/badge.svg)](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml)
+
 ### Proof of Concept:
 
 Simple application (domain complexity) with hard architectural boundaries enforced by maven multimodule following Clean Architectural guidelines using Spring to make DI easy.

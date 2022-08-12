@@ -74,33 +74,33 @@ class DefaultCustomer extends BaseEntity implements Customer {
 
   @Override
   public Customer changeName(String newName) throws BusinessException {
-    DefaultCustomer c = this.name == newName ? this : this.withName(newName);
+    DefaultCustomer c = this.name.equals(newName) ? this : this.withName(newName);
     c.validate();
     return c;
   }
 
   @Override
   public Customer changeEmail(String newEmail) throws BusinessException {
-    DefaultCustomer c = this.email == newEmail ? this : this.withEmail(newEmail);
+    DefaultCustomer c = this.email.equals(newEmail) ? this : this.withEmail(newEmail);
     c.validate();
     return c;
   }
 
   @Override
   public Customer changeAddress(Address newAddr) throws BusinessException {
-    DefaultCustomer c = this.address == newAddr ? this : this.withAddress(newAddr); 
+    DefaultCustomer c = this.address.equals(newAddr) ? this : this.withAddress(newAddr); 
     c.validate();
     return c;
   }
 
   @Override
   public Customer activate() {
-    return this.active ? this : this.withActive(true);
+    return this.active.equals(Boolean.TRUE) ? this : this.withActive(true);
   }
 
   @Override
   public Customer deactivate() {
-    return !this.active ? this : this.withActive(false);
+    return this.active.equals(Boolean.FALSE) ? this : this.withActive(false);
     
   }
 

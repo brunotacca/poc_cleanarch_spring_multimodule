@@ -10,7 +10,7 @@
     <relativePath /> <!-- lookup parent from maven repository -->
   </parent>
 
-  <groupId>com.brunotacca</groupId>
+  <groupId>com.brunotacca.caspringmultimodule</groupId>
   <artifactId>ca-spring-multimodule</artifactId>
 
   <version>0.0.1-SNAPSHOT</version>
@@ -38,8 +38,21 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>2.7.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>2.7.2</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <scope>runtime</scope>
+        <version>2.7.2</version>
         <optional>true</optional>
       </dependency>
     </dependencies>
@@ -47,21 +60,6 @@
 
   <!-- Artifacts specified here will always be included as a dependency of the child module(s). -->
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <scope>runtime</scope>
-      <optional>true</optional>
-    </dependency>
   </dependencies>
 
 </project>

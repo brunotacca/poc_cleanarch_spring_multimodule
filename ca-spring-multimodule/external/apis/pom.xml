@@ -4,19 +4,25 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.brunotacca</groupId>
+    <groupId>com.brunotacca.caspringmultimodule</groupId>
     <artifactId>external</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.brunotacca</groupId>
-  <artifactId>external.apis</artifactId>
+  <groupId>com.brunotacca.caspringmultimodule</groupId>
+  <artifactId>external-apis</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>adapter-controllers</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 

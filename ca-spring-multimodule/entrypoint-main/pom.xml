@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.brunotacca</groupId>
+    <groupId>com.brunotacca.caspringmultimodule</groupId>
     <artifactId>ca-spring-multimodule</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.brunotacca</groupId>
+  <groupId>com.brunotacca.caspringmultimodule</groupId>
   <artifactId>entrypoint-main</artifactId>
 
   <version>0.0.1-SNAPSHOT</version>
@@ -17,8 +17,29 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>external.apis</artifactId>
+      <artifactId>external-apis</artifactId>
       <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>adapter-gateways</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
     </dependency>
   </dependencies>
 

@@ -23,6 +23,9 @@
     <java.version>17</java.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+
+    <sonar.organization>brunotacca</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
 
   <!-- https://spring.io/guides/gs/multi-module/#scratch -->

@@ -1,6 +1,8 @@
 package com.brunotacca.domain.entities.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +31,18 @@ public class DefaultCustomerTest {
   void beforeEach() throws BusinessException {
     this.validCustomer = new DefaultCustomer(UUID.randomUUID().toString(), validName, validEmail, validAddress);
   }
+
+  @Test
+  void shouldCreateValidCustomer() throws BusinessException {
+    Customer created = new DefaultCustomer(UUID.randomUUID().toString(), validName, validEmail, validAddress);
+
+    assertNotNull(created);
+    assertNotNull(created.getId());
+    assertNotSame("", created.getId().trim());
+    assertEquals(validName, created.getName());
+    assertEquals(validEmail, created.getEmail());
+    assertEquals(validAddress, created.getAddress());
+}
 
   @Nested
   class CustomerValidationShouldThrow {
@@ -92,11 +106,11 @@ public class DefaultCustomerTest {
     @Test
     void whenActivatingOrDeactivating() {
       Customer c = validCustomer.deactivate();
-      assertEquals(c.isActive(), false);
+      assertEquals(false, c.isActive());
       Customer c2 = validCustomer.activate();
-      assertEquals(c2.isActive(), true);
+      assertEquals(true, c2.isActive());
       Customer c3 = validCustomer.deactivate();
-      assertEquals(c3.isActive(), false);
+      assertEquals(false, c3.isActive());
     }
 
   }

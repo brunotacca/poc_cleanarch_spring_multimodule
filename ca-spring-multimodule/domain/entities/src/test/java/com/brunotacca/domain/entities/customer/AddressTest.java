@@ -1,5 +1,7 @@
 package com.brunotacca.domain.entities.customer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -20,7 +22,12 @@ public class AddressTest {
 
   @Test
   void shouldCreateValidAddress() throws BusinessException {
-    new Address(validStreet, validNumber, validZip, validCity);
+    Address created = new Address(validStreet, validNumber, validZip, validCity);
+    assertNotNull(created);
+    assertEquals(validStreet, created.getStreet());
+    assertEquals(validNumber, created.getNumber());
+    assertEquals(validZip, created.getZip());
+    assertEquals(validCity, created.getCity());
   }
   
 

@@ -1,13 +1,13 @@
-package com.brunotacca.entrypointmain;
+// package com.brunotacca.entrypointmain;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class EntrypointMainApplicationTests {
+// @SpringBootTest
+// class EntrypointMainApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }

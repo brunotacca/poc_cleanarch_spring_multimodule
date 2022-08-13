@@ -3,7 +3,6 @@ package com.brunotacca.domain.entities.customer;
 
 import static com.brunotacca.domain.entities.shared.utils.ValidationUtils.*;
 
-import com.brunotacca.domain.entities.shared.entities.BaseEntity;
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
 
@@ -12,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.With;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-class DefaultCustomer extends BaseEntity implements Customer {
+class DefaultCustomer implements Customer {
 
   private final String id;
 

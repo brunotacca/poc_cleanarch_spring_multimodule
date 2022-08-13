@@ -1,8 +1,9 @@
 package com.brunotacca.domain.entities.customer;
 
+import com.brunotacca.domain.entities.shared.entities.BaseEntity;
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 
-public interface Customer {
+public interface Customer extends BaseEntity {
   
   public String getId();
   public String getName();

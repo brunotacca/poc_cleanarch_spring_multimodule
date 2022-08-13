@@ -2,20 +2,20 @@ package com.brunotacca.domain.usecases.shared;
 
 import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 
-public abstract class UseCase {
+public interface UseCase {
   
-  public abstract void execute() throws DomainException;
+  public void execute() throws DomainException;
 
-  public static abstract class OnlyInput<INPUT> {
-    public abstract void execute(INPUT inputDTO) throws DomainException;
+  public static interface OnlyInput<I> {
+    public abstract void execute(I inputDTO) throws DomainException;
   }
   
-  public static abstract class InputOutput<INPUT,OUTPUT> {
-    public abstract OUTPUT execute(INPUT inputDTO) throws DomainException;
+  public static interface InputOutput<I,O> {
+    public abstract O execute(I inputDTO) throws DomainException;
   }
   
-  public static abstract class OnlyOutput<OUTPUT> {
-    public abstract OUTPUT execute() throws DomainException;
+  public static interface OnlyOutput<O> {
+    public abstract O execute() throws DomainException;
   }
   
 }

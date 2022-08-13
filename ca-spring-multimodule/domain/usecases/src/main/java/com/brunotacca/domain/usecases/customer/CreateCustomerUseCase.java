@@ -15,7 +15,7 @@ import com.brunotacca.domain.usecases.shared.exceptions.causes.BusinessValidatio
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-class CreateCustomerUseCase extends UseCase.InputOutput<CreateCustomerInputDTO, CustomerOutputDTO> {
+class CreateCustomerUseCase implements UseCase.InputOutput<CreateCustomerInputDTO, CustomerOutputDTO> {
 
   private final CustomerDataAccess customerDataAccess;
   private final CustomerFactory customerFactory;

@@ -12,7 +12,7 @@ import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
 import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
 import com.brunotacca.domain.usecases.shared.UseCase;
 
-public class CustomerUseCaseFactoryTest {
+class CustomerUseCaseFactoryTest {
 
   private CustomerUseCaseFactory customerUseCaseFactory;
   private CustomerDataAccess customerDataAccessMock = mock(CustomerDataAccess.class);

@@ -1,9 +1,11 @@
 package com.brunotacca.domain.entities.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -120,19 +122,29 @@ class DefaultCustomerTest {
     }
 
     @Test
-    void whenActivatingOrDeactivating() {
-      Customer c = validCustomer.deactivate();
-      assertEquals(false, c.isActive());     
+    void whenActivating() {
+      Customer deactivated = validCustomer.deactivate();
+      assertFalse(deactivated.isActive());
 
-      Customer c2 = validCustomer.activate();
-      assertEquals(true, c2.isActive());
-      Customer c2a = c2.activate();
-      assertEquals(c2, c2a);
+      Customer activated = deactivated.activate();
+      assertTrue(activated.isActive());
 
-      Customer c3 = validCustomer.deactivate();
-      assertEquals(false, c3.isActive());
-      Customer c3a = c3.deactivate();
-      assertEquals(c3, c3a);
+      // Must return same instance
+      Customer sameActivated = activated.activate();
+      assertEquals(activated, sameActivated);
+    }
+
+    @Test
+    void whenDeactivating() {
+      Customer activated = validCustomer.activate();
+      assertTrue(activated.isActive());
+
+      Customer deactivated = activated.deactivate();
+      assertFalse(deactivated.isActive());
+
+      // Must return same instance
+      Customer sameDeactivated = deactivated.deactivate();
+      assertEquals(deactivated, sameDeactivated);
     }
 
   }

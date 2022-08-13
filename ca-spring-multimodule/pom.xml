@@ -26,6 +26,10 @@
 
     <sonar.organization>brunotacca</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.coverage.jacoco.xmlReportPaths>
+      ${project.basedir}/report-aggregate/target/site/jacoco-aggregate/jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
+
   </properties>
 
   <!-- https://spring.io/guides/gs/multi-module/#scratch -->
@@ -35,6 +39,7 @@
     <module>adapter</module>
     <module>external</module>
     <module>entrypoint-main</module>
+    <module>report-aggregate</module>
   </modules>
 
   <!-- Artifacts specified here will only be included in a child module if it's declared there. -->
@@ -64,5 +69,39 @@
   <!-- Artifacts specified here will always be included as a dependency of the child module(s). -->
   <dependencies>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>coverage</id>
+      <build>
+      <plugins>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.8</version>
+          <executions>
+            <execution>
+              <id>prepare-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <configuration>
+                <formats>
+                  <format>XML</format>
+                </formats>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

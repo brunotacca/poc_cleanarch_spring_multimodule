@@ -4,6 +4,8 @@ import java.util.Collection;
 
 public class ValidationUtils {
   
+  private ValidationUtils() {}
+
   public static boolean isNull(Object object) {
     return object == null;
   }

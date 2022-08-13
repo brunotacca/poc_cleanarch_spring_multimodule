@@ -14,7 +14,7 @@ import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.usecases.CustomDisplayNameGenerator;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class CustomerMapperTest {
+class CustomerMapperTest {
     
     private final String validName = "Foo Bar";
     private final String validEmail = "foo@bar.com";

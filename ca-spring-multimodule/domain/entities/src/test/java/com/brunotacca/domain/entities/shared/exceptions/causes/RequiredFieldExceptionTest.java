@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.brunotacca.domain.entities.CustomDisplayNameGenerator;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.ReplaceCamelCase.class)
-public class RequiredFieldExceptionTest {
+class RequiredFieldExceptionTest {
 
   @Test
   void shouldGenerateCorrectMessage() {

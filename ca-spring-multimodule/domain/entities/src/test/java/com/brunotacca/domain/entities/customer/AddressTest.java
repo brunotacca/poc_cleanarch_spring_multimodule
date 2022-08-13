@@ -13,7 +13,7 @@ import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class AddressTest {
+class AddressTest {
 
   private final String validStreet = "street";
   private final String validNumber = "123-A";

@@ -32,7 +32,7 @@ import com.brunotacca.domain.usecases.shared.exceptions.causes.BusinessValidatio
 import com.brunotacca.domain.usecases.shared.exceptions.causes.DataAccessException;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class CreateCustomerUseCaseTest {
+class CreateCustomerUseCaseTest {
 
   private final CustomerDataAccess customerDataAccessMock = mock(CustomerDataAccess.class);
   private final CustomerFactory customerFactoryMock = mock(CustomerFactory.class);

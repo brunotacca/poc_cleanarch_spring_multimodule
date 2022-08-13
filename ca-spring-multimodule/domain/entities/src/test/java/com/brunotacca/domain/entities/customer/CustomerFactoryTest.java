@@ -17,7 +17,7 @@ import com.brunotacca.domain.entities.CustomDisplayNameGenerator;
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class CustomerFactoryTest {
+class CustomerFactoryTest {
 
   private final String validName = "Foo Bar";
   private final String validEmail = "foo@bar.com";

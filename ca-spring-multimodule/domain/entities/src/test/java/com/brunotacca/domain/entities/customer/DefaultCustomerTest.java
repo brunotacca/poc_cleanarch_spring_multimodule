@@ -20,7 +20,7 @@ import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class DefaultCustomerTest {
+class DefaultCustomerTest {
 
   private String validName = "Foo Bar";
   private String validEmail = "foo@bar.com";

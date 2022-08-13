@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -62,8 +61,8 @@ class CreateCustomerUseCaseTest {
   void shoudlCallFactoriesAndDataAccess() throws BusinessException, DomainException {
     prepareStubs();
     createCustomerUseCase.execute(validInputDTO);
-    verify(customerFactoryMock, times(1)).createCustomer(eq(validInputDTO.name()), eq(validInputDTO.email()), eq(addressMock));
-    verify(customerFactoryMock, times(1)).createAddress(eq(validInputDTO.street()), eq(validInputDTO.number()), eq(validInputDTO.zip()), eq(validInputDTO.city()));
+    verify(customerFactoryMock, times(1)).createCustomer(validInputDTO.name(), validInputDTO.email(), addressMock);
+    verify(customerFactoryMock, times(1)).createAddress(validInputDTO.street(), validInputDTO.number(), validInputDTO.zip(), validInputDTO.city());
     verify(customerDataAccessMock, times(1)).save(any());
   }
 

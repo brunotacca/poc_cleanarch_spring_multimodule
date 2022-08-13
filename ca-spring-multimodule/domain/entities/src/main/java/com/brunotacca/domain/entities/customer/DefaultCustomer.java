@@ -1,7 +1,8 @@
 package com.brunotacca.domain.entities.customer;
 
 
-import static com.brunotacca.domain.entities.shared.utils.ValidationUtils.*;
+import com.brunotacca.domain.entities.shared.utils.UtilsFactory;
+import com.brunotacca.domain.entities.shared.utils.ValidationUtils;
 
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
@@ -27,7 +28,11 @@ class DefaultCustomer implements Customer {
   @With(AccessLevel.PRIVATE)
   private final Boolean active;
 
+  private final ValidationUtils validationUtils;
+
   protected DefaultCustomer(String id, String name, String email, Address address) throws BusinessException {
+    this.validationUtils = (new UtilsFactory()).getValidationUtils();
+
     this.id = id;
     this.name = name;
     this.email = email;
@@ -38,12 +43,11 @@ class DefaultCustomer implements Customer {
 
   @Override
   public void validate() throws BusinessException {
-    if(isNull(this.id)) throw new RequiredFieldException("id");
-    if(isNullOrEmpty(this.name)) throw new RequiredFieldException("name");
-    if(isNullOrEmpty(this.email)) throw new RequiredFieldException("email");
-    if(isNull(this.address)) throw new RequiredFieldException("address");
+    if(this.validationUtils.isNull(this.id)) throw new RequiredFieldException("id");
+    if(this.validationUtils.isNullOrEmpty(this.name)) throw new RequiredFieldException("name");
+    if(this.validationUtils.isNullOrEmpty(this.email)) throw new RequiredFieldException("email");
+    if(this.validationUtils.isNull(this.address)) throw new RequiredFieldException("address");
     this.address.validate();
-    if(isNull(this.active)) throw new RequiredFieldException("active");
   }
 
   @Override

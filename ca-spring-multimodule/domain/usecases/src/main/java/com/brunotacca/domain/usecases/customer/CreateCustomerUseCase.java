@@ -15,7 +15,7 @@ import com.brunotacca.domain.usecases.shared.exceptions.causes.BusinessValidatio
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-class CreateCustomerUseCase implements UseCase.InputOutput<CreateCustomerInputDTO, CustomerOutputDTO> {
+class CreateCustomerUseCase implements UseCase<CreateCustomerInputDTO, CustomerOutputDTO> {
 
   private final CustomerDataAccess customerDataAccess;
   private final CustomerFactory customerFactory;
@@ -43,9 +43,8 @@ class CreateCustomerUseCase implements UseCase.InputOutput<CreateCustomerInputDT
     // Create
     customerDataAccess.save(customer); // this throws
 
-    // Convert respose to output
-    CustomerOutputDTO outputDTO = customerMapper.fromCustomer(customer);
-    return outputDTO;
+    // Convert respose to output and return
+    return customerMapper.fromCustomer(customer);
   }
   
 }

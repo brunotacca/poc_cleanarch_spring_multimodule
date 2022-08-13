@@ -6,7 +6,7 @@ import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
 import com.brunotacca.domain.usecases.shared.exceptions.causes.DataAccessException;
 
-public class FakeCustomerRepository extends CustomerDataAccess  {
+public class FakeCustomerRepository implements CustomerDataAccess  {
 
   @Override
   public void save(Customer c) throws DataAccessException {

@@ -16,7 +16,7 @@ public class CustomerUseCaseFactory {
   private final CustomerFactory customerFactory = new CustomerFactory();
   private final CustomerMapper customerMapper = new CustomerMapper();
   
-  public UseCase.InputOutput<CreateCustomerInputDTO, CustomerOutputDTO> getCreateCustomerUseCase() {
+  public UseCase<CreateCustomerInputDTO, CustomerOutputDTO> getCreateCustomerUseCase() {
     return new CreateCustomerUseCase(customerDataAccess, customerFactory, customerMapper);
   }
 }

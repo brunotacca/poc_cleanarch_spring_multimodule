@@ -48,12 +48,19 @@ class DefaultCustomerTest {
   class CustomerValidationShouldThrow {
 
     @Test
+    void ifIdIsNull() {
+      assertThrows(RequiredFieldException.class, () -> {
+        new DefaultCustomer(null, validName, validEmail, validAddress);
+      });
+    }
+
+    @Test
     void ifNameIsInvalid() {
       assertThrows(RequiredFieldException.class, () -> {
         validCustomer.changeName(null);
       });
       assertThrows(RequiredFieldException.class, () -> {
-        validCustomer.changeEmail("");
+        validCustomer.changeName("");
       });
     }
 
@@ -87,6 +94,9 @@ class DefaultCustomerTest {
       String newValidName = "Bruno Tacca";
       Customer c = validCustomer.changeName(newValidName);
       assertEquals(c.getName(), newValidName);
+
+      Customer c2 = validCustomer.changeName(newValidName);
+      assertEquals(c, c2);
     }
 
     @Test
@@ -94,6 +104,9 @@ class DefaultCustomerTest {
       String newValidEmail = "brunotacca@gmail.com";
       Customer c = validCustomer.changeEmail(newValidEmail);
       assertEquals(c.getEmail(), newValidEmail);
+
+      Customer c2 = validCustomer.changeEmail(newValidEmail);
+      assertEquals(c, c2);
     }
 
     @Test
@@ -101,16 +114,25 @@ class DefaultCustomerTest {
       Address newValidAddress = new Address("street", "123-A", "00000-000", "city");
       Customer c = validCustomer.changeAddress(newValidAddress);
       assertEquals(c.getAddress(), newValidAddress);
+
+      Customer c2 = validCustomer.changeAddress(newValidAddress);
+      assertEquals(c, c2);
     }
 
     @Test
     void whenActivatingOrDeactivating() {
       Customer c = validCustomer.deactivate();
-      assertEquals(false, c.isActive());
+      assertEquals(false, c.isActive());     
+
       Customer c2 = validCustomer.activate();
       assertEquals(true, c2.isActive());
+      Customer c2a = validCustomer.activate();
+      assertEquals(c2, c2a);
+
       Customer c3 = validCustomer.deactivate();
       assertEquals(false, c3.isActive());
+      Customer c3a = validCustomer.deactivate();
+      assertEquals(c3, c3a);
     }
 
   }

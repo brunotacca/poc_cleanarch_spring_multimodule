@@ -2,8 +2,8 @@ package com.brunotacca.domain.usecases.shared;
 
 import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 
-public interface UseCase<I,O> {
+public interface UseCaseOnlyOutput<O> {
   
-  public O execute(I inputDTO) throws DomainException;
+  public O execute() throws DomainException;
   
 }

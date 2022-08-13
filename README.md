@@ -18,35 +18,56 @@ SpringBoot project structured with Clean Architecture enforced by Maven MultiMod
 
 Simple application (domain complexity) with hard architectural boundaries enforced by maven multimodule following Clean Architectural guidelines using Spring to make DI easy.
 
-- Spring (easy DI setup (Spring IoC))
-- SpringBoot (Quick Spring project setup)
-- Maven MultiModule (Enforced Architectural Boundaries)
+- [x] Spring (easy DI setup (Spring IoC))
+- [x] SpringBoot (Quick Spring project setup)
+- [x] Maven MultiModule (Enforced Architectural Boundaries)
 
 **Extras:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
 
-- JUnit and AssertJ
-- Test Containers
+- [x] JUnit and AssertJ
+- [ ] Test Containers
 
 **Extras 2:** This project also features automated code quality analysis by using:
 
-- SonarQube
-- GitHub Actions
+- [x] SonarQube
+- [x] GitHub Actions
 
 **Extra 3:** Reactive java project, just because I wanted to try CA in a reactive style. I believe it might be a good fit to distinguish the flow of control of controllers and presenters.
 
-- Spring Webflux
-- Project Reactor
+- [ ] Spring Webflux
+- [ ] Project Reactor
 
 **Extra 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
 
+- [x] Domain PoC Planning
+
+
 ### Documents
 
-* [Project Domain](docs/PROJECT_DOMAIN.md)
-* [Project Architecture](docs/PROJECT_ARCHITECTURE.md)
-* [Setup and Configuration](docs/GET_STARTED.md)
-* [Contributing](docs/CONTRIBUTING.md)
-* [Getting help](docs/SUPPORT.md)
-* [Be nice to everyone](docs/CODE_OF_CONDUCT.md)
+* [x] [Project Domain](docs/PROJECT_DOMAIN.md)
+* [ ] [Project Architecture](docs/PROJECT_ARCHITECTURE.md)
+* [ ] [Setup and Configuration](docs/GET_STARTED.md)
+* [ ] [Contributing](docs/CONTRIBUTING.md)
+* [x] [Getting help](docs/SUPPORT.md)
+* [x] [Be nice to everyone](docs/CODE_OF_CONDUCT.md)
+
+
+### Development Progress
+
+- [x] Entities - Customer
+- [ ] Entities - Product
+- [ ] Entities - Order
+- [ ] UseCases - Customer
+- [ ] UseCases - Product
+- [ ] UseCases - Order
+- [ ] Adapters - Customer
+- [ ] Adapters - Product
+- [ ] Adapters - Order
+- [ ] External - Customer
+- [ ] External - Product
+- [ ] External - Order
 
 
 [Project Domain]: docs/PROJECT_DOMAIN.md
+
+

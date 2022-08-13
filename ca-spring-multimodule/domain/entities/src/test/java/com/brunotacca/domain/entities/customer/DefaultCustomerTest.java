@@ -95,7 +95,7 @@ class DefaultCustomerTest {
       Customer c = validCustomer.changeName(newValidName);
       assertEquals(c.getName(), newValidName);
 
-      Customer c2 = validCustomer.changeName(newValidName);
+      Customer c2 = c.changeName(newValidName);
       assertEquals(c, c2);
     }
 
@@ -105,7 +105,7 @@ class DefaultCustomerTest {
       Customer c = validCustomer.changeEmail(newValidEmail);
       assertEquals(c.getEmail(), newValidEmail);
 
-      Customer c2 = validCustomer.changeEmail(newValidEmail);
+      Customer c2 = c.changeEmail(newValidEmail);
       assertEquals(c, c2);
     }
 
@@ -115,7 +115,7 @@ class DefaultCustomerTest {
       Customer c = validCustomer.changeAddress(newValidAddress);
       assertEquals(c.getAddress(), newValidAddress);
 
-      Customer c2 = validCustomer.changeAddress(newValidAddress);
+      Customer c2 = c.changeAddress(newValidAddress);
       assertEquals(c, c2);
     }
 
@@ -126,12 +126,12 @@ class DefaultCustomerTest {
 
       Customer c2 = validCustomer.activate();
       assertEquals(true, c2.isActive());
-      Customer c2a = validCustomer.activate();
+      Customer c2a = c2.activate();
       assertEquals(c2, c2a);
 
       Customer c3 = validCustomer.deactivate();
       assertEquals(false, c3.isActive());
-      Customer c3a = validCustomer.deactivate();
+      Customer c3a = c3.deactivate();
       assertEquals(c3, c3a);
     }
 

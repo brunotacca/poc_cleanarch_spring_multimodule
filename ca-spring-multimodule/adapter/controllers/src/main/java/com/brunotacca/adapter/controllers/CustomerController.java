@@ -8,7 +8,7 @@ import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 
 public class CustomerController {
 
-  private final UseCase.InputOutput<CreateCustomerInputDTO, CustomerOutputDTO> createCustomerUseCase;
+  private final UseCase<CreateCustomerInputDTO, CustomerOutputDTO> createCustomerUseCase;
 
   public CustomerController(CustomerUseCaseFactory customerUseCaseFactory) {
     createCustomerUseCase = customerUseCaseFactory.getCreateCustomerUseCase();

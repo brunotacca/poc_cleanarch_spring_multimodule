@@ -21,6 +21,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - [x] Spring (easy DI setup (Spring IoC))
 - [x] SpringBoot (Quick Spring project setup)
 - [x] Maven MultiModule (Enforced Architectural Boundaries)
+- [x] Clean Architecture
 
 **Extras:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
 
@@ -54,19 +55,22 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 
 ### Development Progress
 
-- [x] Entities - Customer
-- [ ] Entities - Product
-- [ ] Entities - Order
-- [ ] UseCases - Customer
-- [ ] UseCases - Product
-- [ ] UseCases - Order
-- [ ] Adapters - Customer
-- [ ] Adapters - Product
-- [ ] Adapters - Order
-- [ ] External - Customer
-- [ ] External - Product
-- [ ] External - Order
-
+- [ ] Entities
+  - [x] Customer
+  - [ ] Product
+  - [ ] Order
+- [ ] UseCases
+  - [ ] Customer
+  - [ ] Product
+  - [ ] Order
+- [ ] Adapters
+  - [ ] Customer
+  - [ ] Product
+  - [ ] Order
+- [ ] External
+  - [ ] Customer
+  - [ ] Product
+  - [ ] Order
 
 [Project Domain]: docs/PROJECT_DOMAIN.md
 

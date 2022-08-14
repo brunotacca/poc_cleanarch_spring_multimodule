@@ -2,7 +2,8 @@
 
 SpringBoot project structured with Clean Architecture enforced by Maven MultiModule with whipped cream (Automated Tests) and a cherry added on top (Code Quality Analysis).
 
-![](https://img.shields.io/badge/Status-WIP-orange)
+![](https://img.shields.io/badge/Status-WIP-orange) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 
 [![Sonar Analysis](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml/badge.svg)](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml)

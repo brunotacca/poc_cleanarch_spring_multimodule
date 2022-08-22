@@ -18,7 +18,7 @@ import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class CustomerRestControllerTest {
+class CustomerRestControllerTest {
 
   private final NewCustomerModel validNewCustomerInput = new NewCustomerModel("name", "email", "street", "number", "city", "zip");
   private final NewCustomerModel invalidNewCustomerInput = new NewCustomerModel("", "", "", "", "", "");
@@ -34,7 +34,7 @@ public class CustomerRestControllerTest {
   }
 
   @Test
-  public void shouldCallControllerAndMapper() throws DomainException {
+  void shouldCallControllerAndMapper() throws DomainException {
     when(customerController.createCustomer(any())).thenReturn(outputDTO);
 
     this.customerRestController.createCustomer(validNewCustomerInput);
@@ -43,7 +43,7 @@ public class CustomerRestControllerTest {
   }
   
   @Test
-  public void shouldCatchDomainExceptionsAndThrowResponseStatus() throws DomainException {
+  void shouldCatchDomainExceptionsAndThrowResponseStatus() throws DomainException {
 
     when(customerController.createCustomer(any())).thenThrow(new DomainException("message"));
     assertThrows(ResponseStatusException.class,() -> this.customerRestController.createCustomer(invalidNewCustomerInput));

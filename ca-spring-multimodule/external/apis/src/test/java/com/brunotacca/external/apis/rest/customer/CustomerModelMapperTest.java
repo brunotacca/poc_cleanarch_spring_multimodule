@@ -10,7 +10,7 @@ import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-public class CustomerModelMapperTest {
+class CustomerModelMapperTest {
 
   private final NewCustomerModel validNewCustomerInput = new NewCustomerModel("name", "email", "street", "number", "city", "zip");
   private final CustomerModel validCustomerModel = new CustomerModel("ID", "name", "email", false, "street", "number", "city", "zip");

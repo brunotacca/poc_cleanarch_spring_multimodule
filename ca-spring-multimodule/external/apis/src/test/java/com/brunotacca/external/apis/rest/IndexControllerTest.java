@@ -23,13 +23,13 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 @AutoConfigureRestDocs
 @WebMvcTest(IndexController.class)
-public class IndexControllerTest {
+class IndexControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
 
     @Test
-    public void indexExample() throws Exception {
+    void indexExample() throws Exception {
         this.mockMvc.perform(get("/"))
             .andExpect(status().isOk())
             .andDo(

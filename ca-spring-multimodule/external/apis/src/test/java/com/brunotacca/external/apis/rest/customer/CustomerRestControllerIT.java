@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @AutoConfigureRestDocs
 @ContextConfiguration(classes = ApisApplication.class)
 @WebMvcTest(CustomerRestController.class)
-public class CustomerRestControllerIT {
+class CustomerRestControllerIT {
 
   @Autowired
   private MockMvc mockMvc;
@@ -54,7 +54,7 @@ public class CustomerRestControllerIT {
   }
  
   @Test
-  public void shouldCreateCustomerAndReturn201() throws Exception {
+  void shouldCreateCustomerAndReturn201() throws Exception {
 
     this.mockMvc.perform(post("/customers").contentType(MediaTypes.HAL_JSON)
       .content(this.objectMapper.writeValueAsString(validNewCustomerInput)))
@@ -78,7 +78,7 @@ public class CustomerRestControllerIT {
   }
 
   @Test
-  public void shouldNotCreateCustomerAndReturn400() throws Exception {
+  void shouldNotCreateCustomerAndReturn400() throws Exception {
 
     this.mockMvc.perform(post("/customers").contentType(MediaTypes.HAL_JSON)
       .content(this.objectMapper.writeValueAsString(invalidNewCustomerInput)))

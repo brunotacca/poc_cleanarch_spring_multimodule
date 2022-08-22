@@ -38,7 +38,6 @@
     <module>domain</module>
     <module>adapter</module>
     <module>external</module>
-    <module>entrypoint-main</module>
     <module>report-aggregate</module>
   </modules>
 

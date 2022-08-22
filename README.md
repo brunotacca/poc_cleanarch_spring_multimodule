@@ -21,9 +21,8 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - [x] SpringBoot (Quick Spring project setup)
 - [x] Maven MultiModule (Enforced Architectural Boundaries)
 - [x] Clean Architecture
-- [x] RESTful API (HATEOAS)
 
-**Extras:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
+**Extras 1:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
 
 - [x] JUnit and AssertJ
 - [ ] Test Containers
@@ -33,7 +32,16 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - [x] SonarQube
 - [x] GitHub Actions
 
-**Extras 3:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
+
+**Extras 3:** RESTful API with Docs.
+
+- [x] RESTful API (HATEOAS)
+- [x] Documentation (AsciiDoc)
+  - [x] HTML
+  - [x] Docbook
+  - [ ] Markdown
+
+**Extras 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
 
 - [x] Domain PoC Planning
 
@@ -48,7 +56,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 * [x] [Be nice to everyone](docs/CODE_OF_CONDUCT.md)
 
 
-### Development Progress
+### Project Progress
 
 - [ ] Entities
   - [x] Customer

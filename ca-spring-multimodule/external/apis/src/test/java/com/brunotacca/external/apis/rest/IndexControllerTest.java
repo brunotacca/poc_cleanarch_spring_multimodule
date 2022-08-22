@@ -34,13 +34,13 @@ public class IndexControllerTest {
             .andExpect(status().isOk())
             .andDo(
               document(
-                "index-example", 
+                "index", 
                 preprocessRequest(prettyPrint()), 
                 preprocessResponse(prettyPrint()), 
                 links(
                   linkWithRel("customers").description("The Customers resource")
                 ), 
-                responseFields(subsectionWithPath("_links").description("Links to other resources")),
+                responseFields(subsectionWithPath("_links").description("Links to resources")),
                 responseHeaders(headerWithName("Content-Type").description("The Content-Type of the payload, e.g. `application/hal+json`"))
               )
             );

@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.brunotacca.external.apis.annotation.ExcludeFromJacocoGeneratedReport;
+
+import lombok.Generated;
+
 // @SpringBootApplication(scanBasePackages = "com.brunotacca")
 @SpringBootApplication
 @ComponentScan(
@@ -20,6 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 )
 public class ApisApplication {
 
+  @ExcludeFromJacocoGeneratedReport
 	public static void main(String[] args) {
 		SpringApplication.run(ApisApplication.class);
 	}

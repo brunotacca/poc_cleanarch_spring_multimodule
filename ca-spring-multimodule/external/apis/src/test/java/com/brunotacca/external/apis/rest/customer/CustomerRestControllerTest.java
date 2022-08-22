@@ -1,71 +1,54 @@
 package com.brunotacca.external.apis.rest.customer;
 
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.hateoas.MediaTypes;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.server.ResponseStatusException;
 
-import com.brunotacca.external.apis.ApisApplication;
+import com.brunotacca.adapter.controllers.CustomerController;
+import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
+import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-@AutoConfigureRestDocs
-@ContextConfiguration(classes = ApisApplication.class)
-@WebMvcTest(CustomerRestController.class)
 public class CustomerRestControllerTest {
 
-  @Autowired
-  private MockMvc mockMvc;
+  private final NewCustomerModel validNewCustomerInput = new NewCustomerModel("name", "email", "street", "number", "city", "zip");
+  private final NewCustomerModel invalidNewCustomerInput = new NewCustomerModel("", "", "", "", "", "");
 
-  @Autowired
-  private ObjectMapper objectMapper;
- 
+  private final CustomerController customerController = mock(CustomerController.class);
+  private final CustomerModelMapper customerModelMapper = mock(CustomerModelMapper.class);
+  private CustomerRestController customerRestController;
+  private CustomerOutputDTO outputDTO = new CustomerOutputDTO("id", "name", "email", false, "street", "number", "city", "zip");
+
+  @BeforeEach
+  void beforeEach() {
+    this.customerRestController = new CustomerRestController(this.customerController, this.customerModelMapper);
+  }
+
   @Test
-  public void testCreateCustomer() throws Exception {
+  public void shouldCallControllerAndMapper() throws DomainException {
+    when(customerController.createCustomer(any())).thenReturn(outputDTO);
 
-    Map<String, Object> customer = new HashMap<>();
-    customer.put("name", "Foo Bar");
-    customer.put("email", "foo@bar.com");
-    customer.put("street", "Foo Street");
-    customer.put("number", "123B");
-    customer.put("city", "Bay Bar");
-    customer.put("zip", "000000-000");
+    this.customerRestController.createCustomer(validNewCustomerInput);
+    verify(customerModelMapper, times(1)).inputFromModel(validNewCustomerInput);
+    verify(customerController, times(1)).createCustomer(any());
+  }
+  
+  @Test
+  public void shouldCatchDomainExceptionsAndThrowResponseStatus() throws DomainException {
 
-    this.mockMvc.perform(post("/customers").contentType(MediaTypes.HAL_JSON)
-      .content(this.objectMapper.writeValueAsString(customer)))
-      .andExpect(status().isCreated())
-      .andDo(
-        document(
-          "customer-create-example", 
-          preprocessRequest(prettyPrint()), 
-          preprocessResponse(prettyPrint()), 
-          requestFields(
-            fieldWithPath("name").description("The name of the customer"), 
-            fieldWithPath("email").description("The email of the customer"), 
-            fieldWithPath("street").description("The street of the customer"), 
-            fieldWithPath("number").description("The number of the customer"), 
-            fieldWithPath("city").description("The city of the customer"), 
-            fieldWithPath("zip").description("The zip of the customer")
-          )
-        )
-      );
+    when(customerController.createCustomer(any())).thenThrow(new DomainException("message"));
+    assertThrows(ResponseStatusException.class,() -> this.customerRestController.createCustomer(invalidNewCustomerInput));
 
   }
+  
+
 }

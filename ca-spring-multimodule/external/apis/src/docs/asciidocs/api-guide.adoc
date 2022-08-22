@@ -79,22 +79,22 @@ A `GET` request is used to access the index
 
 ==== Request structure
 
-include::{snippets}/index-example/http-request.adoc[]
+include::{snippets}/index/http-request.adoc[]
 
 ==== Example response
 
-include::{snippets}/index-example/http-response.adoc[]
+include::{snippets}/index/http-response.adoc[]
 
-include::{snippets}/index-example/response-fields.adoc[]
+include::{snippets}/index/response-fields.adoc[]
 
 ==== CURL request
 
-include::{snippets}/index-example/curl-request.adoc[]
+include::{snippets}/index/curl-request.adoc[]
 
 [[resources-index-links]]
 ==== Links
 
-include::{snippets}/index-example/links.adoc[]
+include::{snippets}/index/links.adoc[]
 
 
 [[resources-customers]]
@@ -109,17 +109,17 @@ A `POST` request is used to access customer creation.
 
 ==== Request structure
 
-include::{snippets}/customer-create-example/http-request.adoc[]
+include::{snippets}/customer-create/http-request.adoc[]
 
-include::{snippets}/customer-create-example/request-fields.adoc[]
+include::{snippets}/customer-create/request-fields.adoc[]
 
 ==== Example response
 
-include::{snippets}/customer-create-example/http-response.adoc[]
+include::{snippets}/customer-create/http-response.adoc[]
 
 ==== CURL request
 
-include::{snippets}/customer-create-example/curl-request.adoc[]
+include::{snippets}/customer-create/curl-request.adoc[]
 
 
 

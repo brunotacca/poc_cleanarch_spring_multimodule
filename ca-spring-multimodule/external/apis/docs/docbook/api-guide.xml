@@ -138,7 +138,7 @@ Content-Length: 97
 <row>
 <entry align="left" valign="top"><simpara><literal>_links</literal></simpara></entry>
 <entry align="left" valign="top"><simpara><literal>Object</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>Links to other resources</simpara></entry>
+<entry align="left" valign="top"><simpara>Links to resources</simpara></entry>
 </row>
 </tbody>
 </tgroup>
@@ -179,83 +179,16 @@ Content-Length: 97
 <simpara>A <literal>POST</literal> request is used to access customer creation.</simpara>
 <section xml:id="_request_structure_2">
 <title>Request structure</title>
-<programlisting language="http" linenumbering="unnumbered">POST /customers HTTP/1.1
-Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 145
-Host: localhost:8080
-
-{
-  "zip" : "000000-000",
-  "number" : "123B",
-  "city" : "Bay Bar",
-  "street" : "Foo Street",
-  "name" : "Foo Bar",
-  "email" : "foo@bar.com"
-}</programlisting>
-<informaltable frame="all" rowsep="1" colsep="1">
-<tgroup cols="3">
-<colspec colname="col_1" colwidth="33.3333*"/>
-<colspec colname="col_2" colwidth="33.3333*"/>
-<colspec colname="col_3" colwidth="33.3334*"/>
-<thead>
-<row>
-<entry align="left" valign="top">Path</entry>
-<entry align="left" valign="top">Type</entry>
-<entry align="left" valign="top">Description</entry>
-</row>
-</thead>
-<tbody>
-<row>
-<entry align="left" valign="top"><simpara><literal>name</literal></simpara></entry>
-<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>The name of the customer</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><literal>email</literal></simpara></entry>
-<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>The email of the customer</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><literal>street</literal></simpara></entry>
-<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>The street of the customer</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><literal>number</literal></simpara></entry>
-<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>The number of the customer</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><literal>city</literal></simpara></entry>
-<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>The city of the customer</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><literal>zip</literal></simpara></entry>
-<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>The zip of the customer</simpara></entry>
-</row>
-</tbody>
-</tgroup>
-</informaltable>
+<simpara>Unresolved directive in api-guide.adoc - include::/home/tacca/Development/github/poc_cleanarch_spring_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customer-create/http-request.adoc[]</simpara>
+<simpara>Unresolved directive in api-guide.adoc - include::/home/tacca/Development/github/poc_cleanarch_spring_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customer-create/request-fields.adoc[]</simpara>
 </section>
 <section xml:id="_example_response_2">
 <title>Example response</title>
-<programlisting language="http" linenumbering="unnumbered">HTTP/1.1 201 Created
-Location: http://localhost:8080/customers/6ef8167e-dac2-4414-a5f0-14593bd26783</programlisting>
+<simpara>Unresolved directive in api-guide.adoc - include::/home/tacca/Development/github/poc_cleanarch_spring_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customer-create/http-response.adoc[]</simpara>
 </section>
 <section xml:id="_curl_request_2">
 <title>CURL request</title>
-<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers' -i -X POST \
-    -H 'Content-Type: application/hal+json;charset=UTF-8' \
-    -d '{
-  "zip" : "000000-000",
-  "number" : "123B",
-  "city" : "Bay Bar",
-  "street" : "Foo Street",
-  "name" : "Foo Bar",
-  "email" : "foo@bar.com"
-}'</programlisting>
+<simpara>Unresolved directive in api-guide.adoc - include::/home/tacca/Development/github/poc_cleanarch_spring_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customer-create/curl-request.adoc[]</simpara>
 </section>
 </section>
 </chapter>

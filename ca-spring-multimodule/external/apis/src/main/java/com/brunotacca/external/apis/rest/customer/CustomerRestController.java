@@ -28,7 +28,7 @@ public class CustomerRestController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public HttpHeaders createCustomer(@RequestBody @Valid NewCustomerModel customer) {
+  public HttpHeaders createCustomer(@RequestBody @Valid NewCustomerModel customer) throws ResponseStatusException {
     CustomerOutputDTO output = null;
     
     try {

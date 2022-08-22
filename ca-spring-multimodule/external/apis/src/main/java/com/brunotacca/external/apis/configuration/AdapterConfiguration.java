@@ -1,4 +1,4 @@
-package com.brunotacca.entrypointmain.configuration;
+package com.brunotacca.external.apis.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

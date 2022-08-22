@@ -1,4 +1,4 @@
-package com.brunotacca.entrypointmain;
+package com.brunotacca.external.apis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,10 +18,10 @@ import org.springframework.context.annotation.ComponentScan;
     "com.brunotacca.external.datasources",
   }
 )
-public class EntrypointMainApplication {
+public class ApisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EntrypointMainApplication.class);
+		SpringApplication.run(ApisApplication.class);
 	}
 
 }

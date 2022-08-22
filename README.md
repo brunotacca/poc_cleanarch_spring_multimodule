@@ -4,8 +4,6 @@ SpringBoot project structured with Clean Architecture enforced by Maven MultiMod
 
 ![](https://img.shields.io/badge/Status-WIP-orange) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
-
 [![Sonar Analysis](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml/badge.svg)](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml)
 
 #### Sonar
@@ -23,6 +21,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - [x] SpringBoot (Quick Spring project setup)
 - [x] Maven MultiModule (Enforced Architectural Boundaries)
 - [x] Clean Architecture
+- [x] RESTful API (HATEOAS)
 
 **Extras:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
 
@@ -34,12 +33,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - [x] SonarQube
 - [x] GitHub Actions
 
-**Extra 3:** Reactive java project, just because I wanted to try CA in a reactive style. I believe it might be a good fit to distinguish the flow of control of controllers and presenters.
-
-- [ ] Spring Webflux
-- [ ] Project Reactor
-
-**Extra 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
+**Extras 3:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
 
 - [x] Domain PoC Planning
 

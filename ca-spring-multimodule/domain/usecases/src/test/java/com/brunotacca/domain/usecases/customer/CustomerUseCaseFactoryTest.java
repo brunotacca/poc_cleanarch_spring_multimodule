@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.brunotacca.domain.usecases.customer.dto.CreateCustomerInputDTO;
 import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
+import com.brunotacca.domain.usecases.customer.dto.UpdateCustomerInputDTO;
 import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
 import com.brunotacca.domain.usecases.shared.UseCase;
 
@@ -24,9 +25,18 @@ class CustomerUseCaseFactoryTest {
 
   @Test
   void shouldReturnCreateCustomerUseCase() {
-    UseCase<CreateCustomerInputDTO, CustomerOutputDTO> createdUseCase = customerUseCaseFactory.getCreateCustomerUseCase();
+    UseCase<CreateCustomerInputDTO, CustomerOutputDTO> createUseCase = customerUseCaseFactory.getCreateCustomerUseCase();
 
-    assertNotNull(createdUseCase);
-    assertEquals(CreateCustomerUseCase.class, createdUseCase.getClass());
+    assertNotNull(createUseCase);
+    assertEquals(CreateCustomerUseCase.class, createUseCase.getClass());
   }
+
+  @Test
+  void shouldReturnUpdateCustomerUseCase() {
+    UseCase<UpdateCustomerInputDTO, CustomerOutputDTO> updateUseCase = customerUseCaseFactory.getUpdateCustomerUseCase();
+
+    assertNotNull(updateUseCase);
+    assertEquals(UpdateCustomerUseCase.class, updateUseCase.getClass());
+  }
+
 }

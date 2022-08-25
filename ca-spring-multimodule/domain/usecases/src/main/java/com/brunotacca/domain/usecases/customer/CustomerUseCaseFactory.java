@@ -4,6 +4,7 @@ import com.brunotacca.domain.entities.customer.CustomerFactory;
 import com.brunotacca.domain.usecases.customer.dto.CreateCustomerInputDTO;
 import com.brunotacca.domain.usecases.customer.dto.CustomerMapper;
 import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
+import com.brunotacca.domain.usecases.customer.dto.UpdateCustomerInputDTO;
 import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
 import com.brunotacca.domain.usecases.shared.UseCase;
 
@@ -19,4 +20,9 @@ public class CustomerUseCaseFactory {
   public UseCase<CreateCustomerInputDTO, CustomerOutputDTO> getCreateCustomerUseCase() {
     return new CreateCustomerUseCase(customerDataAccess, customerFactory, customerMapper);
   }
+
+  public UseCase<UpdateCustomerInputDTO, CustomerOutputDTO> getUpdateCustomerUseCase() {
+    return new UpdateCustomerUseCase(customerDataAccess, customerFactory, customerMapper);
+  }
+
 }

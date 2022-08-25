@@ -15,7 +15,7 @@ import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.usecases.CustomDisplayNameGenerator;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
-class CustomerIntegrationTest {
+class CustomerIT {
 
     private final String validName = "Foo Bar";
     private final String validEmail = "foo@bar.com";
@@ -42,6 +42,7 @@ class CustomerIntegrationTest {
             assertNotNull(createdCustomer.getId());
             assertEquals(validName, createdCustomer.getName());
             assertEquals(validEmail, createdCustomer.getEmail());
+            assertNotNull(createdCustomer.isActive());
             assertEquals(validStreet, createdCustomer.getAddress().getStreet());
             assertEquals(validNumber, createdCustomer.getAddress().getNumber());
             assertEquals(validZip, createdCustomer.getAddress().getZip());

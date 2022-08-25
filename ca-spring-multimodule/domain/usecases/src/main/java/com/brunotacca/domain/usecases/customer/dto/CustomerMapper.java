@@ -4,7 +4,7 @@ import com.brunotacca.domain.entities.customer.Customer;
 
 public class CustomerMapper {
 
-  public CustomerOutputDTO fromCustomer(Customer c) {
+  public CustomerOutputDTO outputFromEntity(Customer c) {
     return new CustomerOutputDTO(
       c.getId(), 
       c.getName(), 

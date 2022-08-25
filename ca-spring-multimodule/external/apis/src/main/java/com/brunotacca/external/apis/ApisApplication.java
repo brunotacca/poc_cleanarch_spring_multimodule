@@ -6,8 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.brunotacca.external.apis.annotation.ExcludeFromJacocoGeneratedReport;
 
-import lombok.Generated;
-
 // @SpringBootApplication(scanBasePackages = "com.brunotacca")
 @SpringBootApplication
 @ComponentScan(

@@ -2,9 +2,6 @@ package com.brunotacca.domain.usecases.customer;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Answers.CALLS_REAL_METHODS;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -15,11 +12,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import com.brunotacca.domain.entities.customer.Address;
 import com.brunotacca.domain.entities.customer.Customer;
@@ -57,11 +52,6 @@ class UpdateCustomerUseCaseTest {
   private final String validCity = "city";
   private UpdateCustomerInputDTO validInputDTO = new UpdateCustomerInputDTO(validId, validName, validEmail, validStreet, validNumber, validCity, validZip);
   private CustomerOutputDTO validOutputDTO = new CustomerOutputDTO(validId, validName, validEmail, false, validStreet, validNumber, validCity, validZip);
-
-  @BeforeEach
-  void beforeEach() {
-    this.updateCustomerUseCase = new UpdateCustomerUseCase(customerDataAccessMock,customerFactoryMock,customerMapperMock);
-  }
 
   void prepareDefaultStubs() throws BusinessException, DataAccessException {
     doReturn(addressMock).when(customerFactoryMock).createAddress(any(), any(), any(), any());

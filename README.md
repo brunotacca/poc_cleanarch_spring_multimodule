@@ -63,7 +63,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
   - [ ] Product
   - [ ] Order
 - [ ] UseCases
-  - [ ] Customer
+  - [x] Customer
   - [ ] Product
   - [ ] Order
 - [ ] Adapters

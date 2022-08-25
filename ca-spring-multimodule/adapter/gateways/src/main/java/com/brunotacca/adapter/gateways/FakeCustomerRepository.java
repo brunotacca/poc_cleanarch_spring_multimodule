@@ -30,5 +30,11 @@ public class FakeCustomerRepository implements CustomerDataAccess  {
     // TODO Auto-generated method stub
     return null;
   }
+
+  @Override
+  public List<Customer> findByName(String name) throws DataAccessException {
+    // TODO Auto-generated method stub
+    return null;
+  }
   
 }

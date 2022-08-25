@@ -1,7 +1,6 @@
 package com.brunotacca.domain.usecases.customer;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.usecases.customer.dto.CustomerMapper;

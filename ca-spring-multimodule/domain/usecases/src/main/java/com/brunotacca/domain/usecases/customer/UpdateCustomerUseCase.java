@@ -53,7 +53,8 @@ class UpdateCustomerUseCase implements UseCase<UpdateCustomerInputDTO, CustomerO
     // Update Data and Save
     
     // Keep the active status
-    if(Boolean.TRUE.equals(existingCustomer.isActive())) updatedCustomer.activate();
+    if(Boolean.TRUE.equals(existingCustomer.isActive())) 
+      updatedCustomer.activate();
     else updatedCustomer.deactivate();
 
     customerDataAccess.save(updatedCustomer);

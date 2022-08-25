@@ -31,7 +31,7 @@ class FindCustomerByNameUseCase implements UseCase<CustomerNameInputDTO, List<Cu
     // Convert respose to output and return
     return listCustomers.stream()
       .map(customerMapper::outputFromEntity)
-      .collect(Collectors.toList());
+      .toList();
   }
   
 }

@@ -2,6 +2,7 @@ package com.brunotacca.domain.usecases.customer;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -93,6 +94,19 @@ class UpdateCustomerUseCaseTest {
     doReturn(customerMock3).when(customerDataAccessMock).findByEmail(any());
     assertThrows(DomainException.class, () -> updateCustomerUseCase.execute(validInputDTO));
     verify(customerDataAccessMock, times(1)).findByEmail(any());
+  }
+
+  @Test
+  void shouldKeepActiveStatus() throws BusinessException, DomainException {
+    prepareDefaultStubs();
+    
+    doReturn(true).when(customerMock2).isActive();
+    updateCustomerUseCase.execute(validInputDTO);
+    verify(customerMock, times(1)).activate();
+
+    doReturn(false).when(customerMock2).isActive();
+    updateCustomerUseCase.execute(validInputDTO);
+    verify(customerMock, times(1)).deactivate();
   }
 
   @Test

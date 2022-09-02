@@ -53,6 +53,14 @@ class CustomerUseCaseFactoryTest {
   }
 
   @Test
+  void shouldReturnGetCustomerByIdUseCase() {
+    UseCase<CustomerIdDTO, CustomerOutputDTO> getUseCase = customerUseCaseFactory.getGetCustomerByIdUseCase();
+
+    assertNotNull(getUseCase);
+    assertEquals(GetCustomerByIdUseCase.class, getUseCase.getClass());
+  }
+
+  @Test
   void shouldReturnActivateCustomerUseCase() {
     UseCaseOnlyInput<CustomerIdDTO> activateUseCase = customerUseCaseFactory.getActivateCustomerUseCase();
 

@@ -32,6 +32,7 @@ class CustomerControllerTest {
     doReturn(useCaseMock).when(customerUseCaseFactoryMock).getCreateCustomerUseCase();
     doReturn(useCaseMock).when(customerUseCaseFactoryMock).getUpdateCustomerUseCase();
     doReturn(useCaseMock).when(customerUseCaseFactoryMock).getFindCustomerByNameUseCase();
+    doReturn(useCaseMock).when(customerUseCaseFactoryMock).getGetCustomerByIdUseCase();
     doReturn(useCaseOnlyInputMock).when(customerUseCaseFactoryMock).getActivateCustomerUseCase();
     doReturn(useCaseOnlyInputMock).when(customerUseCaseFactoryMock).getDeactivateCustomerUseCase();
     this.customerController = new CustomerController(customerUseCaseFactoryMock);
@@ -55,6 +56,11 @@ class CustomerControllerTest {
     verify(useCaseMock, times(1)).execute(any());
   }
 
+  @Test
+  void shouldCallUseCasesCorrectlyGet() throws DomainException {
+    customerController.getCustomer(null);
+    verify(useCaseMock, times(1)).execute(any());
+  }
 
   @Test
   void shouldCallUseCasesCorrectlyActivate() throws DomainException {

@@ -22,6 +22,7 @@ public class CustomerUseCaseFactory {
   private final CreateCustomerUseCase createCustomerUseCase;
   private final UpdateCustomerUseCase updateCustomerUseCase;
   private final FindCustomerByNameUseCase findCustomerByNameUseCase;
+  private final GetCustomerByIdUseCase getCustomerByIdUseCase;
   private final ActivateCustomerUseCase activateCustomerUseCase;
   private final DeactivateCustomerUseCase deactivateCustomerUseCase;
 
@@ -31,6 +32,7 @@ public class CustomerUseCaseFactory {
     this.createCustomerUseCase = new CreateCustomerUseCase(this.customerDataAccess, this.customerFactory, this.customerMapper);
     this.updateCustomerUseCase = new UpdateCustomerUseCase(this.customerDataAccess, this.customerFactory, this.customerMapper);
     this.findCustomerByNameUseCase = new FindCustomerByNameUseCase(this.customerDataAccess, this.customerMapper);
+    this.getCustomerByIdUseCase = new GetCustomerByIdUseCase(this.customerDataAccess, this.customerMapper);
     this.activateCustomerUseCase = new ActivateCustomerUseCase(this.customerDataAccess);
     this.deactivateCustomerUseCase = new DeactivateCustomerUseCase(this.customerDataAccess);
   }
@@ -46,6 +48,10 @@ public class CustomerUseCaseFactory {
 
   public UseCase<CustomerNameInputDTO, List<CustomerOutputDTO>> getFindCustomerByNameUseCase() {
     return this.findCustomerByNameUseCase;
+  }
+
+  public UseCase<CustomerIdDTO, CustomerOutputDTO> getGetCustomerByIdUseCase() {
+    return this.getCustomerByIdUseCase;
   }
 
   public UseCaseOnlyInput<CustomerIdDTO> getActivateCustomerUseCase() {

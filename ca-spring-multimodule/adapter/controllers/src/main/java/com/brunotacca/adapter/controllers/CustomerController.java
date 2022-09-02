@@ -17,6 +17,7 @@ public class CustomerController {
   private final UseCase<CreateCustomerInputDTO, CustomerOutputDTO> createCustomerUseCase;
   private final UseCase<UpdateCustomerInputDTO, CustomerOutputDTO> updateCustomerUseCase;
   private final UseCase<CustomerNameInputDTO, List<CustomerOutputDTO>> findCustomerByNameUseCase;
+  private final UseCase<CustomerIdDTO, CustomerOutputDTO> getCustomerByIdUseCase;
   private final UseCaseOnlyInput<CustomerIdDTO> activateCustomerUseCase;
   private final UseCaseOnlyInput<CustomerIdDTO> deactivateCustomerUseCase;
 
@@ -24,6 +25,7 @@ public class CustomerController {
     this.createCustomerUseCase = customerUseCaseFactory.getCreateCustomerUseCase();
     this.updateCustomerUseCase = customerUseCaseFactory.getUpdateCustomerUseCase();
     this.findCustomerByNameUseCase = customerUseCaseFactory.getFindCustomerByNameUseCase();
+    this.getCustomerByIdUseCase = customerUseCaseFactory.getGetCustomerByIdUseCase();
     this.activateCustomerUseCase = customerUseCaseFactory.getActivateCustomerUseCase();
     this.deactivateCustomerUseCase = customerUseCaseFactory.getDeactivateCustomerUseCase();
   }
@@ -46,6 +48,10 @@ public class CustomerController {
 
   public List<CustomerOutputDTO> findCustomer(CustomerNameInputDTO inputDTO) throws DomainException {
     return findCustomerByNameUseCase.execute(inputDTO);
+  }
+
+  public CustomerOutputDTO getCustomer(CustomerIdDTO inputDTO) throws DomainException {
+    return getCustomerByIdUseCase.execute(inputDTO);
   }
 
   public CustomerOutputDTO createActiveCustomer(CreateCustomerInputDTO inputDTO) throws DomainException {

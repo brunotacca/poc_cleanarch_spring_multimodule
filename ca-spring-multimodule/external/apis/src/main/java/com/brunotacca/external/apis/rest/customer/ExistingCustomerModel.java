@@ -1,6 +1,7 @@
 package com.brunotacca.external.apis.rest.customer;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -11,12 +12,15 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
-public class NewCustomerModel extends RepresentationModel<NewCustomerModel> {
-
+class ExistingCustomerModel extends RepresentationModel<ExistingCustomerModel> {
+  @NotBlank
+  private final String id;
   @NotBlank
   private final String name;
   @NotBlank
   private final String email;
+  @NotNull
+  private final Boolean active;
   @NotBlank
   private final String street;
   @NotBlank

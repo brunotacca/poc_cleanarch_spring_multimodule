@@ -7,34 +7,52 @@ import org.junit.jupiter.api.Test;
 
 import com.brunotacca.domain.usecases.customer.dto.CreateCustomerInputDTO;
 import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
+import com.brunotacca.domain.usecases.customer.dto.UpdateCustomerInputDTO;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerModelMapperTest {
 
-  private final NewCustomerModel validNewCustomerInput = new NewCustomerModel("name", "email", "street", "number", "city", "zip");
-  private final CustomerModel validCustomerModel = new CustomerModel("ID", "name", "email", false, "street", "number", "city", "zip");
-  private final CustomerOutputDTO validCustomerOutputDTO = new CustomerOutputDTO("ID", "name", "email", false, "street", "number", "city", "zip");
+  private final String validId = "55951aeb-4fc8-4ba4-b78a-020138b13d22";
+  private final CustomerModel validNewCustomerInput = new CustomerModel("name", "email", "street", "number", "city", "zip");
+  private final ExistingCustomerModel validCustomerModel = new ExistingCustomerModel(validId, "name", "email", false, "street", "number", "city", "zip");
+  private final CustomerOutputDTO validCustomerOutputDTO = new CustomerOutputDTO(validId, "name", "email", false, "street", "number", "city", "zip");
 
   @Test
   void shouldCreateInputFromModel() {
     CustomerModelMapper mapper = new CustomerModelMapper();
 
-    CreateCustomerInputDTO output = mapper.inputFromModel(validNewCustomerInput);
+    CreateCustomerInputDTO createDto = mapper.createDtoFromModel(validNewCustomerInput);
 
-    assertEquals(validNewCustomerInput.getName(), output.name());
-    assertEquals(validNewCustomerInput.getEmail(), output.email());
-    assertEquals(validNewCustomerInput.getStreet(), output.street());
-    assertEquals(validNewCustomerInput.getNumber(), output.number());
-    assertEquals(validNewCustomerInput.getCity(), output.city());
-    assertEquals(validNewCustomerInput.getZip(), output.zip());
+    assertEquals(validNewCustomerInput.getName(), createDto.name());
+    assertEquals(validNewCustomerInput.getEmail(), createDto.email());
+    assertEquals(validNewCustomerInput.getStreet(), createDto.street());
+    assertEquals(validNewCustomerInput.getNumber(), createDto.number());
+    assertEquals(validNewCustomerInput.getCity(), createDto.city());
+    assertEquals(validNewCustomerInput.getZip(), createDto.zip());
   }
+
+  @Test
+  void shouldCreateUpdateDtoFromModel() {
+    CustomerModelMapper mapper = new CustomerModelMapper();
+
+    UpdateCustomerInputDTO updateDto = mapper.updateDtoFromModel(validNewCustomerInput, validId);
+
+    assertEquals(validId, updateDto.id());
+    assertEquals(validNewCustomerInput.getName(), updateDto.name());
+    assertEquals(validNewCustomerInput.getEmail(), updateDto.email());
+    assertEquals(validNewCustomerInput.getStreet(), updateDto.street());
+    assertEquals(validNewCustomerInput.getNumber(), updateDto.number());
+    assertEquals(validNewCustomerInput.getCity(), updateDto.city());
+    assertEquals(validNewCustomerInput.getZip(), updateDto.zip());
+  }
+
 
   @Test
   void shouldCreateOutputFromModel() {
     CustomerModelMapper mapper = new CustomerModelMapper();
 
-    CustomerOutputDTO output = mapper.outputFromModel(validCustomerModel);
+    CustomerOutputDTO output = mapper.outputDtoFromModel(validCustomerModel);
 
     assertEquals(validCustomerModel.getId(), output.id());
     assertEquals(validCustomerModel.getName(), output.name());
@@ -50,7 +68,7 @@ class CustomerModelMapperTest {
   void shouldCreateModelFromOutput() {
     CustomerModelMapper mapper = new CustomerModelMapper();
 
-    CustomerModel output = mapper.modelFromOutput(validCustomerOutputDTO);
+    ExistingCustomerModel output = mapper.modelFromOutput(validCustomerOutputDTO);
 
     assertEquals(validCustomerOutputDTO.id(), output.getId());
     assertEquals(validCustomerOutputDTO.name(), output.getName());

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -38,8 +39,14 @@ class CustomerRestControllerIT {
   @Autowired
   private ObjectMapper objectMapper;
 
+  private final String validId = "55951aeb-4fc8-4ba4-b78a-020138b13d22";
+
   private Map<String, Object> validNewCustomerInput = new HashMap<>();
   private Map<String, Object> invalidNewCustomerInput = new HashMap<>();
+
+  private Map<String, Object> validIdInput = new HashMap<>();
+  private Map<String, Object> invalidIdInput = new HashMap<>();
+  
 
   @BeforeEach
   void beforeEach() {
@@ -51,39 +58,72 @@ class CustomerRestControllerIT {
     this.validNewCustomerInput.put("zip", "000000-000");
 
     this.invalidNewCustomerInput.put("name", "");
+
+    this.validIdInput.put("id", validId);
+    this.invalidIdInput.put("id", "");
   }
  
-  @Test
-  void shouldCreateCustomerAndReturn201() throws Exception {
+  @Nested
+  class Create {
+    @Test
+    void shouldCreateCustomerAndReturn201() throws Exception {
 
-    this.mockMvc.perform(post("/customers").contentType(MediaTypes.HAL_JSON)
-      .content(this.objectMapper.writeValueAsString(validNewCustomerInput)))
-      .andExpect(status().isCreated())
-      .andDo(
-        document(
-          "customer-create", 
-          preprocessRequest(prettyPrint()), 
-          preprocessResponse(prettyPrint()), 
-          requestFields(
-            fieldWithPath("name").description("The name of the customer").optional(), 
-            fieldWithPath("email").description("The email of the customer"), 
-            fieldWithPath("street").description("The street of the customer"), 
-            fieldWithPath("number").description("The number of the customer"), 
-            fieldWithPath("city").description("The city of the customer"), 
-            fieldWithPath("zip").description("The zip of the customer")
+      mockMvc.perform(post("/customer").contentType(MediaTypes.HAL_JSON)
+        .content(objectMapper.writeValueAsString(validNewCustomerInput)))
+        .andExpect(status().isCreated())
+        .andDo(
+          document(
+            "customer-create", 
+            preprocessRequest(prettyPrint()), 
+            preprocessResponse(prettyPrint()), 
+            requestFields(
+              fieldWithPath("name").description("The name of the customer").optional(), 
+              fieldWithPath("email").description("The email of the customer"), 
+              fieldWithPath("street").description("The street of the customer"), 
+              fieldWithPath("number").description("The number of the customer"), 
+              fieldWithPath("city").description("The city of the customer"), 
+              fieldWithPath("zip").description("The zip of the customer")
+            )
           )
-        )
-      );
+        );
 
+    }
+
+    @Test
+    void shouldNotCreateCustomerAndReturn400() throws Exception {
+
+      mockMvc.perform(post("/customer").contentType(MediaTypes.HAL_JSON)
+        .content(objectMapper.writeValueAsString(invalidNewCustomerInput)))
+        .andExpect(status().isBadRequest());
+
+    }
   }
 
-  @Test
-  void shouldNotCreateCustomerAndReturn400() throws Exception {
-
-    this.mockMvc.perform(post("/customers").contentType(MediaTypes.HAL_JSON)
-      .content(this.objectMapper.writeValueAsString(invalidNewCustomerInput)))
-      .andExpect(status().isBadRequest());
-
+  @Nested
+  class GetById {
+    // TODO
   }
+  
+  @Nested
+  class FindCustomerByName {
+    // TODO
+  }
+  
+  @Nested
+  class Update {
+    // TODO
+  }
+  
+  @Nested
+  class Activate {
+    // TODO
+  }
+  
+  @Nested
+  class Deactivate {
+    // TODO
+  }
+  
+
 
 }

@@ -4,11 +4,12 @@ import org.springframework.stereotype.Component;
 
 import com.brunotacca.domain.usecases.customer.dto.CreateCustomerInputDTO;
 import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
+import com.brunotacca.domain.usecases.customer.dto.UpdateCustomerInputDTO;
 
 @Component
-public class CustomerModelMapper {
+class CustomerModelMapper {
 
-  public CreateCustomerInputDTO inputFromModel(NewCustomerModel c) {
+  public CreateCustomerInputDTO createDtoFromModel(CustomerModel c) {
     return new CreateCustomerInputDTO(
       c.getName(), 
       c.getEmail(), 
@@ -19,7 +20,19 @@ public class CustomerModelMapper {
     );
   }
 
-  public CustomerOutputDTO outputFromModel(CustomerModel c) {
+  public UpdateCustomerInputDTO updateDtoFromModel(CustomerModel c, String id) {
+    return new UpdateCustomerInputDTO(
+      id,
+      c.getName(), 
+      c.getEmail(), 
+      c.getStreet(), 
+      c.getNumber(), 
+      c.getCity(), 
+      c.getZip()
+    );
+  }
+
+  public CustomerOutputDTO outputDtoFromModel(ExistingCustomerModel c) {
     return new CustomerOutputDTO(
       c.getId(), 
       c.getName(), 
@@ -32,8 +45,8 @@ public class CustomerModelMapper {
     );
   }
   
-  public CustomerModel modelFromOutput(CustomerOutputDTO c) {
-    return new CustomerModel(
+  public ExistingCustomerModel modelFromOutput(CustomerOutputDTO c) {
+    return new ExistingCustomerModel(
       c.id(),
       c.name(), 
       c.email(), 

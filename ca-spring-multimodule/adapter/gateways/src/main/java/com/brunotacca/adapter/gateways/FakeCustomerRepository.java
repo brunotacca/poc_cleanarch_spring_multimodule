@@ -53,7 +53,7 @@ public class FakeCustomerRepository implements CustomerDataAccess  {
               );
     } catch (BusinessException e) {
       // TODO Auto-generated catch block
-      e.printStackTrace();
+      // e.printStackTrace();
     }
     return c;
   }

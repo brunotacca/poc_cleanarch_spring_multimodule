@@ -1,4 +1,4 @@
-package com.brunotacca.external.apis.rest.customer;
+package com.brunotacca.external.apis.rest.customers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,4 +1,4 @@
-package com.brunotacca.external.apis.rest.customer;
+package com.brunotacca.external.apis.rest.customers;
 
 import java.net.URI;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Links;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,8 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/"+ApiLinkRelations.CUSTOMER)
-class CustomerRestController {
+@RequestMapping("/"+ApiLinkRelations.CUSTOMERS)
+class CustomersRestController {
 
   private final CustomerController customerController;
   private final CustomerModelMapper customerModelMapper;
@@ -73,7 +74,7 @@ class CustomerRestController {
   }
 
   @GetMapping
-  public ResponseEntity<List<ExistingCustomerModel>> findCustomerByName(@RequestParam("name") @NotBlank String name) throws ResponseStatusException {
+  public ResponseEntity<CollectionModel<ExistingCustomerModel>> findCustomerByName(@RequestParam("name") @NotBlank String name) throws ResponseStatusException {
     List<CustomerOutputDTO> output = null;
 
     try {
@@ -89,7 +90,11 @@ class CustomerRestController {
           return model;
         })
         .toList();
-    return ResponseEntity.ok(result);
+
+    CollectionModel<ExistingCustomerModel> collectionResult = CollectionModel.of(result);
+    collectionResult.add(customerLinkDiscoverabilityFactory.linksForFindCustomerByName(name));
+    
+    return ResponseEntity.ok(collectionResult);
   }
 
   @PutMapping("/{id}")

@@ -4,7 +4,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>POC - Clean Architecture Spring Multi Module</title>
-<date>2022-08-22</date>
+<date>2022-09-04</date>
 <author>
 <personname>
 <firstname>Bruno</firstname>
@@ -113,15 +113,15 @@ Host: localhost:8080</programlisting>
 <title>Example response</title>
 <programlisting language="http" linenumbering="unnumbered">HTTP/1.1 200 OK
 Content-Type: application/prs.hal-forms+json
-Content-Length: 197
+Content-Length: 201
 
 {
   "_links" : {
-    "customer" : {
-      "href" : "http://localhost:8080/customer/id"
+    "customers" : {
+      "href" : "http://localhost:8080/customers/id"
     },
-    "customer:search" : {
-      "href" : "http://localhost:8080/customer?name=customerName"
+    "customers:search" : {
+      "href" : "http://localhost:8080/customers?name=customerName"
     }
   }
 }</programlisting>
@@ -165,11 +165,11 @@ Content-Length: 197
 </thead>
 <tbody>
 <row>
-<entry align="left" valign="top"><simpara><literal>customer</literal></simpara></entry>
-<entry align="left" valign="top"><simpara>The Customer resource</simpara></entry>
+<entry align="left" valign="top"><simpara><literal>customers</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The Customers resource</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top"><simpara><literal>customer:search</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>customers:search</literal></simpara></entry>
 <entry align="left" valign="top"><simpara>The Search for Customers</simpara></entry>
 </row>
 </tbody>
@@ -182,11 +182,11 @@ Content-Length: 197
 <title>Customer REST Service</title>
 <simpara>The <literal>customers</literal> provides the entry point into the service.</simpara>
 <section xml:id="resources-customers-post">
-<title>Accessing the customers POST</title>
+<title>(POST) Creating customers</title>
 <simpara>A <literal>POST</literal> request is used to access customer creation.</simpara>
 <section xml:id="_request_structure_2">
 <title>Request structure</title>
-<programlisting language="http" linenumbering="unnumbered">POST /customer HTTP/1.1
+<programlisting language="http" linenumbering="unnumbered">POST /customers HTTP/1.1
 Content-Type: application/hal+json;charset=UTF-8
 Content-Length: 145
 Host: localhost:8080
@@ -249,21 +249,42 @@ Host: localhost:8080
 <section xml:id="_example_response_2">
 <title>Example response</title>
 <programlisting language="http" linenumbering="unnumbered">HTTP/1.1 201 Created
-Location: /2e8b999a-dbc0-47e3-ac14-a4323b77c13f
+Location: /82c3a661-3493-4528-a3ce-f35e3ab7a5c4
 Content-Type: application/prs.hal-forms+json
-Content-Length: 128
+Content-Length: 129
 
 {
   "_links" : {
     "edit" : {
-      "href" : "http://localhost:8080/customer/2e8b999a-dbc0-47e3-ac14-a4323b77c13f"
+      "href" : "http://localhost:8080/customers/82c3a661-3493-4528-a3ce-f35e3ab7a5c4"
     }
   }
 }</programlisting>
 </section>
+<section xml:id="_response_headers">
+<title>Response headers</title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Name</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>Location</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The location of the created resource</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
 <section xml:id="_curl_request_2">
 <title>CURL request</title>
-<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customer' -i -X POST \
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers' -i -X POST \
     -H 'Content-Type: application/hal+json;charset=UTF-8' \
     -d '{
   "zip" : "000000-000",
@@ -274,6 +295,645 @@ Content-Length: 128
   "email" : "foo@bar.com"
 }'</programlisting>
 </section>
+<section xml:id="_links">
+<title>Links</title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Relation</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>edit</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Edit customer data</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>
+<section xml:id="resources-customers-getbyid">
+<title>(GET) Retrieving customers by ID</title>
+<simpara>A <literal>GET</literal> request is used to get the customer by Id.</simpara>
+<section xml:id="_request_structure_3">
+<title>Request structure</title>
+<programlisting language="http" linenumbering="unnumbered">GET /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+Accept: application/prs.hal-forms+json
+Host: localhost:8080</programlisting>
+<table frame="all" rowsep="1" colsep="1">
+<title>/customers/{id}</title>
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Parameter</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>id</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Customer Id</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</section>
+<section xml:id="_curl_request_3">
+<title>CURL request</title>
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X GET \
+    -H 'Accept: application/prs.hal-forms+json'</programlisting>
+</section>
+<section xml:id="_example_response_3">
+<title>Example response</title>
+<programlisting language="http" linenumbering="unnumbered">HTTP/1.1 200 OK
+Content-Type: application/prs.hal-forms+json
+Content-Length: 1548
+
+{
+  "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
+  "name" : "fake_name",
+  "email" : "fake_email",
+  "active" : false,
+  "street" : "fake_street",
+  "number" : "fake_number",
+  "city" : "fake_city",
+  "zip" : "fake_zip",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    }
+  },
+  "_templates" : {
+    "default" : {
+      "method" : "PUT",
+      "properties" : [ {
+        "name" : "city",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "email",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "name",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "number",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "street",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "zip",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      } ]
+    },
+    "activate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+    },
+    "deactivate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+    }
+  }
+}</programlisting>
+</section>
+</section>
+<section xml:id="resources-customers-findbyname">
+<title>(GET) Finding customers by Name</title>
+<simpara>A <literal>GET</literal> request is also used to find customers by name.</simpara>
+<section xml:id="_request_structure_4">
+<title>Request structure</title>
+<programlisting language="http" linenumbering="unnumbered">GET /customers?name=Foo%20Bar HTTP/1.1
+Accept: application/prs.hal-forms+json
+Host: localhost:8080</programlisting>
+</section>
+<section xml:id="_curl_request_4">
+<title>CURL request</title>
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers?name=Foo%20Bar' -i -X GET \
+    -H 'Accept: application/prs.hal-forms+json'</programlisting>
+</section>
+<section xml:id="_response_structure">
+<title>Response structure</title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Path</entry>
+<entry align="left" valign="top">Type</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>_embedded.existingCustomerModelList</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>Array</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The customer list</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>_links</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>Object</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The search made</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+<section xml:id="_example_response_4">
+<title>Example response</title>
+<programlisting language="http" linenumbering="unnumbered">HTTP/1.1 200 OK
+Content-Type: application/prs.hal-forms+json
+Content-Length: 3747
+
+{
+  "_embedded" : {
+    "existingCustomerModelList" : [ {
+      "id" : "5142387a-053d-4bc9-989c-c9001984a34c",
+      "name" : "fake_name",
+      "email" : "fake_email",
+      "active" : false,
+      "street" : "fake_street",
+      "number" : "fake_number",
+      "city" : "fake_city",
+      "zip" : "fake_zip",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c"
+        }
+      },
+      "_templates" : {
+        "default" : {
+          "method" : "PUT",
+          "properties" : [ {
+            "name" : "city",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "email",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "name",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "number",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "street",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "zip",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          } ]
+        },
+        "activate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/activate"
+        },
+        "deactivate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/deactivate"
+        }
+      }
+    }, {
+      "id" : "95253ac0-b022-43be-9883-263381b38e13",
+      "name" : "fake_name",
+      "email" : "fake_email",
+      "active" : false,
+      "street" : "fake_street",
+      "number" : "fake_number",
+      "city" : "fake_city",
+      "zip" : "fake_zip",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13"
+        }
+      },
+      "_templates" : {
+        "default" : {
+          "method" : "PUT",
+          "properties" : [ {
+            "name" : "city",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "email",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "name",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "number",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "street",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "zip",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          } ]
+        },
+        "activate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/activate"
+        },
+        "deactivate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/deactivate"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers?name=Foo%20Bar"
+    }
+  }
+}</programlisting>
+</section>
+</section>
+<section xml:id="resources-customers-put">
+<title>(PUT) Updating customers</title>
+<simpara>A <literal>PUT</literal> request is used to access customer update.</simpara>
+<section xml:id="_request_structure_5">
+<title>Request structure</title>
+<programlisting language="http" linenumbering="unnumbered">PUT /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 145
+Host: localhost:8080
+
+{
+  "zip" : "000000-000",
+  "number" : "123B",
+  "city" : "Bay Bar",
+  "street" : "Foo Street",
+  "name" : "Foo Bar",
+  "email" : "foo@bar.com"
+}</programlisting>
+<table frame="all" rowsep="1" colsep="1">
+<title>/customers/{id}</title>
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Parameter</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>id</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Customer Id</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Path</entry>
+<entry align="left" valign="top">Type</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>name</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The name of the customer</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>email</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The email of the customer</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>street</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The street of the customer</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>number</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The number of the customer</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>city</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The city of the customer</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>zip</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>String</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The zip of the customer</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+<section xml:id="_curl_request_5">
+<title>CURL request</title>
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X PUT \
+    -H 'Content-Type: application/hal+json;charset=UTF-8' \
+    -d '{
+  "zip" : "000000-000",
+  "number" : "123B",
+  "city" : "Bay Bar",
+  "street" : "Foo Street",
+  "name" : "Foo Bar",
+  "email" : "foo@bar.com"
+}'</programlisting>
+</section>
+<section xml:id="_example_response_5">
+<title>Example response</title>
+<programlisting language="http" linenumbering="unnumbered">HTTP/1.1 200 OK
+Content-Type: application/prs.hal-forms+json
+Content-Length: 1539
+
+{
+  "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
+  "name" : "Foo Bar",
+  "email" : "foo@bar.com",
+  "active" : false,
+  "street" : "Foo Street",
+  "number" : "123B",
+  "city" : "Bay Bar",
+  "zip" : "000000-000",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    }
+  },
+  "_templates" : {
+    "default" : {
+      "method" : "PUT",
+      "properties" : [ {
+        "name" : "city",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "email",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "name",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "number",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "street",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "zip",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      } ]
+    },
+    "activate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+    },
+    "deactivate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+    }
+  }
+}</programlisting>
+</section>
+<section xml:id="_links_2">
+<title>Links</title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Relation</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>self</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Resource Self Link</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>
+<section xml:id="resources-customers-patch-activate">
+<title>(PATCH) Activate customer</title>
+<simpara>A <literal>PATCH</literal> request can be used to activate a customer.</simpara>
+<section xml:id="_request_structure_6">
+<title>Request structure</title>
+<programlisting language="http" linenumbering="unnumbered">PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate HTTP/1.1
+Host: localhost:8080</programlisting>
+<table frame="all" rowsep="1" colsep="1">
+<title>/customers/{id}/activate</title>
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Parameter</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>id</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Customer Id</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</section>
+<section xml:id="_curl_request_6">
+<title>CURL request</title>
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate' -i -X PATCH</programlisting>
+</section>
+<section xml:id="_example_response_6">
+<title>Example response</title>
+<programlisting language="http" linenumbering="unnumbered">HTTP/1.1 202 Accepted
+Content-Type: application/prs.hal-forms+json
+Content-Length: 254
+
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    },
+    "deactivate" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+    }
+  }
+}</programlisting>
+</section>
+<section xml:id="_links_3">
+<title>Links</title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Relation</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>self</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Resource Self Link</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>deactivate</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Link to deactivate the customer</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>
+<section xml:id="resources-customers-patch-deactivate">
+<title>(PATCH) Deactivate customer</title>
+<simpara>A <literal>PATCH</literal> request can be used to deactivate a customer.</simpara>
+<section xml:id="_request_structure_7">
+<title>Request structure</title>
+<programlisting language="http" linenumbering="unnumbered">PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate HTTP/1.1
+Host: localhost:8080</programlisting>
+<table frame="all" rowsep="1" colsep="1">
+<title>/customers/{id}/deactivate</title>
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Parameter</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>id</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Customer Id</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</section>
+<section xml:id="_curl_request_7">
+<title>CURL request</title>
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate' -i -X PATCH</programlisting>
+</section>
+<section xml:id="_example_response_7">
+<title>Example response</title>
+<programlisting language="http" linenumbering="unnumbered">HTTP/1.1 202 Accepted
+Content-Type: application/prs.hal-forms+json
+Content-Length: 250
+
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    },
+    "activate" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+    }
+  }
+}</programlisting>
+</section>
+<section xml:id="_links_4">
+<title>Links</title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Relation</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>self</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Resource Self Link</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><literal>activate</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Link to activate the customer</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
 </section>
 </chapter>
 <bibliography xml:id="_references">
@@ -281,6 +941,9 @@ Content-Length: 128
 <bibliodiv>
 <bibliomixed>
 <bibliomisc>Baeldung. "Introduction to Spring REST Docs". Baeldung. May 29, 2022. Available at: <link xl:href="https://www.baeldung.com/spring-rest-docs">https://www.baeldung.com/spring-rest-docs</link>. Accessed Aug 14, 2022.</bibliomisc>
+</bibliomixed>
+<bibliomixed>
+<bibliomisc>Docs Spring. "Spring REST Docs". Wilkinson A., Bryant J. Jan 15, 2022. Available at: <link xl:href="https://docs.spring.io/spring-restdocs/docs/current/reference/html5/">https://docs.spring.io/spring-restdocs/docs/current/reference/html5/</link> Accessed Sep 02, 2022.</bibliomisc>
 </bibliomixed>
 </bibliodiv>
 </bibliography>

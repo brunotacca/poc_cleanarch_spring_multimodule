@@ -7,7 +7,7 @@ public class ApiLinkRelations {
 
   private ApiLinkRelations() {}
 
-  public static final String CUSTOMER = "customer";
+  public static final String CUSTOMERS = "customers";
 
   public static final String ACTIVATE = "activate";
   public static final String DEACTIVATE = "deactivate";

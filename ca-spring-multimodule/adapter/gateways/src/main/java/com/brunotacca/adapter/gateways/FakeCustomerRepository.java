@@ -18,7 +18,7 @@ public class FakeCustomerRepository implements CustomerDataAccess  {
   @Override
   public Customer read(String id) throws DataAccessException {
     System.out.println("FakeRepository: read "+id);
-    return this.getFakeCustomer();
+    return this.getFakeCustomer(id);
   }
 
   @Override
@@ -37,10 +37,6 @@ public class FakeCustomerRepository implements CustomerDataAccess  {
   public List<Customer> findByName(String name) throws DataAccessException {
     System.out.println("FakeRepository: findByName "+name);
     return List.of(getFakeCustomer("5142387a-053d-4bc9-989c-c9001984a34c"),getFakeCustomer("95253ac0-b022-43be-9883-263381b38e13"));
-  }
-
-  private Customer getFakeCustomer() {
-    return getFakeCustomer("00bc5f76-331c-4370-849e-6d4f2f7f4304");
   }
 
   private Customer getFakeCustomer(String id) {

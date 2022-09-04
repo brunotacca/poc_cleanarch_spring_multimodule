@@ -25,7 +25,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 @AutoConfigureRestDocs
 @WebMvcTest(IndexController.class)
-class IndexControllerTest {
+class IndexControllerIT {
 
   @Autowired
   private MockMvc mockMvc;
@@ -42,8 +42,8 @@ class IndexControllerTest {
                 preprocessResponse(prettyPrint()), 
                 links(
                   halLinks(),
-                  linkWithRel("customer").description("The Customer resource"),
-                  linkWithRel("customer:search").description("The Search for Customers")
+                  linkWithRel("customers").description("The Customers resource"),
+                  linkWithRel("customers:search").description("The Search for Customers")
                 ), 
                 responseFields(subsectionWithPath("_links").description("Links to resources")),
                 responseHeaders(headerWithName("Content-Type").description("The Content-Type of the payload, e.g. `application/hal+json`"))

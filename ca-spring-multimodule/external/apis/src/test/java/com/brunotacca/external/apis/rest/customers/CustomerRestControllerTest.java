@@ -1,10 +1,8 @@
-package com.brunotacca.external.apis.rest.customer;
+package com.brunotacca.external.apis.rest.customers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyIterable;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -13,16 +11,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.brunotacca.adapter.controllers.CustomerController;
@@ -30,7 +22,6 @@ import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
 import com.brunotacca.domain.usecases.customer.dto.UpdateCustomerInputDTO;
 import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
-import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator.Validity;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerRestControllerTest {
@@ -48,12 +39,12 @@ class CustomerRestControllerTest {
   
   private final CustomerLinkDiscoverabilityFactory customerLinkDiscoverabilityFactory = mock(CustomerLinkDiscoverabilityFactory.class, RETURNS_DEEP_STUBS);
 
-  private CustomerRestController customerRestController;
+  private CustomersRestController customerRestController;
   private CustomerOutputDTO outputDTO = new CustomerOutputDTO(validId, validName, "email", false, "street", "number", "city", "zip");
 
   @BeforeEach
   void beforeEach() {
-    this.customerRestController = new CustomerRestController(this.customerController, this.customerModelMapper, this.customerLinkDiscoverabilityFactory);
+    this.customerRestController = new CustomersRestController(this.customerController, this.customerModelMapper, this.customerLinkDiscoverabilityFactory);
   }
 
 

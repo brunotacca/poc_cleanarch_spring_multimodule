@@ -470,11 +470,52 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#resources-customers">Customer REST Service</a>
 <ul class="sectlevel2">
-<li><a href="#resources-customers-post">Accessing the customers POST</a>
+<li><a href="#resources-customers-post">(POST) Creating customers</a>
 <ul class="sectlevel3">
 <li><a href="#_request_structure_2">Request structure</a></li>
 <li><a href="#_example_response_2">Example response</a></li>
+<li><a href="#_response_headers">Response headers</a></li>
 <li><a href="#_curl_request_2">CURL request</a></li>
+<li><a href="#_links">Links</a></li>
+</ul>
+</li>
+<li><a href="#resources-customers-getbyid">(GET) Retrieving customers by ID</a>
+<ul class="sectlevel3">
+<li><a href="#_request_structure_3">Request structure</a></li>
+<li><a href="#_curl_request_3">CURL request</a></li>
+<li><a href="#_example_response_3">Example response</a></li>
+</ul>
+</li>
+<li><a href="#resources-customers-findbyname">(GET) Finding customers by Name</a>
+<ul class="sectlevel3">
+<li><a href="#_request_structure_4">Request structure</a></li>
+<li><a href="#_curl_request_4">CURL request</a></li>
+<li><a href="#_response_structure">Response structure</a></li>
+<li><a href="#_example_response_4">Example response</a></li>
+</ul>
+</li>
+<li><a href="#resources-customers-put">(PUT) Updating customers</a>
+<ul class="sectlevel3">
+<li><a href="#_request_structure_5">Request structure</a></li>
+<li><a href="#_curl_request_5">CURL request</a></li>
+<li><a href="#_example_response_5">Example response</a></li>
+<li><a href="#_links_2">Links</a></li>
+</ul>
+</li>
+<li><a href="#resources-customers-patch-activate">(PATCH) Activate customer</a>
+<ul class="sectlevel3">
+<li><a href="#_request_structure_6">Request structure</a></li>
+<li><a href="#_curl_request_6">CURL request</a></li>
+<li><a href="#_example_response_6">Example response</a></li>
+<li><a href="#_links_3">Links</a></li>
+</ul>
+</li>
+<li><a href="#resources-customers-patch-deactivate">(PATCH) Deactivate customer</a>
+<ul class="sectlevel3">
+<li><a href="#_request_structure_7">Request structure</a></li>
+<li><a href="#_curl_request_7">CURL request</a></li>
+<li><a href="#_example_response_7">Example response</a></li>
+<li><a href="#_links_4">Links</a></li>
 </ul>
 </li>
 </ul>
@@ -605,15 +646,15 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/prs.hal-forms+json
-Content-Length: 197
+Content-Length: 201
 
 {
   "_links" : {
-    "customer" : {
-      "href" : "http://localhost:8080/customer/id"
+    "customers" : {
+      "href" : "http://localhost:8080/customers/id"
     },
-    "customer:search" : {
-      "href" : "http://localhost:8080/customer?name=customerName"
+    "customers:search" : {
+      "href" : "http://localhost:8080/customers?name=customerName"
     }
   }
 }</code></pre>
@@ -664,11 +705,11 @@ Content-Length: 197
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>customer</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Customer resource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>customers</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Customers resource</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>customer:search</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>customers:search</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The Search for Customers</p></td>
 </tr>
 </tbody>
@@ -684,7 +725,7 @@ Content-Length: 197
 <p>The <code>customers</code> provides the entry point into the service.</p>
 </div>
 <div class="sect2">
-<h3 id="resources-customers-post"><a class="link" href="#resources-customers-post">Accessing the customers POST</a></h3>
+<h3 id="resources-customers-post"><a class="link" href="#resources-customers-post">(POST) Creating customers</a></h3>
 <div class="paragraph">
 <p>A <code>POST</code> request is used to access customer creation.</p>
 </div>
@@ -692,7 +733,7 @@ Content-Length: 197
 <h4 id="_request_structure_2"><a class="link" href="#_request_structure_2">Request structure</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /customer HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /customers HTTP/1.1
 Content-Type: application/hal+json;charset=UTF-8
 Content-Length: 145
 Host: localhost:8080
@@ -759,14 +800,14 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
-Location: /2e8b999a-dbc0-47e3-ac14-a4323b77c13f
+Location: /82c3a661-3493-4528-a3ce-f35e3ab7a5c4
 Content-Type: application/prs.hal-forms+json
-Content-Length: 128
+Content-Length: 129
 
 {
   "_links" : {
     "edit" : {
-      "href" : "http://localhost:8080/customer/2e8b999a-dbc0-47e3-ac14-a4323b77c13f"
+      "href" : "http://localhost:8080/customers/82c3a661-3493-4528-a3ce-f35e3ab7a5c4"
     }
   }
 }</code></pre>
@@ -774,10 +815,31 @@ Content-Length: 128
 </div>
 </div>
 <div class="sect3">
+<h4 id="_response_headers"><a class="link" href="#_response_headers">Response headers</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The location of the created resource</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
 <h4 id="_curl_request_2"><a class="link" href="#_curl_request_2">CURL request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/customer' -i -X POST \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/customers' -i -X POST \
     -H 'Content-Type: application/hal+json;charset=UTF-8' \
     -d '{
   "zip" : "000000-000",
@@ -790,6 +852,715 @@ Content-Length: 128
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_links"><a class="link" href="#_links">Links</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Relation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edit customer data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resources-customers-getbyid"><a class="link" href="#resources-customers-getbyid">(GET) Retrieving customers by ID</a></h3>
+<div class="paragraph">
+<p>A <code>GET</code> request is used to get the customer by Id.</p>
+</div>
+<div class="sect3">
+<h4 id="_request_structure_3"><a class="link" href="#_request_structure_3">Request structure</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+Accept: application/prs.hal-forms+json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. /customers/{id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Customer Id</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_curl_request_3"><a class="link" href="#_curl_request_3">CURL request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X GET \
+    -H 'Accept: application/prs.hal-forms+json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_3"><a class="link" href="#_example_response_3">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/prs.hal-forms+json
+Content-Length: 1548
+
+{
+  "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
+  "name" : "fake_name",
+  "email" : "fake_email",
+  "active" : false,
+  "street" : "fake_street",
+  "number" : "fake_number",
+  "city" : "fake_city",
+  "zip" : "fake_zip",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    }
+  },
+  "_templates" : {
+    "default" : {
+      "method" : "PUT",
+      "properties" : [ {
+        "name" : "city",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "email",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "name",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "number",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "street",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "zip",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      } ]
+    },
+    "activate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+    },
+    "deactivate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resources-customers-findbyname"><a class="link" href="#resources-customers-findbyname">(GET) Finding customers by Name</a></h3>
+<div class="paragraph">
+<p>A <code>GET</code> request is also used to find customers by name.</p>
+</div>
+<div class="sect3">
+<h4 id="_request_structure_4"><a class="link" href="#_request_structure_4">Request structure</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /customers?name=Foo%20Bar HTTP/1.1
+Accept: application/prs.hal-forms+json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_curl_request_4"><a class="link" href="#_curl_request_4">CURL request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/customers?name=Foo%20Bar' -i -X GET \
+    -H 'Accept: application/prs.hal-forms+json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_structure"><a class="link" href="#_response_structure">Response structure</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_embedded.existingCustomerModelList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The customer list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The search made</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_example_response_4"><a class="link" href="#_example_response_4">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/prs.hal-forms+json
+Content-Length: 3747
+
+{
+  "_embedded" : {
+    "existingCustomerModelList" : [ {
+      "id" : "5142387a-053d-4bc9-989c-c9001984a34c",
+      "name" : "fake_name",
+      "email" : "fake_email",
+      "active" : false,
+      "street" : "fake_street",
+      "number" : "fake_number",
+      "city" : "fake_city",
+      "zip" : "fake_zip",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c"
+        }
+      },
+      "_templates" : {
+        "default" : {
+          "method" : "PUT",
+          "properties" : [ {
+            "name" : "city",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "email",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "name",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "number",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "street",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "zip",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          } ]
+        },
+        "activate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/activate"
+        },
+        "deactivate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/deactivate"
+        }
+      }
+    }, {
+      "id" : "95253ac0-b022-43be-9883-263381b38e13",
+      "name" : "fake_name",
+      "email" : "fake_email",
+      "active" : false,
+      "street" : "fake_street",
+      "number" : "fake_number",
+      "city" : "fake_city",
+      "zip" : "fake_zip",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13"
+        }
+      },
+      "_templates" : {
+        "default" : {
+          "method" : "PUT",
+          "properties" : [ {
+            "name" : "city",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "email",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "name",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "number",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "street",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          }, {
+            "name" : "zip",
+            "regex" : "^(?=\\s*\\S).*$",
+            "required" : true,
+            "type" : "text"
+          } ]
+        },
+        "activate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/activate"
+        },
+        "deactivate" : {
+          "method" : "PATCH",
+          "properties" : [ ],
+          "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/deactivate"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers?name=Foo%20Bar"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resources-customers-put"><a class="link" href="#resources-customers-put">(PUT) Updating customers</a></h3>
+<div class="paragraph">
+<p>A <code>PUT</code> request is used to access customer update.</p>
+</div>
+<div class="sect3">
+<h4 id="_request_structure_5"><a class="link" href="#_request_structure_5">Request structure</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 145
+Host: localhost:8080
+
+{
+  "zip" : "000000-000",
+  "number" : "123B",
+  "city" : "Bay Bar",
+  "street" : "Foo Street",
+  "name" : "Foo Bar",
+  "email" : "foo@bar.com"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. /customers/{id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Customer Id</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the customer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The email of the customer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>street</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The street of the customer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of the customer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The city of the customer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The zip of the customer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_curl_request_5"><a class="link" href="#_curl_request_5">CURL request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X PUT \
+    -H 'Content-Type: application/hal+json;charset=UTF-8' \
+    -d '{
+  "zip" : "000000-000",
+  "number" : "123B",
+  "city" : "Bay Bar",
+  "street" : "Foo Street",
+  "name" : "Foo Bar",
+  "email" : "foo@bar.com"
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_5"><a class="link" href="#_example_response_5">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/prs.hal-forms+json
+Content-Length: 1539
+
+{
+  "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
+  "name" : "Foo Bar",
+  "email" : "foo@bar.com",
+  "active" : false,
+  "street" : "Foo Street",
+  "number" : "123B",
+  "city" : "Bay Bar",
+  "zip" : "000000-000",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    }
+  },
+  "_templates" : {
+    "default" : {
+      "method" : "PUT",
+      "properties" : [ {
+        "name" : "city",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "email",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "name",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "number",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "street",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      }, {
+        "name" : "zip",
+        "regex" : "^(?=\\s*\\S).*$",
+        "required" : true,
+        "type" : "text"
+      } ]
+    },
+    "activate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+    },
+    "deactivate" : {
+      "method" : "PATCH",
+      "properties" : [ ],
+      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_links_2"><a class="link" href="#_links_2">Links</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Relation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>self</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource Self Link</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resources-customers-patch-activate"><a class="link" href="#resources-customers-patch-activate">(PATCH) Activate customer</a></h3>
+<div class="paragraph">
+<p>A <code>PATCH</code> request can be used to activate a customer.</p>
+</div>
+<div class="sect3">
+<h4 id="_request_structure_6"><a class="link" href="#_request_structure_6">Request structure</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. /customers/{id}/activate</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Customer Id</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_curl_request_6"><a class="link" href="#_curl_request_6">CURL request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate' -i -X PATCH</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_6"><a class="link" href="#_example_response_6">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 202 Accepted
+Content-Type: application/prs.hal-forms+json
+Content-Length: 254
+
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    },
+    "deactivate" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_links_3"><a class="link" href="#_links_3">Links</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Relation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>self</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource Self Link</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deactivate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Link to deactivate the customer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resources-customers-patch-deactivate"><a class="link" href="#resources-customers-patch-deactivate">(PATCH) Deactivate customer</a></h3>
+<div class="paragraph">
+<p>A <code>PATCH</code> request can be used to deactivate a customer.</p>
+</div>
+<div class="sect3">
+<h4 id="_request_structure_7"><a class="link" href="#_request_structure_7">Request structure</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. /customers/{id}/deactivate</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Customer Id</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_curl_request_7"><a class="link" href="#_curl_request_7">CURL request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate' -i -X PATCH</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_7"><a class="link" href="#_example_response_7">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 202 Accepted
+Content-Type: application/prs.hal-forms+json
+Content-Length: 250
+
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+    },
+    "activate" : {
+      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_links_4"><a class="link" href="#_links_4">Links</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Relation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>self</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource Self Link</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>activate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Link to activate the customer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -801,6 +1572,9 @@ Content-Length: 128
 <li>
 <p>Baeldung. "Introduction to Spring REST Docs". Baeldung. May 29, 2022. Available at: <a href="https://www.baeldung.com/spring-rest-docs" class="bare">https://www.baeldung.com/spring-rest-docs</a>. Accessed Aug 14, 2022.</p>
 </li>
+<li>
+<p>Docs Spring. "Spring REST Docs". Wilkinson A., Bryant J. Jan 15, 2022. Available at: <a href="https://docs.spring.io/spring-restdocs/docs/current/reference/html5/" class="bare">https://docs.spring.io/spring-restdocs/docs/current/reference/html5/</a> Accessed Sep 02, 2022.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -808,7 +1582,7 @@ Content-Length: 128
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-22 11:59:06 -0300
+Last updated 2022-09-04 19:36:05 -0300
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

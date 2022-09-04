@@ -131,7 +131,7 @@
           </execution>
         </executions>
         <dependencies>
-          <dependency> 
+          <dependency>
             <groupId>org.springframework.restdocs</groupId>
             <artifactId>spring-restdocs-asciidoctor</artifactId>
             <version>2.0.6.RELEASE</version>
@@ -151,19 +151,40 @@
             </goals>
             <configuration>
               <outputDirectory>${basedir}/docs</outputDirectory>
-              <resources>          
+              <resources>
                 <resource>
                   <directory>target/generated-docs</directory>
                   <filtering>true</filtering>
                 </resource>
-              </resources>              
-            </configuration>            
+              </resources>
+            </configuration>
           </execution>
         </executions>
       </plugin>
-      
+
     </plugins>
   </build>
 
+  <profiles>
+  <profile>
+    <id>failsafe</id>
+    <build>
+      <plugins>
+        <plugin>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>3.0.0-M7</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+  </profiles>
 
 </project>

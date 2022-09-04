@@ -1,4 +1,4 @@
-package com.brunotacca.external.apis.rest.customer;
+package com.brunotacca.external.apis.rest.customers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,7 +35,7 @@ class CustomerLinkDiscoverabilityFactoryTest {
     assertEquals(2, links.toList().size());
 
     List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
-    assertThat(linkRels, containsInAnyOrder("customer", "customer:search"));
+    assertThat(linkRels, containsInAnyOrder("customers", "customers:search"));
 
   }
   
@@ -82,7 +82,7 @@ class CustomerLinkDiscoverabilityFactoryTest {
     assertThat(linkHref, containsInAnyOrder(containsString(validId),containsString(validId)));
 
     List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
-    assertThat(linkRels, containsInAnyOrder("customer", "deactivate"));
+    assertThat(linkRels, containsInAnyOrder("self", "deactivate"));
 
   }
 
@@ -97,7 +97,25 @@ class CustomerLinkDiscoverabilityFactoryTest {
     assertThat(linkHref, containsInAnyOrder(containsString(validId),containsString(validId)));
 
     List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
-    assertThat(linkRels, containsInAnyOrder("customer", "activate"));
+    assertThat(linkRels, containsInAnyOrder("self", "activate"));
+
+  }
+
+  @Test
+  void shouldGenerateLinksForFindCustomerByName() {
+
+    String name = "Foo Bar";
+    String uriName = "Foo%20Bar";
+
+    Links links = this.customerLinkDiscoverabilityFactory.linksForFindCustomerByName(name);
+
+    assertEquals(1, links.toList().size());
+
+    List<String> linkHref = links.stream().map(l -> l.getHref()).toList();
+    assertThat(linkHref, containsInAnyOrder(containsString(uriName)));
+
+    List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
+    assertThat(linkRels, containsInAnyOrder("self"));
 
   }
 

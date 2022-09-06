@@ -48,12 +48,12 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 
 ### Documents
 
-* [x] [Project Domain](docs/PROJECT_DOMAIN.md)
-* [ ] [Project Architecture](docs/PROJECT_ARCHITECTURE.md)
-* [ ] [Setup and Configuration](docs/GET_STARTED.md)
-* [ ] [Contributing](docs/CONTRIBUTING.md)
-* [x] [Getting help](docs/SUPPORT.md)
-* [x] [Be nice to everyone](docs/CODE_OF_CONDUCT.md)
+* [x] [Project Domain]
+* [ ] [Project Architecture]
+* [ ] [Setup and Configuration]
+* [ ] [Contributing]
+* [x] [Getting help]
+* [x] [Be nice to everyone]
 
 
 ### Project Progress
@@ -67,14 +67,19 @@ Simple application (domain complexity) with hard architectural boundaries enforc
   - [ ] Product
   - [ ] Order
 - [ ] Adapters
-  - [ ] Customer
+  - [x] Customer
   - [ ] Product
   - [ ] Order
 - [ ] External
-  - [ ] Customer
+  - [x] Customer
   - [ ] Product
   - [ ] Order
 
 [Project Domain]: docs/PROJECT_DOMAIN.md
+[Project Architecture]: docs/PROJECT_ARCHITECTURE.md
+[Setup and Configuration]: docs/GET_STARTED.md
+[Contributing]: docs/CONTRIBUTING.md
+[Getting help]: docs/SUPPORT.md
+[Be nice to everyone]: docs/CODE_OF_CONDUCT.md
 
 

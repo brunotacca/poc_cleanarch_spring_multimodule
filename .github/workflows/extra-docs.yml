@@ -35,7 +35,7 @@ jobs:
 
       - uses: docker://pandoc/core:2.19
         with:
-          args: -f docbook -t markdown_strict ca-spring-multimodule/external/apis/docs/docbook/api-guide.xml api-guide.md
+          args: -f docbook -t markdown_strict ca-spring-multimodule/external/apis/docs/docbook/api-guide.xml -o api-guide.md
 
       - uses: actions/upload-artifact@master
         with:

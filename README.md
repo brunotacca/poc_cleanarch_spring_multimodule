@@ -4,8 +4,6 @@ SpringBoot project structured with Clean Architecture enforced by Maven MultiMod
 
 ![](https://img.shields.io/badge/Status-WIP-orange) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
-
 [![Sonar Analysis](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml/badge.svg)](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml)
 
 #### Sonar
@@ -24,7 +22,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - [x] Maven MultiModule (Enforced Architectural Boundaries)
 - [x] Clean Architecture
 
-**Extras:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
+**Extras 1:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
 
 - [x] JUnit and AssertJ
 - [ ] Test Containers
@@ -34,45 +32,54 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 - [x] SonarQube
 - [x] GitHub Actions
 
-**Extra 3:** Reactive java project, just because I wanted to try CA in a reactive style. I believe it might be a good fit to distinguish the flow of control of controllers and presenters.
 
-- [ ] Spring Webflux
-- [ ] Project Reactor
+**Extras 3:** RESTful API with Docs.
 
-**Extra 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
+- [x] RESTful API (HATEOAS)
+- [x] Documentation (AsciiDoc)
+  - [x] HTML
+  - [x] Docbook
+  - [ ] Markdown
+
+**Extras 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
 
 - [x] Domain PoC Planning
 
 
 ### Documents
 
-* [x] [Project Domain](docs/PROJECT_DOMAIN.md)
-* [ ] [Project Architecture](docs/PROJECT_ARCHITECTURE.md)
-* [ ] [Setup and Configuration](docs/GET_STARTED.md)
-* [ ] [Contributing](docs/CONTRIBUTING.md)
-* [x] [Getting help](docs/SUPPORT.md)
-* [x] [Be nice to everyone](docs/CODE_OF_CONDUCT.md)
+* [x] [Project Domain]
+* [ ] [Project Architecture]
+* [ ] [Setup and Configuration]
+* [ ] [Contributing]
+* [x] [Getting help]
+* [x] [Be nice to everyone]
 
 
-### Development Progress
+### Project Progress
 
 - [ ] Entities
   - [x] Customer
   - [ ] Product
   - [ ] Order
 - [ ] UseCases
-  - [ ] Customer
+  - [x] Customer
   - [ ] Product
   - [ ] Order
 - [ ] Adapters
-  - [ ] Customer
+  - [x] Customer
   - [ ] Product
   - [ ] Order
 - [ ] External
-  - [ ] Customer
+  - [x] Customer
   - [ ] Product
   - [ ] Order
 
 [Project Domain]: docs/PROJECT_DOMAIN.md
+[Project Architecture]: docs/PROJECT_ARCHITECTURE.md
+[Setup and Configuration]: docs/GET_STARTED.md
+[Contributing]: docs/CONTRIBUTING.md
+[Getting help]: docs/SUPPORT.md
+[Be nice to everyone]: docs/CODE_OF_CONDUCT.md
 
 

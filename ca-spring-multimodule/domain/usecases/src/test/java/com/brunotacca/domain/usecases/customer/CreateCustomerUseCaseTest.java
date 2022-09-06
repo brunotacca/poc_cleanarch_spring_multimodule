@@ -41,7 +41,7 @@ class CreateCustomerUseCaseTest {
   private final Customer customerMock = mock(Customer.class, Mockito.RETURNS_DEEP_STUBS);
   private final Address addressMock = mock(Address.class);
 
-
+  private final String validId = "e3119506-030a-4877-a219-389ef21118a4";
   private final String validName = "Foo Bar";
   private final String validEmail = "foo@bar.com";
   private final String validStreet = "street";
@@ -49,12 +49,12 @@ class CreateCustomerUseCaseTest {
   private final String validZip = "000000-000";
   private final String validCity = "city";
   private CreateCustomerInputDTO validInputDTO = new CreateCustomerInputDTO(validName, validEmail, validStreet, validNumber, validCity, validZip);
-  private CustomerOutputDTO validOutputDTO = new CustomerOutputDTO("id", validName, validEmail, false, validStreet, validNumber, validCity, validZip);
+  private CustomerOutputDTO validOutputDTO = new CustomerOutputDTO(validId, validName, validEmail, false, validStreet, validNumber, validCity, validZip);
 
   void prepareStubs() throws BusinessException {
     when(customerFactoryMock.createAddress(anyString(), anyString(), anyString(), anyString())).thenReturn(addressMock);
     when(customerFactoryMock.createCustomer(anyString(), anyString(), any())).thenReturn(customerMock);
-    when(customerMapperMock.fromCustomer(any())).thenReturn(validOutputDTO);
+    when(customerMapperMock.outputFromEntity(any())).thenReturn(validOutputDTO);
   }
 
   @Test

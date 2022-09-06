@@ -1,6 +1,7 @@
 package com.brunotacca.domain.usecases.customer.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
@@ -30,6 +31,7 @@ class CustomerMapperTest {
         when(customerMock.getId()).thenReturn("4N_1D");
         when(customerMock.getName()).thenReturn(validName);
         when(customerMock.getEmail()).thenReturn(validEmail);
+        when(customerMock.isActive()).thenReturn(false);
         when(customerMock.getAddress()).thenReturn(addressMock);
         when(addressMock.getCity()).thenReturn(validCity);
         when(addressMock.getStreet()).thenReturn(validStreet);
@@ -38,12 +40,13 @@ class CustomerMapperTest {
         
         
         CustomerMapper mapper = new CustomerMapper();
-        CustomerOutputDTO output = mapper.fromCustomer(customerMock);
+        CustomerOutputDTO output = mapper.outputFromEntity(customerMock);
 
         assertNotNull(output);
         assertEquals("4N_1D", output.id());
         assertEquals(validName, output.name());
         assertEquals(validEmail, output.email());
+        assertFalse(output.active());
         assertEquals(validStreet, output.street());
         assertEquals(validCity, output.city());
         assertEquals(validNumber, output.number());

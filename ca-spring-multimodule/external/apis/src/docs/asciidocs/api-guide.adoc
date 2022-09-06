@@ -1,0 +1,256 @@
+= POC - Clean Architecture Spring Multi Module
+Bruno Tacca;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[discrete]
+=== API Guide from https://github.com/brunotacca/poc_cleanarch_spring_multimodule[CA Spring Multimodule]
+
+[[overview]]
+= Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+CA Spring Multimodule tries to adhere as closely as possible to standard HTTP and REST conventions in its use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+CA Spring Multimodule tries to adhere as closely as possible to standard HTTP and REST conventions in its use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's `Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+[[overview-hypermedia]]
+== Hypermedia
+
+CA Spring Multimodule uses hypermedia and resources include links to other resources in their responses. 
+Responses are in http://stateless.co/hal_specification.html[Hypertext Application from resource to resource. Language (HAL)] format. 
+Links can be found beneath the `_links` key. 
+Users of the API should not create URIs themselves, instead they should use the above-described links to navigate
+
+[[resources]]
+= Resources
+
+
+[[resources-index]]
+== Index
+
+The index provides the entry point into the service.
+
+[[resources-index-access]]
+=== Accessing the index
+
+A `GET` request is used to access the index
+
+==== Request structure
+
+include::{snippets}/index/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/index/http-response.adoc[]
+
+include::{snippets}/index/response-fields.adoc[]
+
+==== CURL request
+
+include::{snippets}/index/curl-request.adoc[]
+
+[[resources-index-links]]
+==== Links
+
+include::{snippets}/index/links.adoc[]
+
+
+[[resources-customers]]
+== Customer REST Service 
+
+The `customers` provides the entry point into the service.
+
+[[resources-customers-post]]
+=== (POST) Creating customers
+
+A `POST` request is used to access customer creation.
+
+==== Request structure
+
+include::{snippets}/customers-create/http-request.adoc[]
+
+include::{snippets}/customers-create/request-fields.adoc[]
+
+==== Example response
+
+include::{snippets}/customers-create/http-response.adoc[]
+
+==== Response headers
+
+include::{snippets}/customers-create/response-headers.adoc[]
+
+==== CURL request
+
+include::{snippets}/customers-create/curl-request.adoc[]
+
+==== Links
+
+include::{snippets}/customers-create/links.adoc[]
+
+
+[[resources-customers-getbyid]]
+=== (GET) Retrieving customers by ID
+
+A `GET` request is used to get the customer by Id.
+
+==== Request structure
+
+include::{snippets}/customers-getbyid/http-request.adoc[]
+
+include::{snippets}/customers-getbyid/path-parameters.adoc[]
+
+==== CURL request
+
+include::{snippets}/customers-getbyid/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customers-getbyid/http-response.adoc[]
+
+[[resources-customers-findbyname]]
+=== (GET) Finding customers by Name
+
+A `GET` request is also used to find customers by name.
+
+==== Request structure
+
+include::{snippets}/customers-findbyname/http-request.adoc[]
+
+include::{snippets}/customers-findbyname/path-parameters.adoc[]
+
+==== CURL request
+
+include::{snippets}/customers-findbyname/curl-request.adoc[]
+
+==== Response structure
+
+include::{snippets}/customers-findbyname/response-fields.adoc[]
+
+==== Example response
+
+include::{snippets}/customers-findbyname/http-response.adoc[]
+
+
+[[resources-customers-put]]
+=== (PUT) Updating customers
+
+A `PUT` request is used to access customer update.
+
+==== Request structure
+
+include::{snippets}/customers-update/http-request.adoc[]
+
+include::{snippets}/customers-update/path-parameters.adoc[]
+
+include::{snippets}/customers-update/request-fields.adoc[]
+
+==== CURL request
+
+include::{snippets}/customers-update/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customers-update/http-response.adoc[]
+
+==== Links
+
+include::{snippets}/customers-update/links.adoc[]
+
+
+
+[[resources-customers-patch-activate]]
+=== (PATCH) Activate customer
+
+A `PATCH` request can be used to activate a customer.
+
+==== Request structure
+
+include::{snippets}/customers-activate/http-request.adoc[]
+
+include::{snippets}/customers-activate/path-parameters.adoc[]
+
+==== CURL request
+
+include::{snippets}/customers-activate/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customers-activate/http-response.adoc[]
+
+==== Links
+
+include::{snippets}/customers-activate/links.adoc[]
+
+
+[[resources-customers-patch-deactivate]]
+=== (PATCH) Deactivate customer
+
+A `PATCH` request can be used to deactivate a customer.
+
+==== Request structure
+
+include::{snippets}/customers-deactivate/http-request.adoc[]
+
+include::{snippets}/customers-deactivate/path-parameters.adoc[]
+
+==== CURL request
+
+include::{snippets}/customers-deactivate/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customers-deactivate/http-response.adoc[]
+
+==== Links
+
+include::{snippets}/customers-deactivate/links.adoc[]
+
+
+[bibliography]
+== References
+
+* Baeldung. "Introduction to Spring REST Docs". Baeldung. May 29, 2022. Available at: https://www.baeldung.com/spring-rest-docs. Accessed Aug 14, 2022.
+
+* Docs Spring. "Spring REST Docs". Wilkinson A., Bryant J. Jan 15, 2022. Available at: https://docs.spring.io/spring-restdocs/docs/current/reference/html5/ Accessed Sep 02, 2022.

@@ -44,7 +44,7 @@ class CreateCustomerUseCase implements UseCase<CreateCustomerInputDTO, CustomerO
     customerDataAccess.save(customer); // this throws
 
     // Convert respose to output and return
-    return customerMapper.fromCustomer(customer);
+    return customerMapper.outputFromEntity(customer);
   }
   
 }

@@ -77,7 +77,7 @@ class CustomerRestControllerIT {
   }
  
   @Nested
-  public class Create {
+  class Create {
 
     @Test
     void shouldCreateCustomerAndReturn201() throws Exception {

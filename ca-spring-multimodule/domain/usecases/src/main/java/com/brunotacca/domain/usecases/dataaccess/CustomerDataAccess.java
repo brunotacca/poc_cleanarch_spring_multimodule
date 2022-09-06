@@ -11,6 +11,5 @@ public interface CustomerDataAccess {
   public Customer read(String id) throws DataAccessException;
   public List<Customer> findByName(String name) throws DataAccessException;
   public Customer findByEmail(String email) throws DataAccessException;
-  // public List<Customer> readAll() throws DataAccessException;
   
 }

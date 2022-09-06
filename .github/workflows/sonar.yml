@@ -5,9 +5,6 @@ on:
       - main
     paths:
       - 'ca-spring-multimodule/**'
-    paths-ignore:
-      - 'docs/**'
-      - 'ca-spring-multimodule/external/apis/docs/**'
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:

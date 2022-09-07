@@ -36,10 +36,10 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 **Extras 3:** RESTful API with Docs.
 
 - [x] RESTful API (HATEOAS)
-- [x] Documentation (AsciiDoc)
-  - [x] HTML
-  - [x] Docbook
-  - [ ] Markdown
+- [x] Documentation (Spring RestDocs + AsciiDoc)
+  - [x] [HTML](ca-spring-multimodule/external/apis/docs/html/api-guide.html)
+  - [x] [Docbook](ca-spring-multimodule/external/apis/docs/docbook/api-guide.xml)
+  - [x] [Markdown](ca-spring-multimodule/external/apis/docs/md/api-guide.md)
 
 **Extras 4:** Domain-Driven Design. Just a little bit to model this small project domain, even tho DDD is not recommended for small projects. This project stays just at the tip of the DDD iceberg. Check out the [Project Domain]. 
 
@@ -81,5 +81,4 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 [Contributing]: docs/CONTRIBUTING.md
 [Getting help]: docs/SUPPORT.md
 [Be nice to everyone]: docs/CODE_OF_CONDUCT.md
-
 

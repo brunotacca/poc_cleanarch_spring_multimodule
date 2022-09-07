@@ -36,7 +36,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 **Extras 3:** RESTful API with Docs.
 
 - [x] RESTful API (HATEOAS)
-- [x] Documentation (Spring RestDocs + AsciiDoc)
+- [x] Documentation (Spring RestDocs + AsciiDoc + Pandoc & GitHub Actions)
   - [x] [HTML](ca-spring-multimodule/external/apis/docs/html/api-guide.html)
   - [x] [Docbook](ca-spring-multimodule/external/apis/docs/docbook/api-guide.xml)
   - [x] [Markdown](ca-spring-multimodule/external/apis/docs/md/api-guide.md)

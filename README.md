@@ -4,11 +4,15 @@ SpringBoot project structured with Clean Architecture enforced by Maven MultiMod
 
 ![](https://img.shields.io/badge/Status-WIP-orange) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Sonar Analysis](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml/badge.svg)](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml)
-
 #### Sonar
 
+<center>
+
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=brunotacca_poc_cleanarch_spring_multimodule)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) \
+[![Sonar Analysis](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml/badge.svg)](https://github.com/brunotacca/poc_cleanarch_spring_multimodule/actions/workflows/sonar.yml)
+
+</center> 
+
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) \
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=bugs)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) \
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=coverage)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=brunotacca_poc_cleanarch_spring_multimodule&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=brunotacca_poc_cleanarch_spring_multimodule)
@@ -67,7 +71,7 @@ Simple application (domain complexity) with hard architectural boundaries enforc
   - [ ] Product
   - [ ] Order
 - [ ] Adapters
-  - [x] Customer
+  - [ ] Customer
   - [ ] Product
   - [ ] Order
 - [ ] External

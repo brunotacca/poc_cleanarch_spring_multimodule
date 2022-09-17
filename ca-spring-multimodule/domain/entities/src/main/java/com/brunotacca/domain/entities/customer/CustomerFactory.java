@@ -8,22 +8,25 @@ import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldExce
 public class CustomerFactory {
 
   public Customer createCustomer(String name, String email, Address address) throws BusinessException {
-    return new DefaultCustomer(UUID.randomUUID().toString(), name, email, address);
+    return new DefaultCustomer(UUID.randomUUID(), name, email, address);
   }
 
-  public Customer getExistingCustomer(String id, String name, String email, Address address) throws BusinessException {
-    UUID uuid = null;
-    if (id == null || id.trim().isEmpty()) {
+  public Customer recreateExistingCustomer(UUID id, String name, String email, Boolean active, Address address) throws BusinessException {
+    if (id == null) {
       throw new RequiredFieldException("id");
     }
 
-    try {
-      uuid = UUID.fromString(id);
-    } catch (IllegalArgumentException e) {
-      throw new RequiredFieldException("id");
-    }
+    Customer existingCustomer = new DefaultCustomer(id, name, email, address);
 
-    return new DefaultCustomer(uuid.toString(), name, email, address);
+    return keepActiveValueForExistingCustomer(existingCustomer, active);
+  }
+
+  Customer keepActiveValueForExistingCustomer(Customer existingCustomer, Boolean activeValue) {
+    if(activeValue!=null) {
+      if(Boolean.TRUE.equals(activeValue)) return existingCustomer.activate();
+      else return existingCustomer.deactivate();
+    }
+    return null;
   }
 
   public Address createAddress(String street, String number, String zip, String city) throws BusinessException {

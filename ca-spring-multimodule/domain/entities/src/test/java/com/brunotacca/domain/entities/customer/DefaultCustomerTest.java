@@ -3,7 +3,6 @@ package com.brunotacca.domain.entities.customer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,16 +30,15 @@ class DefaultCustomerTest {
 
   @BeforeEach
   void beforeEach() throws BusinessException {
-    this.validCustomer = new DefaultCustomer(UUID.randomUUID().toString(), validName, validEmail, validAddress);
+    this.validCustomer = new DefaultCustomer(UUID.randomUUID(), validName, validEmail, validAddress);
   }
 
   @Test
   void shouldCreateValidCustomer() throws BusinessException {
-    Customer created = new DefaultCustomer(UUID.randomUUID().toString(), validName, validEmail, validAddress);
+    Customer created = new DefaultCustomer(UUID.randomUUID(), validName, validEmail, validAddress);
 
     assertNotNull(created);
     assertNotNull(created.getId());
-    assertNotSame("", created.getId().trim());
     assertEquals(validName, created.getName());
     assertEquals(validEmail, created.getEmail());
     assertEquals(validAddress, created.getAddress());

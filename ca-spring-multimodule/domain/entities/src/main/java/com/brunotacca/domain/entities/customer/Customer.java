@@ -1,11 +1,13 @@
 package com.brunotacca.domain.entities.customer;
 
+import java.util.UUID;
+
 import com.brunotacca.domain.entities.shared.entities.BaseEntity;
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 
 public interface Customer extends BaseEntity {
   
-  public String getId();
+  public UUID getId();
   public String getName();
   public String getEmail();
   public Address getAddress();

@@ -2,6 +2,8 @@ package com.brunotacca.external.apis.rest.customers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +15,7 @@ import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerModelMapperTest {
 
-  private final String validId = "55951aeb-4fc8-4ba4-b78a-020138b13d22";
+  private final UUID validId = UUID.fromString("55951aeb-4fc8-4ba4-b78a-020138b13d22");
   private final CustomerModel validNewCustomerInput = new CustomerModel("name", "email", "street", "number", "city", "zip");
   private final ExistingCustomerModel validCustomerModel = new ExistingCustomerModel(validId, "name", "email", false, "street", "number", "city", "zip");
   private final CustomerOutputDTO validCustomerOutputDTO = new CustomerOutputDTO(validId, "name", "email", false, "street", "number", "city", "zip");

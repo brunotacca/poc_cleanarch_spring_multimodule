@@ -1,5 +1,7 @@
 package com.brunotacca.external.apis.rest.customers;
 
+import java.util.UUID;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -14,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 class ExistingCustomerModel extends RepresentationModel<ExistingCustomerModel> {
   @NotBlank
-  private final String id;
+  private final UUID id;
   @NotBlank
   private final String name;
   @NotBlank

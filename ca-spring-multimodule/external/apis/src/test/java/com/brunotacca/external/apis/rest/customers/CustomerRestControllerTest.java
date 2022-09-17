@@ -10,6 +10,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -26,7 +27,8 @@ import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerRestControllerTest {
 
-  private final String validId = "55951aeb-4fc8-4ba4-b78a-020138b13d22";
+  private final UUID validId = UUID.fromString("55951aeb-4fc8-4ba4-b78a-020138b13d22");
+  private final String validIdString = validId.toString();
   private final String validName = "Foo Bar";
 
   private final ExistingCustomerModel existingCustomerModel = new ExistingCustomerModel(validId, validName, "email", false, "street", "number", "city", "zip");
@@ -75,7 +77,7 @@ class CustomerRestControllerTest {
       when(customerController.getCustomer(any())).thenReturn(outputDTO);
       when(customerModelMapper.modelFromOutput(any())).thenReturn(existingCustomerModel);
   
-      customerRestController.getById(validId);
+      customerRestController.getById(validIdString);
       verify(customerController, times(1)).getCustomer(any());
       verify(customerLinkDiscoverabilityFactory, times(1)).linksForGetCustomer(validId);
       verify(customerModelMapper, times(1)).modelFromOutput(outputDTO);
@@ -84,7 +86,7 @@ class CustomerRestControllerTest {
     @Test
     void shouldCatchDomainExceptionsAndThrowResponseStatus() throws DomainException {
       when(customerController.getCustomer(any())).thenThrow(new DomainException("message"));
-      assertThrows(ResponseStatusException.class,() -> customerRestController.getById(validId));
+      assertThrows(ResponseStatusException.class,() -> customerRestController.getById(validIdString));
     }
   }
 
@@ -115,7 +117,7 @@ class CustomerRestControllerTest {
       when(customerModelMapper.updateDtoFromModel(any(), any())).thenReturn(validUpdateCustomerInputDTO);
       when(customerModelMapper.modelFromOutput(any())).thenReturn(existingCustomerModel);
 
-      customerRestController.update(validNewCustomerInput, validId);
+      customerRestController.update(validNewCustomerInput, validIdString);
       verify(customerModelMapper, times(1)).updateDtoFromModel(validNewCustomerInput, validId);
       verify(customerController, times(1)).updateCustomer(any());
       verify(customerLinkDiscoverabilityFactory, times(1)).linksForGetCustomer(validId);
@@ -125,7 +127,7 @@ class CustomerRestControllerTest {
     @Test
     void shouldCatchDomainExceptionsAndThrowResponseStatus() throws DomainException {
       when(customerController.updateCustomer(any())).thenThrow(new DomainException("message"));
-      assertThrows(ResponseStatusException.class,() -> customerRestController.update(validNewCustomerInput, validId));
+      assertThrows(ResponseStatusException.class,() -> customerRestController.update(validNewCustomerInput, validIdString));
     }
   }
   
@@ -133,7 +135,7 @@ class CustomerRestControllerTest {
   class Activate {
     @Test
     void shouldCallControllerMapperAndLinks() throws DomainException {
-      customerRestController.activate(validId);
+      customerRestController.activate(validIdString);
       verify(customerLinkDiscoverabilityFactory, times(1)).linksForActivateCustomer(validId);
     }
 
@@ -148,7 +150,7 @@ class CustomerRestControllerTest {
   class Deactivate {
     @Test
     void shouldCallControllerMapperAndLinks() throws DomainException {
-      customerRestController.deactivate(validId);
+      customerRestController.deactivate(validIdString);
       verify(customerLinkDiscoverabilityFactory, times(1)).linksForDeactivateCustomer(validId);
     }
 

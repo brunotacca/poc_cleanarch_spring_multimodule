@@ -1,5 +1,7 @@
 package com.brunotacca.external.apis.rest.customers;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Component;
 
 import com.brunotacca.domain.usecases.customer.dto.CreateCustomerInputDTO;
@@ -20,7 +22,7 @@ class CustomerModelMapper {
     );
   }
 
-  public UpdateCustomerInputDTO updateDtoFromModel(CustomerModel c, String id) {
+  public UpdateCustomerInputDTO updateDtoFromModel(CustomerModel c, UUID id) {
     return new UpdateCustomerInputDTO(
       id,
       c.getName(), 

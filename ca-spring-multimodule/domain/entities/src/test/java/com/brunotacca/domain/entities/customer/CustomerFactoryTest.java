@@ -76,11 +76,17 @@ class CustomerFactoryTest {
       customerFactory.keepActiveValueForExistingCustomer(customerMock, false);
       verify(customerMock, times(1)).deactivate();
 
+      Customer customerReturned = customerFactory.keepActiveValueForExistingCustomer(customerMock, null);
+      assertEquals(customerMock, customerReturned);
+
       Customer validCustomer = customerFactory.recreateExistingCustomer(UUID.randomUUID(), validName, validEmail, true, validAddress);
       Customer c1 = customerFactory.keepActiveValueForExistingCustomer(validCustomer, true);
       assertTrue(c1.isActive());
       Customer c2 = customerFactory.keepActiveValueForExistingCustomer(validCustomer, false);
       assertFalse(c2.isActive());
+
+      assertNotSame(customerMock, c1);
+      assertNotSame(customerMock, c2);
     }
 
     @Test

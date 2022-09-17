@@ -43,6 +43,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.brunotacca.domain.entities.customer.Customer;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,6 +71,7 @@ class CustomerRestControllerIT {
   private final TestCustomerValuesFactory testCustomerValuesFactory = new TestCustomerValuesFactory();
   private final String validId = testCustomerValuesFactory.validId.toString();
   private final String validName = testCustomerValuesFactory.validName;
+  private Customer validCustomer;
 
   private Map<String, Object> validNewCustomerInput = new HashMap<>();
   private Map<String, Object> invalidNewCustomerInput = new HashMap<>();
@@ -78,7 +81,9 @@ class CustomerRestControllerIT {
   
 
   @BeforeEach
-  void beforeEach() {
+  void beforeEach() throws BusinessException {
+    this.validCustomer = testCustomerValuesFactory.getValidCustomer(false);
+  
     this.validNewCustomerInput.put("name", validName);
     this.validNewCustomerInput.put("email", "foo@bar.com");
     this.validNewCustomerInput.put("street", "Foo Street");
@@ -104,7 +109,6 @@ class CustomerRestControllerIT {
     void shouldCreateCustomerAndReturn201() throws Exception {
 
       mockMvc.perform(post("/customers").contentType(MediaTypes.HAL_JSON).content(objectMapper.writeValueAsString(validNewCustomerInput)))
-        .andDo(print())
         .andExpect(status().isCreated())
         .andDo(
           document(
@@ -146,7 +150,7 @@ class CustomerRestControllerIT {
     @Test
     void shouldGetCustomerAndReturn200() throws Exception {
 
-      customerDataAccess.create(testCustomerValuesFactory.getValidCustomer(false));
+      customerDataAccess.create(validCustomer);
 
       mockMvc.perform(get("/customers/{id}", validId).accept(MediaTypes.HAL_FORMS_JSON_VALUE))
         .andExpect(status().isOk())
@@ -182,7 +186,7 @@ class CustomerRestControllerIT {
     @Test
     void shouldFindCustomersAndReturn200() throws Exception {
 
-      customerDataAccess.create(testCustomerValuesFactory.getValidCustomer(false));
+      customerDataAccess.create(validCustomer);
 
       mockMvc.perform(get("/customers?name={customerName}", testCustomerValuesFactory.validName).accept(MediaTypes.HAL_FORMS_JSON_VALUE))
         .andExpect(status().isOk())
@@ -217,7 +221,9 @@ class CustomerRestControllerIT {
     @Test
     void shouldUpdateCustomerAndReturn200() throws Exception {
 
-      customerDataAccess.create(testCustomerValuesFactory.getValidCustomer(false));
+      customerDataAccess.create(validCustomer);
+      var c = customerDataAccess.findByName(validCustomer.getName());
+      System.out.println(c);
 
       mockMvc.perform(put("/customers/{id}", validId).contentType(MediaTypes.HAL_JSON).content(objectMapper.writeValueAsString(validNewCustomerInput)))
         .andExpect(status().isOk())
@@ -247,7 +253,7 @@ class CustomerRestControllerIT {
     @Test
     void shouldNotUpdateCustomerAndReturn400() throws Exception {
 
-      customerDataAccess.create(testCustomerValuesFactory.getValidCustomer(false));
+      customerDataAccess.create(validCustomer);
 
       mockMvc.perform(
                 put("/customers/{id}", "   ")
@@ -273,7 +279,7 @@ class CustomerRestControllerIT {
     @Test
     void shouldActivateCustomerAndReturn200() throws Exception {
 
-      customerDataAccess.create(testCustomerValuesFactory.getValidCustomer(false));
+      customerDataAccess.create(validCustomer);
 
       mockMvc.perform(patch("/customers/{id}/activate", validId))
         .andExpect(status().isAccepted())
@@ -305,7 +311,7 @@ class CustomerRestControllerIT {
     @Test
     void shouldDeactivateCustomerAndReturn200() throws Exception {
       
-      customerDataAccess.create(testCustomerValuesFactory.getValidCustomer(false));
+      customerDataAccess.create(validCustomer);
 
       mockMvc.perform(patch("/customers/{id}/deactivate", validId))
         .andExpect(status().isAccepted())

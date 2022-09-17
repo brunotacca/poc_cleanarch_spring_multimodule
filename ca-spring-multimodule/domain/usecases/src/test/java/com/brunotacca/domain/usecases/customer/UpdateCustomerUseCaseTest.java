@@ -123,6 +123,12 @@ class UpdateCustomerUseCaseTest {
   class UpdatingCustomerShouldThrow {
 
     @Test
+    void whenCustomerNotFound() throws DomainException {
+      doReturn(Optional.empty()).when(customerDataAccessMock).read(any());
+      assertThrows(DomainException.class,() -> updateCustomerUseCase.execute(validInputDTO));
+    }
+
+    @Test
     void whenEntitiesThrows() throws BusinessException {
       // Test throw for Address
       when(customerFactoryMock.createAddress(anyString(), anyString(), anyString(), anyString())).thenThrow(new BusinessException(""));

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -19,7 +18,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
-import com.brunotacca.domain.usecases.shared.exceptions.causes.DataAccessException;
 import com.brunotacca.external.datasources.customer.TestCustomerValuesFactory;
 import com.brunotacca.external.datasources.customer.entity.CustomerJpaEntity;
 

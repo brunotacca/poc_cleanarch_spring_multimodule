@@ -26,7 +26,7 @@ public class CustomerFactory {
       if(Boolean.TRUE.equals(activeValue)) return existingCustomer.activate();
       else return existingCustomer.deactivate();
     }
-    return null;
+    return existingCustomer;
   }
 
   public Address createAddress(String street, String number, String zip, String city) throws BusinessException {

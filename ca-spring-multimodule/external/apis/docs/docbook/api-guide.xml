@@ -4,7 +4,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>POC - Clean Architecture Spring Multi Module</title>
-<date>2022-09-04</date>
+<date>2022-09-07</date>
 <author>
 <personname>
 <firstname>Bruno</firstname>
@@ -249,14 +249,14 @@ Host: localhost:8080
 <section xml:id="_example_response_2">
 <title>Example response</title>
 <programlisting language="http" linenumbering="unnumbered">HTTP/1.1 201 Created
-Location: /82c3a661-3493-4528-a3ce-f35e3ab7a5c4
+Location: /7daf6087-c6ef-45d8-bd6e-35e8e5d05966
 Content-Type: application/prs.hal-forms+json
 Content-Length: 129
 
 {
   "_links" : {
     "edit" : {
-      "href" : "http://localhost:8080/customers/82c3a661-3493-4528-a3ce-f35e3ab7a5c4"
+      "href" : "http://localhost:8080/customers/7daf6087-c6ef-45d8-bd6e-35e8e5d05966"
     }
   }
 }</programlisting>
@@ -322,7 +322,7 @@ Content-Length: 129
 <simpara>A <literal>GET</literal> request is used to get the customer by Id.</simpara>
 <section xml:id="_request_structure_3">
 <title>Request structure</title>
-<programlisting language="http" linenumbering="unnumbered">GET /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+<programlisting language="http" linenumbering="unnumbered">GET /customers/e3119506-030a-4877-a219-389ef21118a4 HTTP/1.1
 Accept: application/prs.hal-forms+json
 Host: localhost:8080</programlisting>
 <table frame="all" rowsep="1" colsep="1">
@@ -347,27 +347,27 @@ Host: localhost:8080</programlisting>
 </section>
 <section xml:id="_curl_request_3">
 <title>CURL request</title>
-<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X GET \
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4' -i -X GET \
     -H 'Accept: application/prs.hal-forms+json'</programlisting>
 </section>
 <section xml:id="_example_response_3">
 <title>Example response</title>
 <programlisting language="http" linenumbering="unnumbered">HTTP/1.1 200 OK
 Content-Type: application/prs.hal-forms+json
-Content-Length: 1548
+Content-Length: 1533
 
 {
-  "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
-  "name" : "fake_name",
-  "email" : "fake_email",
+  "id" : "e3119506-030a-4877-a219-389ef21118a4",
+  "name" : "Foo Bar",
+  "email" : "foo@bar.com",
   "active" : false,
-  "street" : "fake_street",
-  "number" : "fake_number",
-  "city" : "fake_city",
-  "zip" : "fake_zip",
+  "street" : "street",
+  "number" : "123-A",
+  "city" : "city",
+  "zip" : "000000-000",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+      "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
     }
   },
   "_templates" : {
@@ -408,12 +408,12 @@ Content-Length: 1548
     "activate" : {
       "method" : "PATCH",
       "properties" : [ ],
-      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+      "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
     },
     "deactivate" : {
       "method" : "PATCH",
       "properties" : [ ],
-      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+      "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
     }
   }
 }</programlisting>
@@ -427,6 +427,7 @@ Content-Length: 1548
 <programlisting language="http" linenumbering="unnumbered">GET /customers?name=Foo%20Bar HTTP/1.1
 Accept: application/prs.hal-forms+json
 Host: localhost:8080</programlisting>
+<simpara>Unresolved directive in api-guide.adoc - include::/home/tacca/Development/github/poc_cleanarch_spring_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customers-findbyname/path-parameters.adoc[]</simpara>
 </section>
 <section xml:id="_curl_request_4">
 <title>CURL request</title>
@@ -466,22 +467,22 @@ Host: localhost:8080</programlisting>
 <title>Example response</title>
 <programlisting language="http" linenumbering="unnumbered">HTTP/1.1 200 OK
 Content-Type: application/prs.hal-forms+json
-Content-Length: 3747
+Content-Length: 1942
 
 {
   "_embedded" : {
     "existingCustomerModelList" : [ {
-      "id" : "5142387a-053d-4bc9-989c-c9001984a34c",
-      "name" : "fake_name",
-      "email" : "fake_email",
+      "id" : "e3119506-030a-4877-a219-389ef21118a4",
+      "name" : "Foo Bar",
+      "email" : "foo@bar.com",
       "active" : false,
-      "street" : "fake_street",
-      "number" : "fake_number",
-      "city" : "fake_city",
-      "zip" : "fake_zip",
+      "street" : "street",
+      "number" : "123-A",
+      "city" : "city",
+      "zip" : "000000-000",
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c"
+          "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
         }
       },
       "_templates" : {
@@ -522,72 +523,12 @@ Content-Length: 3747
         "activate" : {
           "method" : "PATCH",
           "properties" : [ ],
-          "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/activate"
+          "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
         },
         "deactivate" : {
           "method" : "PATCH",
           "properties" : [ ],
-          "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/deactivate"
-        }
-      }
-    }, {
-      "id" : "95253ac0-b022-43be-9883-263381b38e13",
-      "name" : "fake_name",
-      "email" : "fake_email",
-      "active" : false,
-      "street" : "fake_street",
-      "number" : "fake_number",
-      "city" : "fake_city",
-      "zip" : "fake_zip",
-      "_links" : {
-        "self" : {
-          "href" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13"
-        }
-      },
-      "_templates" : {
-        "default" : {
-          "method" : "PUT",
-          "properties" : [ {
-            "name" : "city",
-            "regex" : "^(?=\\s*\\S).*$",
-            "required" : true,
-            "type" : "text"
-          }, {
-            "name" : "email",
-            "regex" : "^(?=\\s*\\S).*$",
-            "required" : true,
-            "type" : "text"
-          }, {
-            "name" : "name",
-            "regex" : "^(?=\\s*\\S).*$",
-            "required" : true,
-            "type" : "text"
-          }, {
-            "name" : "number",
-            "regex" : "^(?=\\s*\\S).*$",
-            "required" : true,
-            "type" : "text"
-          }, {
-            "name" : "street",
-            "regex" : "^(?=\\s*\\S).*$",
-            "required" : true,
-            "type" : "text"
-          }, {
-            "name" : "zip",
-            "regex" : "^(?=\\s*\\S).*$",
-            "required" : true,
-            "type" : "text"
-          } ]
-        },
-        "activate" : {
-          "method" : "PATCH",
-          "properties" : [ ],
-          "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/activate"
-        },
-        "deactivate" : {
-          "method" : "PATCH",
-          "properties" : [ ],
-          "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/deactivate"
+          "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
         }
       }
     } ]
@@ -605,7 +546,7 @@ Content-Length: 3747
 <simpara>A <literal>PUT</literal> request is used to access customer update.</simpara>
 <section xml:id="_request_structure_5">
 <title>Request structure</title>
-<programlisting language="http" linenumbering="unnumbered">PUT /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+<programlisting language="http" linenumbering="unnumbered">PUT /customers/e3119506-030a-4877-a219-389ef21118a4 HTTP/1.1
 Content-Type: application/hal+json;charset=UTF-8
 Content-Length: 145
 Host: localhost:8080
@@ -686,7 +627,7 @@ Host: localhost:8080
 </section>
 <section xml:id="_curl_request_5">
 <title>CURL request</title>
-<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X PUT \
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4' -i -X PUT \
     -H 'Content-Type: application/hal+json;charset=UTF-8' \
     -d '{
   "zip" : "000000-000",
@@ -704,7 +645,7 @@ Content-Type: application/prs.hal-forms+json
 Content-Length: 1539
 
 {
-  "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
+  "id" : "e3119506-030a-4877-a219-389ef21118a4",
   "name" : "Foo Bar",
   "email" : "foo@bar.com",
   "active" : false,
@@ -714,7 +655,7 @@ Content-Length: 1539
   "zip" : "000000-000",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+      "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
     }
   },
   "_templates" : {
@@ -755,12 +696,12 @@ Content-Length: 1539
     "activate" : {
       "method" : "PATCH",
       "properties" : [ ],
-      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+      "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
     },
     "deactivate" : {
       "method" : "PATCH",
       "properties" : [ ],
-      "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+      "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
     }
   }
 }</programlisting>
@@ -792,7 +733,7 @@ Content-Length: 1539
 <simpara>A <literal>PATCH</literal> request can be used to activate a customer.</simpara>
 <section xml:id="_request_structure_6">
 <title>Request structure</title>
-<programlisting language="http" linenumbering="unnumbered">PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate HTTP/1.1
+<programlisting language="http" linenumbering="unnumbered">PATCH /customers/e3119506-030a-4877-a219-389ef21118a4/activate HTTP/1.1
 Host: localhost:8080</programlisting>
 <table frame="all" rowsep="1" colsep="1">
 <title>/customers/{id}/activate</title>
@@ -816,7 +757,7 @@ Host: localhost:8080</programlisting>
 </section>
 <section xml:id="_curl_request_6">
 <title>CURL request</title>
-<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate' -i -X PATCH</programlisting>
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate' -i -X PATCH</programlisting>
 </section>
 <section xml:id="_example_response_6">
 <title>Example response</title>
@@ -827,10 +768,10 @@ Content-Length: 254
 {
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+      "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
     },
     "deactivate" : {
-      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+      "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
     }
   }
 }</programlisting>
@@ -866,7 +807,7 @@ Content-Length: 254
 <simpara>A <literal>PATCH</literal> request can be used to deactivate a customer.</simpara>
 <section xml:id="_request_structure_7">
 <title>Request structure</title>
-<programlisting language="http" linenumbering="unnumbered">PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate HTTP/1.1
+<programlisting language="http" linenumbering="unnumbered">PATCH /customers/e3119506-030a-4877-a219-389ef21118a4/deactivate HTTP/1.1
 Host: localhost:8080</programlisting>
 <table frame="all" rowsep="1" colsep="1">
 <title>/customers/{id}/deactivate</title>
@@ -890,7 +831,7 @@ Host: localhost:8080</programlisting>
 </section>
 <section xml:id="_curl_request_7">
 <title>CURL request</title>
-<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate' -i -X PATCH</programlisting>
+<programlisting language="bash" linenumbering="unnumbered">$ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate' -i -X PATCH</programlisting>
 </section>
 <section xml:id="_example_response_7">
 <title>Example response</title>
@@ -901,10 +842,10 @@ Content-Length: 250
 {
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+      "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
     },
     "activate" : {
-      "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+      "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
     }
   }
 }</programlisting>

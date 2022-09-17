@@ -19,7 +19,7 @@ SpringBoot project structured with Clean Architecture enforced by Maven MultiMod
 
 ### Proof of Concept:
 
-Simple application (domain complexity) with hard architectural boundaries enforced by maven multimodule following Clean Architectural guidelines using Spring to make DI easy.
+Simple application (domain complexity) with hard architectural boundaries enforced by maven multimodule following Clean Architectural guidelines using Spring to make DI easy. In this CA, Spring framework is decoupled and required only in the external layers (api and datasources).
 
 - [x] Spring (easy DI setup (Spring IoC))
 - [x] SpringBoot (Quick Spring project setup)
@@ -29,13 +29,12 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 **Extras 1:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
 
 - [x] JUnit and AssertJ
-- [ ] Test Containers
+- [x] Test Containers
 
 **Extras 2:** This project also features automated code quality analysis by using:
 
 - [x] SonarQube
 - [x] GitHub Actions
-
 
 **Extras 3:** RESTful API with Docs.
 
@@ -62,22 +61,17 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 
 ### Project Progress
 
-- [ ] Entities
-  - [x] Customer
-  - [ ] Product
-  - [ ] Order
-- [ ] UseCases
-  - [x] Customer
-  - [ ] Product
-  - [ ] Order
-- [ ] Adapters
-  - [ ] Customer
-  - [ ] Product
-  - [ ] Order
-- [ ] External
-  - [x] Customer
-  - [ ] Product
-  - [ ] Order
+- [x] Customer
+  - [x] Domain
+    - [x] Entities
+    - [x] UseCases
+  - [x] Adapters
+    - [x] Controllers
+  - [x] External
+    - [x] Datasources
+    - [x] Apis
+- [ ] Product
+- [ ] Order
 
 [Project Domain]: docs/PROJECT_DOMAIN.md
 [Project Architecture]: docs/PROJECT_ARCHITECTURE.md

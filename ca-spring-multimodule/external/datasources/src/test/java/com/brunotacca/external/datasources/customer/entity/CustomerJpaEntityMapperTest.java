@@ -4,14 +4,17 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
 import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.entities.customer.CustomerFactory;
 import com.brunotacca.domain.usecases.shared.exceptions.causes.DataAccessException;
+import com.brunotacca.external.datasources.CustomDisplayNameGenerator;
 import com.brunotacca.external.datasources.customer.TestCustomerValuesFactory;
 
-public class CustomerJpaEntityMapperTest {
+@DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
+class CustomerJpaEntityMapperTest {
 
   private final TestCustomerValuesFactory testCustomerValuesFactory = new TestCustomerValuesFactory();
   private final CustomerJpaEntityMapper customerJpaEntityMapper = new CustomerJpaEntityMapper(new CustomerFactory());

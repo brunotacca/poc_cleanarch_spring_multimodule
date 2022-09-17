@@ -1,7 +1,9 @@
 package com.brunotacca.domain.usecases.customer.dto;
 
+import java.util.UUID;
+
 public record CustomerOutputDTO(
-  String id,
+  UUID id,
   String name,
   String email,
   Boolean active,

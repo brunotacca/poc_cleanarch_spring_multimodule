@@ -1,5 +1,7 @@
 package com.brunotacca.domain.usecases.customer;
 
+import java.util.Optional;
+
 import com.brunotacca.domain.entities.customer.Address;
 import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.entities.customer.CustomerFactory;
@@ -35,13 +37,13 @@ class CreateCustomerUseCase implements UseCase<CreateCustomerInputDTO, CustomerO
     }
 
     // Validate Unique Email
-    Customer customerWithEmail = customerDataAccess.findByEmail(customer.getEmail());
-    if(customerWithEmail!=null) {
+    Optional<Customer> customerWithEmail = customerDataAccess.findByEmail(customer.getEmail());
+    if(customerWithEmail.isPresent()) {
       throw new DomainException("There is already a customer with this email.");
     }
 
     // Create
-    customerDataAccess.save(customer); // this throws
+    customerDataAccess.create(customer); // this throws
 
     // Convert respose to output and return
     return customerMapper.outputFromEntity(customer);

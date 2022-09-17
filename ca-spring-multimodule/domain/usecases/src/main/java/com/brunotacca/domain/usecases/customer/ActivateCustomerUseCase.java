@@ -1,5 +1,7 @@
 package com.brunotacca.domain.usecases.customer;
 
+import java.util.Optional;
+
 import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.usecases.customer.dto.CustomerIdDTO;
 import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
@@ -16,19 +18,19 @@ class ActivateCustomerUseCase implements UseCaseOnlyInput<CustomerIdDTO> {
   @Override
   public void execute(CustomerIdDTO inputDTO) throws DomainException {
 
-    if(inputDTO.id()==null || inputDTO.id().isBlank()) {
+    if(inputDTO.id()==null) {
       throw new DomainException("Customer Id is required.");
     }
 
-    Customer c = customerDataAccess.read(inputDTO.id());
+    Optional<Customer> customer = customerDataAccess.read(inputDTO.id());
 
-    if(c==null) {
+    if(!customer.isPresent()) {
       throw new DomainException("Customer not found.");
     }
 
-    if(Boolean.FALSE.equals(c.isActive())) {
-      c.activate();
-      customerDataAccess.save(c);
+    if(Boolean.FALSE.equals(customer.get().isActive())) {
+      customer.get().activate();
+      customerDataAccess.update(customer.get());
     }
 
   }

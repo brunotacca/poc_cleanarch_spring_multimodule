@@ -29,7 +29,7 @@ class CustomerIT {
     @Nested
     class DependencyWithCustomerFactory {
         @Test
-        void shouldReturnValidStuff() throws BusinessException {
+        void shouldReturnValidCustomerAndAddress() throws BusinessException {
             Address createdAddress = customerFactory.createAddress(validStreet, validNumber, validZip, validCity);
             assertNotNull(createdAddress);
             assertEquals(validStreet, createdAddress.getStreet());

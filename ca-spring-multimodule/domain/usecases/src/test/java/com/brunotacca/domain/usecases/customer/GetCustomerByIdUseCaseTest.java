@@ -8,6 +8,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
@@ -31,12 +34,12 @@ class GetCustomerByIdUseCaseTest {
 
   private final Customer customerMock = mock(Customer.class);
 
-  private final String validId = "e3119506-030a-4877-a219-389ef21118a4";
+  private final UUID validId = UUID.fromString("e3119506-030a-4877-a219-389ef21118a4");
   private CustomerIdDTO validInputDTO = new CustomerIdDTO(validId);
 
   @BeforeEach
   void beforeEach() throws DataAccessException {
-    doReturn(customerMock).when(customerDataAccessMock).read(any());
+    doReturn(Optional.of(customerMock)).when(customerDataAccessMock).read(any());
   }
 
   @Test
@@ -51,10 +54,7 @@ class GetCustomerByIdUseCaseTest {
 
     @Test
     void whenIdIsInvalid() throws BusinessException {
-      // Test throw for Address
       assertThrows(DomainException.class,() -> getCustomerByIdUseCase.execute(new CustomerIdDTO(null)));
-      assertThrows(DomainException.class,() -> getCustomerByIdUseCase.execute(new CustomerIdDTO("")));
-      assertThrows(DomainException.class,() -> getCustomerByIdUseCase.execute(new CustomerIdDTO("  ")));
     }
 
     @Test

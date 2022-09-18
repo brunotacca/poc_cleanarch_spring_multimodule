@@ -12,6 +12,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+import java.util.UUID;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -42,7 +46,7 @@ class UpdateCustomerUseCaseTest {
   private final Customer customerMock3 = mock(Customer.class);
   private final Address addressMock = mock(Address.class);
 
-  private final String validId = "e3119506-030a-4877-a219-389ef21118a4";
+  private final UUID validId = UUID.fromString("e3119506-030a-4877-a219-389ef21118a4");
   private final String validName = "Foo Bar";
   private final String validEmail = "foo@bar.com";
   private final String validEmail2 = "bar@bar.com";
@@ -53,13 +57,15 @@ class UpdateCustomerUseCaseTest {
   private UpdateCustomerInputDTO validInputDTO = new UpdateCustomerInputDTO(validId, validName, validEmail, validStreet, validNumber, validCity, validZip);
   private CustomerOutputDTO validOutputDTO = new CustomerOutputDTO(validId, validName, validEmail, false, validStreet, validNumber, validCity, validZip);
 
-  void prepareDefaultStubs() throws BusinessException, DataAccessException {
+  // void prepareDefaultStubs() throws BusinessException, DataAccessException {
+  @BeforeEach
+  void beforeEach() throws BusinessException, DataAccessException {
     doReturn(addressMock).when(customerFactoryMock).createAddress(any(), any(), any(), any());
     
-    doReturn(customerMock).when(customerFactoryMock).getExistingCustomer(any(), any(), any(), any());
+    doReturn(customerMock).when(customerFactoryMock).recreateExistingCustomer(any(), any(), any(), any(), any());
     
-    doReturn(customerMock2).when(customerDataAccessMock).read(any());
-    doReturn(customerMock3).when(customerDataAccessMock).findByEmail(any());
+    doReturn(Optional.of(customerMock2)).when(customerDataAccessMock).read(any());
+    doReturn(Optional.of(customerMock3)).when(customerDataAccessMock).findByEmail(any());
 
     doReturn(validEmail).when(customerMock).getEmail();
     doReturn(validEmail).when(customerMock2).getEmail();
@@ -69,36 +75,35 @@ class UpdateCustomerUseCaseTest {
   }
 
   @Test
-  void shoudlCallFactoriesAndDataAccessCorrectly() throws BusinessException, DomainException {
+  void shoudlCallFactoriesAndDataAccessCorrectlyWhenSameEmail() throws BusinessException, DomainException {
     // Same email path
-    prepareDefaultStubs();
     updateCustomerUseCase.execute(validInputDTO);
     verify(customerFactoryMock, times(1)).createAddress(validInputDTO.street(), validInputDTO.number(), validInputDTO.zip(), validInputDTO.city());
-    verify(customerFactoryMock, times(1)).getExistingCustomer(validInputDTO.id(), validInputDTO.name(), validInputDTO.email(), addressMock);
+    verify(customerFactoryMock, times(1)).recreateExistingCustomer(validInputDTO.id(), validInputDTO.name(), validInputDTO.email(), null, addressMock);
     verify(customerDataAccessMock, times(1)).read(any());
-    verify(customerDataAccessMock, times(1)).save(any());
+    verify(customerDataAccessMock, times(1)).update(any());
+  }
 
+  @Test
+  void shoudlCallFactoriesAndDataAccessCorrectlyWhenDifferentEmail() throws BusinessException, DomainException {
     // Different email path (email unique)
-    reset(customerDataAccessMock);
-    prepareDefaultStubs();
     doReturn(validEmail2).when(customerMock2).getEmail();
-    doReturn(null).when(customerDataAccessMock).findByEmail(any());
+    doReturn(Optional.empty()).when(customerDataAccessMock).findByEmail(any());
     updateCustomerUseCase.execute(validInputDTO);
     verify(customerDataAccessMock, times(1)).findByEmail(any());
+  }
 
+  @Test
+  void shoudlCallFactoriesAndDataAccessCorrectlyWhenDifferentEmailAndNotUnique() throws BusinessException, DomainException {
     // Different email path (email not unique)
-    reset(customerDataAccessMock);
-    prepareDefaultStubs();
     doReturn(validEmail2).when(customerMock2).getEmail();
-    doReturn(customerMock3).when(customerDataAccessMock).findByEmail(any());
+    doReturn(Optional.of(customerMock3)).when(customerDataAccessMock).findByEmail(any());
     assertThrows(DomainException.class, () -> updateCustomerUseCase.execute(validInputDTO));
     verify(customerDataAccessMock, times(1)).findByEmail(any());
   }
 
   @Test
   void shouldKeepActiveStatus() throws BusinessException, DomainException {
-    prepareDefaultStubs();
-    
     doReturn(true).when(customerMock2).isActive();
     updateCustomerUseCase.execute(validInputDTO);
     verify(customerMock, times(1)).activate();
@@ -110,13 +115,18 @@ class UpdateCustomerUseCaseTest {
 
   @Test
   void shouldReturnCustomer() throws DomainException, BusinessException {
-    prepareDefaultStubs();
     CustomerOutputDTO outputDTO = updateCustomerUseCase.execute(validInputDTO);
     assertNotNull(outputDTO);
   }
 
   @Nested
   class UpdatingCustomerShouldThrow {
+
+    @Test
+    void whenCustomerNotFound() throws DomainException {
+      doReturn(Optional.empty()).when(customerDataAccessMock).read(any());
+      assertThrows(DomainException.class,() -> updateCustomerUseCase.execute(validInputDTO));
+    }
 
     @Test
     void whenEntitiesThrows() throws BusinessException {
@@ -127,14 +137,13 @@ class UpdateCustomerUseCaseTest {
       // Test throw for Customer
       reset(customerFactoryMock);
       when(customerFactoryMock.createAddress(anyString(), anyString(), anyString(), anyString())).thenReturn(addressMock);
-      when(customerFactoryMock.getExistingCustomer(anyString(), anyString(), anyString(), any())).thenThrow(new BusinessException(""));
+      when(customerFactoryMock.recreateExistingCustomer(any(), anyString(), anyString(), any(), any())).thenThrow(new BusinessException(""));
       assertThrows(BusinessValidationException.class,() -> updateCustomerUseCase.execute(validInputDTO));
     }
 
     @Test
     void whenDataAccessThrows() throws BusinessException, DataAccessException {
-      prepareDefaultStubs();
-      doThrow(new DataAccessException("Test cause")).when(customerDataAccessMock).save(any());
+      doThrow(new DataAccessException("Test cause")).when(customerDataAccessMock).update(any());
       assertThrows(DataAccessException.class,() -> updateCustomerUseCase.execute(validInputDTO));
     }
 

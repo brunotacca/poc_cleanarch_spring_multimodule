@@ -1,5 +1,7 @@
 package com.brunotacca.domain.usecases.customer;
 
+import java.util.Optional;
+
 import com.brunotacca.domain.entities.customer.Address;
 import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.entities.customer.CustomerFactory;
@@ -30,21 +32,25 @@ class UpdateCustomerUseCase implements UseCase<UpdateCustomerInputDTO, CustomerO
     try {
       // Validations should throw
       address = customerFactory.createAddress(inputDTO.street(), inputDTO.number(), inputDTO.zip(), inputDTO.city());
-      updatedCustomer = customerFactory.getExistingCustomer(inputDTO.id(), inputDTO.name(), inputDTO.email(), address);
+      updatedCustomer = customerFactory.recreateExistingCustomer(inputDTO.id(), inputDTO.name(), inputDTO.email(), null, address);
     } catch (BusinessException e) {
       throw new BusinessValidationException(e.getMessage());
     }
     
     // Fetch from data access
-    Customer existingCustomer = customerDataAccess.read(updatedCustomer.getId());
+    Optional<Customer> existingCustomer = customerDataAccess.read(updatedCustomer.getId());
+
+    if(!existingCustomer.isPresent()) {
+      throw new DomainException("Customer not found.");
+    }
 
     // Verify email changed 
-    if(!updatedCustomer.getEmail().equals(existingCustomer.getEmail())) {
+    if(!updatedCustomer.getEmail().equals(existingCustomer.get().getEmail())) {
       // Validate uniqueness
-      Customer customerWithUpdatedMail = customerDataAccess.findByEmail(updatedCustomer.getEmail());
+      Optional<Customer> customerWithUpdatedMail = customerDataAccess.findByEmail(updatedCustomer.getEmail());
       
       // If there is a customer with this email already
-      if(customerWithUpdatedMail!=null) {
+      if(customerWithUpdatedMail.isPresent()) {
         // Error if not unique
         throw new DomainException("There is already a customer with this updated email.");
       }
@@ -53,11 +59,11 @@ class UpdateCustomerUseCase implements UseCase<UpdateCustomerInputDTO, CustomerO
     // Update Data and Save
     
     // Keep the active status
-    if(Boolean.TRUE.equals(existingCustomer.isActive())) 
+    if(Boolean.TRUE.equals(existingCustomer.get().isActive())) 
       updatedCustomer.activate();
     else updatedCustomer.deactivate();
 
-    customerDataAccess.save(updatedCustomer);
+    customerDataAccess.update(updatedCustomer);
 
     // Output customer
     return customerMapper.outputFromEntity(updatedCustomer);

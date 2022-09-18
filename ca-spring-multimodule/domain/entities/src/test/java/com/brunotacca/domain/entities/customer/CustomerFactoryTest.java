@@ -1,10 +1,16 @@
 package com.brunotacca.domain.entities.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.UUID;
 
@@ -37,7 +43,7 @@ class CustomerFactoryTest {
 
       assertNotNull(validCustomer);
       assertNotNull(validCustomer.getId());
-      assertNotSame("", validCustomer.getId().trim());
+      assertNotSame("", validCustomer.getId());
       assertEquals(validName, validCustomer.getName());
       assertEquals(validEmail, validCustomer.getEmail());
       assertEquals(validAddress, validCustomer.getAddress());
@@ -45,16 +51,42 @@ class CustomerFactoryTest {
 
     @Test
     void shouldReconstituteAnExistingCustomer() throws BusinessException {
+      CustomerFactory customerFactorySpied = Mockito.spy(new CustomerFactory());
+
       UUID expectedUuid = UUID.randomUUID();
-      Customer validCustomer = customerFactory.getExistingCustomer(expectedUuid.toString(), validName, validEmail, validAddress);
+      Customer validCustomer = customerFactorySpied.recreateExistingCustomer(expectedUuid, validName, validEmail, true, validAddress);
 
       assertNotNull(validCustomer);
       assertNotNull(validCustomer.getId());
-      assertNotSame("", validCustomer.getId().trim());
-      assertEquals(expectedUuid.toString(), validCustomer.getId());
+      assertEquals(expectedUuid, validCustomer.getId());
       assertEquals(validName, validCustomer.getName());
       assertEquals(validEmail, validCustomer.getEmail());
       assertEquals(validAddress, validCustomer.getAddress());
+
+      Mockito.verify(customerFactorySpied, times(1)).keepActiveValueForExistingCustomer(any(), eq(true));     
+    }
+
+    @Test 
+    void shouldKeepActiveValueForExistingCustomer() throws BusinessException {
+      Customer customerMock = Mockito.mock(Customer.class);
+
+      customerFactory.keepActiveValueForExistingCustomer(customerMock, true);
+      verify(customerMock, times(1)).activate();
+
+      customerFactory.keepActiveValueForExistingCustomer(customerMock, false);
+      verify(customerMock, times(1)).deactivate();
+
+      Customer customerReturned = customerFactory.keepActiveValueForExistingCustomer(customerMock, null);
+      assertEquals(customerMock, customerReturned);
+
+      Customer validCustomer = customerFactory.recreateExistingCustomer(UUID.randomUUID(), validName, validEmail, true, validAddress);
+      Customer c1 = customerFactory.keepActiveValueForExistingCustomer(validCustomer, true);
+      assertTrue(c1.isActive());
+      Customer c2 = customerFactory.keepActiveValueForExistingCustomer(validCustomer, false);
+      assertFalse(c2.isActive());
+
+      assertNotSame(customerMock, c1);
+      assertNotSame(customerMock, c2);
     }
 
     @Test
@@ -71,18 +103,9 @@ class CustomerFactoryTest {
     }
 
     @Test
-    void shouldThrowWhenReconstitutingWithInvalidId() {
+    void shouldThrowWhenReconstitutingWithNullId() {
       assertThrows(BusinessException.class, () -> {
-        customerFactory.getExistingCustomer(null, validName, validEmail, validAddress);
-      });
-      assertThrows(BusinessException.class, () -> {
-        customerFactory.getExistingCustomer(" ", validName, validEmail, validAddress);
-      });
-      assertThrows(BusinessException.class, () -> {
-        customerFactory.getExistingCustomer("", validName, validEmail, validAddress);
-      });
-      assertThrows(BusinessException.class, () -> {
-        customerFactory.getExistingCustomer("invalid uuid pattern", validName, validEmail, validAddress);
+        customerFactory.recreateExistingCustomer(null, validName, validEmail, null, validAddress);
       });
     }
 

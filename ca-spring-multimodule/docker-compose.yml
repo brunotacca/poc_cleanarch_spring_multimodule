@@ -1,0 +1,38 @@
+#docker run --name local-postgres --mount source=local-postgres,target=/var/lib/postgresql/data --network=pgadmin-network -e POSTGRES_PASSWORD=postgres -p -p 5432:5432/tcp -d postgres
+
+services:
+  local-postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: caspringmultimodule
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:
+    pgadmin:

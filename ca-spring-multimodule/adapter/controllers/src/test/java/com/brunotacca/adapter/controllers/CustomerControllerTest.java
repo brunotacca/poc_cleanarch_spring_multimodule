@@ -7,6 +7,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
@@ -25,7 +27,8 @@ class CustomerControllerTest {
   
   private final UseCase<?, ?> useCaseMock = mock(UseCase.class);
   private final UseCaseOnlyInput<?> useCaseOnlyInputMock = mock(UseCaseOnlyInput.class);
-  private final CustomerOutputDTO customerOutputMock = new CustomerOutputDTO("id", "name", "email", false, "street", "number", "city", "zip");
+  private final UUID validId = UUID.randomUUID();
+  private final CustomerOutputDTO customerOutputMock = new CustomerOutputDTO(validId, "name", "email", false, "street", "number", "city", "zip");
 
   @BeforeEach
   void beforeEach() {

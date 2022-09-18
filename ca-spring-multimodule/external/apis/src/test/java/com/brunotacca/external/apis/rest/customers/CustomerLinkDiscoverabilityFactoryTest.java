@@ -3,6 +3,7 @@ package com.brunotacca.external.apis.rest.customers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -20,7 +21,7 @@ import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 class CustomerLinkDiscoverabilityFactoryTest {
 
   CustomerLinkDiscoverabilityFactory customerLinkDiscoverabilityFactory;
-  private final String validId = "55951aeb-4fc8-4ba4-b78a-020138b13d22";
+  private final UUID validId = UUID.fromString("55951aeb-4fc8-4ba4-b78a-020138b13d22");
 
   @BeforeEach
   void beforeEach() {
@@ -47,7 +48,7 @@ class CustomerLinkDiscoverabilityFactoryTest {
     assertEquals(1, links.toList().size());
 
     List<String> linkHref = links.stream().map(l -> l.getHref()).toList();
-    assertThat(linkHref, containsInAnyOrder(containsString(validId)));
+    assertThat(linkHref, containsInAnyOrder(containsString(validId.toString())));
 
     List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
     assertThat(linkRels, containsInAnyOrder("edit"));
@@ -62,7 +63,7 @@ class CustomerLinkDiscoverabilityFactoryTest {
     assertEquals(1, links.toList().size());
 
     List<String> linkHref = links.stream().map(l -> l.getHref()).toList();
-    assertThat(linkHref, containsInAnyOrder(containsString(validId)));
+    assertThat(linkHref, containsInAnyOrder(containsString(validId.toString())));
 
     List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
     assertThat(linkRels, containsInAnyOrder("self"));
@@ -79,7 +80,7 @@ class CustomerLinkDiscoverabilityFactoryTest {
     assertEquals(2, links.toList().size());
 
     List<String> linkHref = links.stream().map(l -> l.getHref()).toList();
-    assertThat(linkHref, containsInAnyOrder(containsString(validId),containsString(validId)));
+    assertThat(linkHref, containsInAnyOrder(containsString(validId.toString()),containsString(validId.toString())));
 
     List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
     assertThat(linkRels, containsInAnyOrder("self", "deactivate"));
@@ -94,7 +95,7 @@ class CustomerLinkDiscoverabilityFactoryTest {
     assertEquals(2, links.toList().size());
 
     List<String> linkHref = links.stream().map(l -> l.getHref()).toList();
-    assertThat(linkHref, containsInAnyOrder(containsString(validId),containsString(validId)));
+    assertThat(linkHref, containsInAnyOrder(containsString(validId.toString()),containsString(validId.toString())));
 
     List<String> linkRels = links.stream().map(l -> l.getRel().toString()).toList();
     assertThat(linkRels, containsInAnyOrder("self", "activate"));

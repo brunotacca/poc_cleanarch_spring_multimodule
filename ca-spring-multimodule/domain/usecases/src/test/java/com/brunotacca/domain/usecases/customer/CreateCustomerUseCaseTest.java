@@ -5,12 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+import java.util.UUID;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
@@ -41,7 +45,7 @@ class CreateCustomerUseCaseTest {
   private final Customer customerMock = mock(Customer.class, Mockito.RETURNS_DEEP_STUBS);
   private final Address addressMock = mock(Address.class);
 
-  private final String validId = "e3119506-030a-4877-a219-389ef21118a4";
+  private final UUID validId = UUID.fromString("e3119506-030a-4877-a219-389ef21118a4");
   private final String validName = "Foo Bar";
   private final String validEmail = "foo@bar.com";
   private final String validStreet = "street";
@@ -53,7 +57,7 @@ class CreateCustomerUseCaseTest {
 
   void prepareStubs() throws BusinessException {
     when(customerFactoryMock.createAddress(anyString(), anyString(), anyString(), anyString())).thenReturn(addressMock);
-    when(customerFactoryMock.createCustomer(anyString(), anyString(), any())).thenReturn(customerMock);
+    doReturn(customerMock).when(customerFactoryMock).createCustomer(anyString(), anyString(), any());
     when(customerMapperMock.outputFromEntity(any())).thenReturn(validOutputDTO);
   }
 
@@ -63,7 +67,7 @@ class CreateCustomerUseCaseTest {
     createCustomerUseCase.execute(validInputDTO);
     verify(customerFactoryMock, times(1)).createCustomer(validInputDTO.name(), validInputDTO.email(), addressMock);
     verify(customerFactoryMock, times(1)).createAddress(validInputDTO.street(), validInputDTO.number(), validInputDTO.zip(), validInputDTO.city());
-    verify(customerDataAccessMock, times(1)).save(any());
+    verify(customerDataAccessMock, times(1)).create(any());
   }
 
   @Test
@@ -92,7 +96,8 @@ class CreateCustomerUseCaseTest {
     @Test
     void withoutUniqueEmail() throws BusinessException, DataAccessException {
       prepareStubs();
-      when(customerDataAccessMock.findByEmail(any())).thenReturn(customerMock);
+      doReturn(Optional.of(customerMock)).when(customerDataAccessMock).findByEmail(any());
+
       DomainException thrown = assertThrows(DomainException.class,() -> createCustomerUseCase.execute(validInputDTO));
       assertTrue(thrown.getMessage().contains("There is already a customer with this email."));
     }
@@ -100,7 +105,7 @@ class CreateCustomerUseCaseTest {
     @Test
     void whenDataAccessThrows() throws BusinessException, DataAccessException {
       prepareStubs();
-      doThrow(new DataAccessException("Test cause")).when(customerDataAccessMock).save(any());
+      doThrow(new DataAccessException("Test cause")).when(customerDataAccessMock).create(any());
       assertThrows(DataAccessException.class,() -> createCustomerUseCase.execute(validInputDTO));
     }
 

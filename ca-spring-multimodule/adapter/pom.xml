@@ -18,8 +18,6 @@
   <!-- Modules declaration -->
   <modules>
     <module>controllers</module>
-    <module>presenters</module>
-    <module>gateways</module>
   </modules>
 
 </project>

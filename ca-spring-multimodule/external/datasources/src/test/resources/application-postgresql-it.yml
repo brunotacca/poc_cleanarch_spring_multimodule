@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:14.5:///caspringmultimodule
+    username: user
+    password: password

@@ -7,6 +7,8 @@ import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +19,7 @@ import com.brunotacca.domain.usecases.CustomDisplayNameGenerator;
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerMapperTest {
     
+    private final UUID validId = UUID.fromString("2d58df20-58e4-4238-b988-3ba5134021d0");
     private final String validName = "Foo Bar";
     private final String validEmail = "foo@bar.com";
     private final String validStreet = "street";
@@ -28,7 +31,7 @@ class CustomerMapperTest {
 
     @Test
     void shouldMapCorrectlyToDTO() {
-        when(customerMock.getId()).thenReturn("4N_1D");
+        when(customerMock.getId()).thenReturn(validId);
         when(customerMock.getName()).thenReturn(validName);
         when(customerMock.getEmail()).thenReturn(validEmail);
         when(customerMock.isActive()).thenReturn(false);
@@ -43,7 +46,7 @@ class CustomerMapperTest {
         CustomerOutputDTO output = mapper.outputFromEntity(customerMock);
 
         assertNotNull(output);
-        assertEquals("4N_1D", output.id());
+        assertEquals(validId, output.id());
         assertEquals(validName, output.name());
         assertEquals(validEmail, output.email());
         assertFalse(output.active());

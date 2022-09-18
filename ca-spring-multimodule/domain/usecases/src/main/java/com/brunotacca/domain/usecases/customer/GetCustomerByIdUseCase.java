@@ -1,5 +1,7 @@
 package com.brunotacca.domain.usecases.customer;
 
+import java.util.Optional;
+
 import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.usecases.customer.dto.CustomerIdDTO;
 import com.brunotacca.domain.usecases.customer.dto.CustomerMapper;
@@ -19,14 +21,18 @@ class GetCustomerByIdUseCase implements UseCase<CustomerIdDTO, CustomerOutputDTO
   @Override
   public CustomerOutputDTO execute(CustomerIdDTO inputDTO) throws DomainException {
     // Validate Input
-    if(inputDTO.id()==null || inputDTO.id().trim().isBlank()) {
+    if(inputDTO.id()==null) {
       throw new DomainException("Customer Id is required.");
     }
 
-    Customer customer = customerDataAccess.read(inputDTO.id());
+    Optional<Customer> customer = customerDataAccess.read(inputDTO.id());
+
+    if(!customer.isPresent()) {
+      throw new DomainException("Customer not found.");
+    }
 
     // Convert respose to output and return
-    return customerMapper.outputFromEntity(customer);
+    return customerMapper.outputFromEntity(customer.get());
   }
   
 }

@@ -2,6 +2,7 @@ package com.brunotacca.external.apis.rest.customers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -64,8 +65,9 @@ class CustomersRestController {
     CustomerOutputDTO output = null;
 
     try {
-      output = customerController.getCustomer(new CustomerIdDTO(id));
-    } catch (DomainException e) {
+      UUID uuid = UUID.fromString(id);
+      output = customerController.getCustomer(new CustomerIdDTO(uuid));
+    } catch (DomainException | IllegalArgumentException e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
@@ -102,8 +104,9 @@ class CustomersRestController {
     CustomerOutputDTO output = null;
 
     try {
-      output = customerController.updateCustomer(customerModelMapper.updateDtoFromModel(customer, id));
-    } catch (DomainException e) {
+      UUID uuid = UUID.fromString(id);
+      output = customerController.updateCustomer(customerModelMapper.updateDtoFromModel(customer, uuid));
+    } catch (DomainException | IllegalArgumentException e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
@@ -114,13 +117,15 @@ class CustomersRestController {
   @PatchMapping("/{id}/activate")
   public ResponseEntity<EmptyBodyModel> activate(@PathVariable @NotBlank String id) throws ResponseStatusException {
     
+    UUID uuid = null;
     try {
-      customerController.activateCustomer(new CustomerIdDTO(id));
-    } catch (DomainException e) {
+      uuid = UUID.fromString(id);
+      customerController.activateCustomer(new CustomerIdDTO(uuid));
+    } catch (DomainException | IllegalArgumentException e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
-    Links links = customerLinkDiscoverabilityFactory.linksForActivateCustomer(id);
+    Links links = customerLinkDiscoverabilityFactory.linksForActivateCustomer(uuid);
 
     return ResponseEntity
             .accepted()
@@ -130,13 +135,15 @@ class CustomersRestController {
   @PatchMapping("/{id}/deactivate")
   public ResponseEntity<EmptyBodyModel> deactivate(@PathVariable @NotBlank String id) throws ResponseStatusException {
     
+    UUID uuid = null;
     try {
-      customerController.deactivateCustomer(new CustomerIdDTO(id));
-    } catch (DomainException e) {
+      uuid = UUID.fromString(id);
+      customerController.deactivateCustomer(new CustomerIdDTO(uuid));
+    } catch (DomainException | IllegalArgumentException e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
-    Links links = customerLinkDiscoverabilityFactory.linksForDeactivateCustomer(id);
+    Links links = customerLinkDiscoverabilityFactory.linksForDeactivateCustomer(uuid);
 
     return ResponseEntity
             .accepted()

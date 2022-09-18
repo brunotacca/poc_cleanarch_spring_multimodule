@@ -27,22 +27,33 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.brunotacca.domain.entities.customer.Customer;
+import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
+import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@SpringBootTest
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 @AutoConfigureRestDocs
-@WebMvcTest(CustomersRestController.class)
+@AutoConfigureMockMvc
+@AutoConfigureTestDatabase(replace = Replace.ANY)
 class CustomerRestControllerIT {
 
   @Autowired
@@ -51,8 +62,16 @@ class CustomerRestControllerIT {
   @Autowired
   private ObjectMapper objectMapper;
 
-  private final String validId = "55951aeb-4fc8-4ba4-b78a-020138b13d22";
-  private final String validName = "Foo Bar";
+  @Autowired
+  private CustomerDataAccess customerDataAccess;
+
+  @Autowired
+  private JdbcTemplate jdbcTemplate;
+
+  private final TestCustomerValuesFactory testCustomerValuesFactory = new TestCustomerValuesFactory();
+  private final String validId = testCustomerValuesFactory.validId.toString();
+  private final String validName = testCustomerValuesFactory.validName;
+  private Customer validCustomer;
 
   private Map<String, Object> validNewCustomerInput = new HashMap<>();
   private Map<String, Object> invalidNewCustomerInput = new HashMap<>();
@@ -62,7 +81,9 @@ class CustomerRestControllerIT {
   
 
   @BeforeEach
-  void beforeEach() {
+  void beforeEach() throws BusinessException {
+    this.validCustomer = testCustomerValuesFactory.getValidCustomer(false);
+  
     this.validNewCustomerInput.put("name", validName);
     this.validNewCustomerInput.put("email", "foo@bar.com");
     this.validNewCustomerInput.put("street", "Foo Street");
@@ -75,7 +96,12 @@ class CustomerRestControllerIT {
     this.validIdInput.put("id", validId);
     this.invalidIdInput.put("id", "");
   }
- 
+
+  @AfterEach
+  void tearDown() {
+    JdbcTestUtils.deleteFromTables(jdbcTemplate, "customer");
+  }
+
   @Nested
   class Create {
 
@@ -124,6 +150,8 @@ class CustomerRestControllerIT {
     @Test
     void shouldGetCustomerAndReturn200() throws Exception {
 
+      customerDataAccess.create(validCustomer);
+
       mockMvc.perform(get("/customers/{id}", validId).accept(MediaTypes.HAL_FORMS_JSON_VALUE))
         .andExpect(status().isOk())
         .andDo(
@@ -158,7 +186,9 @@ class CustomerRestControllerIT {
     @Test
     void shouldFindCustomersAndReturn200() throws Exception {
 
-      mockMvc.perform(get("/customers?name={customerName}", validName).accept(MediaTypes.HAL_FORMS_JSON_VALUE))
+      customerDataAccess.create(validCustomer);
+
+      mockMvc.perform(get("/customers?name={customerName}", testCustomerValuesFactory.validName).accept(MediaTypes.HAL_FORMS_JSON_VALUE))
         .andExpect(status().isOk())
         .andDo(
           document(
@@ -191,6 +221,10 @@ class CustomerRestControllerIT {
     @Test
     void shouldUpdateCustomerAndReturn200() throws Exception {
 
+      customerDataAccess.create(validCustomer);
+      var c = customerDataAccess.findByName(validCustomer.getName());
+      System.out.println(c);
+
       mockMvc.perform(put("/customers/{id}", validId).contentType(MediaTypes.HAL_JSON).content(objectMapper.writeValueAsString(validNewCustomerInput)))
         .andExpect(status().isOk())
         .andDo(
@@ -219,12 +253,15 @@ class CustomerRestControllerIT {
     @Test
     void shouldNotUpdateCustomerAndReturn400() throws Exception {
 
+      customerDataAccess.create(validCustomer);
+
       mockMvc.perform(
                 put("/customers/{id}", "   ")
                 .contentType(MediaTypes.HAL_JSON)
                 .content(objectMapper.writeValueAsString(validNewCustomerInput))
               )
               .andExpect(status().isBadRequest());
+
 
       mockMvc.perform(
         put("/customers/{id}", validId)
@@ -241,6 +278,8 @@ class CustomerRestControllerIT {
   class Activate {
     @Test
     void shouldActivateCustomerAndReturn200() throws Exception {
+
+      customerDataAccess.create(validCustomer);
 
       mockMvc.perform(patch("/customers/{id}/activate", validId))
         .andExpect(status().isAccepted())
@@ -271,6 +310,9 @@ class CustomerRestControllerIT {
   class Deactivate {
     @Test
     void shouldDeactivateCustomerAndReturn200() throws Exception {
+      
+      customerDataAccess.create(validCustomer);
+
       mockMvc.perform(patch("/customers/{id}/deactivate", validId))
         .andExpect(status().isAccepted())
         .andDo(print())

@@ -4,6 +4,8 @@ package com.brunotacca.domain.entities.customer;
 import com.brunotacca.domain.entities.shared.utils.UtilsFactory;
 import com.brunotacca.domain.entities.shared.utils.ValidationUtils;
 
+import java.util.UUID;
+
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldException;
 
@@ -14,7 +16,7 @@ import lombok.With;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 class DefaultCustomer implements Customer {
 
-  private final String id;
+  private final UUID id;
 
   @With(AccessLevel.PRIVATE)
   private final String name;
@@ -30,7 +32,7 @@ class DefaultCustomer implements Customer {
 
   private final ValidationUtils validationUtils;
 
-  protected DefaultCustomer(String id, String name, String email, Address address) throws BusinessException {
+  protected DefaultCustomer(UUID id, String name, String email, Address address) throws BusinessException {
     this.validationUtils = (new UtilsFactory()).getValidationUtils();
 
     this.id = id;
@@ -51,7 +53,7 @@ class DefaultCustomer implements Customer {
   }
 
   @Override
-  public String getId() {
+  public UUID getId() {
     return this.id;
   }
 

@@ -1,2 +1,8 @@
+# VSCode
 .vscode
-ca-spring-multimodule.code-workspace
+*.code-workspace
+
+# IntelliJ
+.idea
+*.iml
+.project

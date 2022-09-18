@@ -10,14 +10,11 @@ import com.brunotacca.external.apis.annotation.ExcludeFromJacocoGeneratedReport;
 @SpringBootApplication
 @ComponentScan(
   basePackages = {
-    // "com.brunotacca", // works too, but it's not a good practice
-    "com.brunotacca.entrypointmain",
     "com.brunotacca.domain.entities",
     "com.brunotacca.domain.usecases",
     "com.brunotacca.adapter.controllers",
-    "com.brunotacca.adapter.gateways",
-    "com.brunotacca.external.apis",
     "com.brunotacca.external.datasources",
+    "com.brunotacca.external.apis",
   }
 )
 public class ApisApplication {

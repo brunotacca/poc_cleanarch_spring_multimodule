@@ -250,14 +250,14 @@ A `POST` request is used to access customer creation.
 ### Example response
 
     HTTP/1.1 201 Created
-    Location: /82c3a661-3493-4528-a3ce-f35e3ab7a5c4
+    Location: /a77cc8c6-3767-4520-813d-5258af22b89e
     Content-Type: application/prs.hal-forms+json
     Content-Length: 129
 
     {
       "_links" : {
         "edit" : {
-          "href" : "http://localhost:8080/customers/82c3a661-3493-4528-a3ce-f35e3ab7a5c4"
+          "href" : "http://localhost:8080/customers/a77cc8c6-3767-4520-813d-5258af22b89e"
         }
       }
     }
@@ -324,7 +324,7 @@ A `GET` request is used to get the customer by Id.
 
 ### Request structure
 
-    GET /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+    GET /customers/e3119506-030a-4877-a219-389ef21118a4 HTTP/1.1
     Accept: application/prs.hal-forms+json
     Host: localhost:8080
 
@@ -352,27 +352,27 @@ A `GET` request is used to get the customer by Id.
 
 ### CURL request
 
-    $ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X GET \
+    $ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4' -i -X GET \
         -H 'Accept: application/prs.hal-forms+json'
 
 ### Example response
 
     HTTP/1.1 200 OK
     Content-Type: application/prs.hal-forms+json
-    Content-Length: 1548
+    Content-Length: 1533
 
     {
-      "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
-      "name" : "fake_name",
-      "email" : "fake_email",
+      "id" : "e3119506-030a-4877-a219-389ef21118a4",
+      "name" : "Foo Bar",
+      "email" : "foo@bar.com",
       "active" : false,
-      "street" : "fake_street",
-      "number" : "fake_number",
-      "city" : "fake_city",
-      "zip" : "fake_zip",
+      "street" : "street",
+      "number" : "123-A",
+      "city" : "city",
+      "zip" : "000000-000",
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+          "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
         }
       },
       "_templates" : {
@@ -413,12 +413,12 @@ A `GET` request is used to get the customer by Id.
         "activate" : {
           "method" : "PATCH",
           "properties" : [ ],
-          "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+          "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
         },
         "deactivate" : {
           "method" : "PATCH",
           "properties" : [ ],
-          "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+          "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
         }
       }
     }
@@ -432,6 +432,9 @@ A `GET` request is also used to find customers by name.
     GET /customers?name=Foo%20Bar HTTP/1.1
     Accept: application/prs.hal-forms+json
     Host: localhost:8080
+
+Unresolved directive in api-guide.adoc -
+include::/home/tacca/Development/github/poc\_cleanarch\_spring\_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customers-findbyname/path-parameters.adoc\[\]
 
 ### CURL request
 
@@ -472,22 +475,22 @@ style="text-align: left;"><p><code>_embedded.existingCustomerModelList</code></p
 
     HTTP/1.1 200 OK
     Content-Type: application/prs.hal-forms+json
-    Content-Length: 3747
+    Content-Length: 1942
 
     {
       "_embedded" : {
         "existingCustomerModelList" : [ {
-          "id" : "5142387a-053d-4bc9-989c-c9001984a34c",
-          "name" : "fake_name",
-          "email" : "fake_email",
+          "id" : "e3119506-030a-4877-a219-389ef21118a4",
+          "name" : "Foo Bar",
+          "email" : "foo@bar.com",
           "active" : false,
-          "street" : "fake_street",
-          "number" : "fake_number",
-          "city" : "fake_city",
-          "zip" : "fake_zip",
+          "street" : "street",
+          "number" : "123-A",
+          "city" : "city",
+          "zip" : "000000-000",
           "_links" : {
             "self" : {
-              "href" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c"
+              "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
             }
           },
           "_templates" : {
@@ -528,72 +531,12 @@ style="text-align: left;"><p><code>_embedded.existingCustomerModelList</code></p
             "activate" : {
               "method" : "PATCH",
               "properties" : [ ],
-              "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/activate"
+              "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
             },
             "deactivate" : {
               "method" : "PATCH",
               "properties" : [ ],
-              "target" : "http://localhost:8080/customers/5142387a-053d-4bc9-989c-c9001984a34c/deactivate"
-            }
-          }
-        }, {
-          "id" : "95253ac0-b022-43be-9883-263381b38e13",
-          "name" : "fake_name",
-          "email" : "fake_email",
-          "active" : false,
-          "street" : "fake_street",
-          "number" : "fake_number",
-          "city" : "fake_city",
-          "zip" : "fake_zip",
-          "_links" : {
-            "self" : {
-              "href" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13"
-            }
-          },
-          "_templates" : {
-            "default" : {
-              "method" : "PUT",
-              "properties" : [ {
-                "name" : "city",
-                "regex" : "^(?=\\s*\\S).*$",
-                "required" : true,
-                "type" : "text"
-              }, {
-                "name" : "email",
-                "regex" : "^(?=\\s*\\S).*$",
-                "required" : true,
-                "type" : "text"
-              }, {
-                "name" : "name",
-                "regex" : "^(?=\\s*\\S).*$",
-                "required" : true,
-                "type" : "text"
-              }, {
-                "name" : "number",
-                "regex" : "^(?=\\s*\\S).*$",
-                "required" : true,
-                "type" : "text"
-              }, {
-                "name" : "street",
-                "regex" : "^(?=\\s*\\S).*$",
-                "required" : true,
-                "type" : "text"
-              }, {
-                "name" : "zip",
-                "regex" : "^(?=\\s*\\S).*$",
-                "required" : true,
-                "type" : "text"
-              } ]
-            },
-            "activate" : {
-              "method" : "PATCH",
-              "properties" : [ ],
-              "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/activate"
-            },
-            "deactivate" : {
-              "method" : "PATCH",
-              "properties" : [ ],
-              "target" : "http://localhost:8080/customers/95253ac0-b022-43be-9883-263381b38e13/deactivate"
+              "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
             }
           }
         } ]
@@ -611,7 +554,7 @@ A `PUT` request is used to access customer update.
 
 ### Request structure
 
-    PUT /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22 HTTP/1.1
+    PUT /customers/e3119506-030a-4877-a219-389ef21118a4 HTTP/1.1
     Content-Type: application/hal+json;charset=UTF-8
     Content-Length: 145
     Host: localhost:8080
@@ -696,7 +639,7 @@ A `PUT` request is used to access customer update.
 
 ### CURL request
 
-    $ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22' -i -X PUT \
+    $ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4' -i -X PUT \
         -H 'Content-Type: application/hal+json;charset=UTF-8' \
         -d '{
       "zip" : "000000-000",
@@ -714,7 +657,7 @@ A `PUT` request is used to access customer update.
     Content-Length: 1539
 
     {
-      "id" : "55951aeb-4fc8-4ba4-b78a-020138b13d22",
+      "id" : "e3119506-030a-4877-a219-389ef21118a4",
       "name" : "Foo Bar",
       "email" : "foo@bar.com",
       "active" : false,
@@ -724,7 +667,7 @@ A `PUT` request is used to access customer update.
       "zip" : "000000-000",
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+          "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
         }
       },
       "_templates" : {
@@ -765,12 +708,12 @@ A `PUT` request is used to access customer update.
         "activate" : {
           "method" : "PATCH",
           "properties" : [ ],
-          "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+          "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
         },
         "deactivate" : {
           "method" : "PATCH",
           "properties" : [ ],
-          "target" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+          "target" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
         }
       }
     }
@@ -802,7 +745,7 @@ A `PATCH` request can be used to activate a customer.
 
 ### Request structure
 
-    PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate HTTP/1.1
+    PATCH /customers/e3119506-030a-4877-a219-389ef21118a4/activate HTTP/1.1
     Host: localhost:8080
 
 <table>
@@ -829,7 +772,7 @@ A `PATCH` request can be used to activate a customer.
 
 ### CURL request
 
-    $ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate' -i -X PATCH
+    $ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate' -i -X PATCH
 
 ### Example response
 
@@ -840,10 +783,10 @@ A `PATCH` request can be used to activate a customer.
     {
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+          "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
         },
         "deactivate" : {
-          "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate"
+          "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate"
         }
       }
     }
@@ -880,7 +823,7 @@ A `PATCH` request can be used to deactivate a customer.
 
 ### Request structure
 
-    PATCH /customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate HTTP/1.1
+    PATCH /customers/e3119506-030a-4877-a219-389ef21118a4/deactivate HTTP/1.1
     Host: localhost:8080
 
 <table>
@@ -907,7 +850,7 @@ A `PATCH` request can be used to deactivate a customer.
 
 ### CURL request
 
-    $ curl 'http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/deactivate' -i -X PATCH
+    $ curl 'http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/deactivate' -i -X PATCH
 
 ### Example response
 
@@ -918,10 +861,10 @@ A `PATCH` request can be used to deactivate a customer.
     {
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22"
+          "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4"
         },
         "activate" : {
-          "href" : "http://localhost:8080/customers/55951aeb-4fc8-4ba4-b78a-020138b13d22/activate"
+          "href" : "http://localhost:8080/customers/e3119506-030a-4877-a219-389ef21118a4/activate"
         }
       }
     }

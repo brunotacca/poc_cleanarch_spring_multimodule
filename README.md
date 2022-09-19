@@ -28,7 +28,9 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 
 **Extras 1:** This project features automated tests to demonstrate a way to do so in a clean architecture style with enforced boundaries. Since this is not a real-world application, the test suit doesn't go further than integration and unit tests.
 
-- [x] JUnit and AssertJ
+- [x] JUnit, Mockito and AssertJ
+- [x] Flyway
+- [x] H2 and Postgres
 - [x] Test Containers
 
 **Extras 2:** This project also features automated code quality analysis by using:
@@ -48,11 +50,10 @@ Simple application (domain complexity) with hard architectural boundaries enforc
 
 - [x] Domain PoC Planning
 
-
 ### Documents
 
 * [x] [Project Domain]
-* [ ] [Project Architecture]
+* [x] [Project Architecture]
 * [ ] [Setup and Configuration]
 * [ ] [Contributing]
 * [x] [Getting help]

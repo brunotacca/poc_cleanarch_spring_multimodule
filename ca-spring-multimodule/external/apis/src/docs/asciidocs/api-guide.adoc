@@ -158,7 +158,7 @@ A `GET` request is also used to find customers by name.
 
 include::{snippets}/customers-findbyname/http-request.adoc[]
 
-include::{snippets}/customers-findbyname/path-parameters.adoc[]
+include::{snippets}/customers-findbyname/request-parameters.adoc[]
 
 ==== CURL request
 

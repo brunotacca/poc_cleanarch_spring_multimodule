@@ -11,12 +11,12 @@ import com.brunotacca.domain.entities.customer.Customer;
 import com.brunotacca.domain.entities.customer.CustomerFactory;
 import com.brunotacca.domain.usecases.shared.exceptions.causes.DataAccessException;
 import com.brunotacca.external.datasources.CustomDisplayNameGenerator;
-import com.brunotacca.external.datasources.customer.TestCustomerValuesFactory;
+import com.brunotacca.external.datasources.customer.CustomerJpaFixtureTestFactory;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerJpaEntityMapperTest {
 
-  private final TestCustomerValuesFactory testCustomerValuesFactory = new TestCustomerValuesFactory();
+  private final CustomerJpaFixtureTestFactory testCustomerValuesFactory = new CustomerJpaFixtureTestFactory();
   private final CustomerJpaEntityMapper customerJpaEntityMapper = new CustomerJpaEntityMapper(new CustomerFactory());
 
   @Test

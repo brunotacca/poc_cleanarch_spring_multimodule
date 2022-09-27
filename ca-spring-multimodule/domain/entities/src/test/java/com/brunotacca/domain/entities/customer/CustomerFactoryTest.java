@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.UUID;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -25,15 +25,22 @@ import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerFactoryTest {
 
-  private final String validName = "Foo Bar";
-  private final String validEmail = "foo@bar.com";
-  private final Address validAddress = mock(Address.class, Mockito.RETURNS_DEEP_STUBS);
-  private final String validStreet = "street";
-  private final String validNumber = "123-A";
-  private final String validZip = "000000-000";
-  private final String validCity = "city";
+  private final CustomerFixtureFactory customerFixtureFactory = new CustomerFixtureFactory(); 
+
+  private final String validName = CustomerFixtureFactory.VALID_NAME;
+  private final String validEmail = CustomerFixtureFactory.VALID_EMAIL;
+  private Address validAddress;
+  private final String validStreet = CustomerFixtureFactory.VALID_STREET;
+  private final String validNumber = CustomerFixtureFactory.VALID_NUMBER;
+  private final String validZip = CustomerFixtureFactory.VALID_ZIP;
+  private final String validCity = CustomerFixtureFactory.VALID_CITY;
 
   private final CustomerFactory customerFactory = new CustomerFactory();
+
+  @BeforeEach
+  void setUp() throws BusinessException {
+    this.validAddress = customerFixtureFactory.getValidAddress();
+  }
 
   @Nested
   class ForCustomerIt {

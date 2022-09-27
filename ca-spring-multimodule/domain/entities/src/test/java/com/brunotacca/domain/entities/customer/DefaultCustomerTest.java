@@ -23,14 +23,16 @@ import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldExce
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class DefaultCustomerTest {
 
-  private String validName = "Foo Bar";
-  private String validEmail = "foo@bar.com";
+  private final CustomerFixtureFactory customerFixtureFactory = new CustomerFixtureFactory(); 
+
+  private String validName = CustomerFixtureFactory.VALID_NAME;
+  private String validEmail = CustomerFixtureFactory.VALID_EMAIL;
   private Address validAddress = mock(Address.class, Mockito.RETURNS_DEEP_STUBS);
   private Customer validCustomer;
 
   @BeforeEach
   void beforeEach() throws BusinessException {
-    this.validCustomer = new DefaultCustomer(UUID.randomUUID(), validName, validEmail, validAddress);
+    this.validCustomer = customerFixtureFactory.getValidCustomer(true);
   }
 
   @Test
@@ -111,7 +113,7 @@ class DefaultCustomerTest {
 
     @Test
     void withValidAddress() throws BusinessException {
-      Address newValidAddress = new Address("street", "123-A", "00000-000", "city");
+      Address newValidAddress = new Address("new street", "123-ABC", "00000-000FF", "The city");
       Customer c = validCustomer.changeAddress(newValidAddress);
       assertEquals(c.getAddress(), newValidAddress);
 

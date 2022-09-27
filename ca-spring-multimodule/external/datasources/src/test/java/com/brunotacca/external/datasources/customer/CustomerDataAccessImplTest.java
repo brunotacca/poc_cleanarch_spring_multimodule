@@ -38,7 +38,7 @@ class CustomerDataAccessImplTest {
 
   private CustomerJpaEntityMapper customerJpaEntityMapperMock = Mockito.mock(CustomerJpaEntityMapper.class);
 
-  private final CustomerJpaFixtureTestFactory customerJpaFixtureTestFactory = new CustomerJpaFixtureTestFactory();
+  private final CustomerJpaFixtureFactory customerJpaFixtureTestFactory = new CustomerJpaFixtureFactory();
 
   private Customer validCustomer;
   private CustomerJpaEntity validCustomerJpa;

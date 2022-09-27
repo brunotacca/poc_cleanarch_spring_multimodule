@@ -9,7 +9,7 @@ import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.external.datasources.customer.entity.AddressJpaEntity;
 import com.brunotacca.external.datasources.customer.entity.CustomerJpaEntity;
 
-public class CustomerJpaFixtureTestFactory {
+public class CustomerJpaFixtureFactory {
 
   private final CustomerFixtureFactory customerFixtureFactory = new CustomerFixtureFactory();
 

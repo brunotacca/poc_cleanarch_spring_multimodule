@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
+import com.brunotacca.domain.entities.customer.CustomerFixtureFactory;
 import com.brunotacca.domain.usecases.customer.CustomerUseCaseFactory;
 import com.brunotacca.domain.usecases.customer.dto.CustomerOutputDTO;
 import com.brunotacca.domain.usecases.shared.UseCase;
@@ -27,7 +28,7 @@ class CustomerControllerTest {
   
   private final UseCase<?, ?> useCaseMock = mock(UseCase.class);
   private final UseCaseOnlyInput<?> useCaseOnlyInputMock = mock(UseCaseOnlyInput.class);
-  private final UUID validId = UUID.randomUUID();
+  private final UUID validId = CustomerFixtureFactory.VALID_ID;
   private final CustomerOutputDTO customerOutputMock = new CustomerOutputDTO(validId, "name", "email", false, "street", "number", "city", "zip");
 
   @BeforeEach

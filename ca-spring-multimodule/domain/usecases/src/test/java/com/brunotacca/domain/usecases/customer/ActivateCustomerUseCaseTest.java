@@ -25,6 +25,8 @@ import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class ActivateCustomerUseCaseTest {
   
+  private final CustomerFixtures customerFixtures = new CustomerFixtures(); 
+
   private CustomerDataAccess customerDataAccessMock = mock(CustomerDataAccess.class);
   private ActivateCustomerUseCase activateCustomerUseCase = new ActivateCustomerUseCase(customerDataAccessMock);
 

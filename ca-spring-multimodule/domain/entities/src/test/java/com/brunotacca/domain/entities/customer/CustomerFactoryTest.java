@@ -25,21 +25,21 @@ import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class CustomerFactoryTest {
 
-  private final CustomerFixtureFactory customerFixtureFactory = new CustomerFixtureFactory(); 
+  private final CustomerFixtures customerFixtures = new CustomerFixtures(); 
 
-  private final String validName = CustomerFixtureFactory.VALID_NAME;
-  private final String validEmail = CustomerFixtureFactory.VALID_EMAIL;
+  private final String validName = CustomerFixtures.VALID_NAME;
+  private final String validEmail = CustomerFixtures.VALID_EMAIL;
   private Address validAddress;
-  private final String validStreet = CustomerFixtureFactory.VALID_STREET;
-  private final String validNumber = CustomerFixtureFactory.VALID_NUMBER;
-  private final String validZip = CustomerFixtureFactory.VALID_ZIP;
-  private final String validCity = CustomerFixtureFactory.VALID_CITY;
+  private final String validStreet = CustomerFixtures.VALID_STREET;
+  private final String validNumber = CustomerFixtures.VALID_NUMBER;
+  private final String validZip = CustomerFixtures.VALID_ZIP;
+  private final String validCity = CustomerFixtures.VALID_CITY;
 
   private final CustomerFactory customerFactory = new CustomerFactory();
 
   @BeforeEach
   void setUp() throws BusinessException {
-    this.validAddress = customerFixtureFactory.getValidAddress();
+    this.validAddress = customerFixtures.getValidAddress();
   }
 
   @Nested

@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 
-public class CustomerFixtureFactory {
+public class CustomerFixtures {
 
   private final CustomerFactory customerFactory = new CustomerFactory();
 

@@ -23,16 +23,16 @@ import com.brunotacca.domain.entities.shared.exceptions.causes.RequiredFieldExce
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class DefaultCustomerTest {
 
-  private final CustomerFixtureFactory customerFixtureFactory = new CustomerFixtureFactory(); 
+  private final CustomerFixtures customerFixtures = new CustomerFixtures(); 
 
-  private String validName = CustomerFixtureFactory.VALID_NAME;
-  private String validEmail = CustomerFixtureFactory.VALID_EMAIL;
+  private String validName = CustomerFixtures.VALID_NAME;
+  private String validEmail = CustomerFixtures.VALID_EMAIL;
   private Address validAddress = mock(Address.class, Mockito.RETURNS_DEEP_STUBS);
   private Customer validCustomer;
 
   @BeforeEach
   void beforeEach() throws BusinessException {
-    this.validCustomer = customerFixtureFactory.getValidCustomer(true);
+    this.validCustomer = customerFixtures.getValidCustomer(true);
   }
 
   @Test

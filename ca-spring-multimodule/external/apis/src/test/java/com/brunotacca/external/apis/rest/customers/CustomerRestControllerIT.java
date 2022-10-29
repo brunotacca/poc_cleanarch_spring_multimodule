@@ -44,6 +44,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.brunotacca.domain.entities.customer.Customer;
+import com.brunotacca.domain.entities.customer.CustomerFixtures;
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.usecases.dataaccess.CustomerDataAccess;
 import com.brunotacca.external.apis.CustomDisplayNameGenerator;
@@ -68,9 +69,8 @@ class CustomerRestControllerIT {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
-  private final TestCustomerValuesFactory testCustomerValuesFactory = new TestCustomerValuesFactory();
-  private final String validId = testCustomerValuesFactory.validId.toString();
-  private final String validName = testCustomerValuesFactory.validName;
+  private final CustomerFixtures customerFixtures = new CustomerFixtures();
+  private final String validId = CustomerFixtures.VALID_ID.toString();
   private Customer validCustomer;
 
   private Map<String, Object> validNewCustomerInput = new HashMap<>();
@@ -82,14 +82,14 @@ class CustomerRestControllerIT {
 
   @BeforeEach
   void beforeEach() throws BusinessException {
-    this.validCustomer = testCustomerValuesFactory.getValidCustomer(false);
+    this.validCustomer = customerFixtures.getValidCustomer(false);
   
-    this.validNewCustomerInput.put("name", validName);
-    this.validNewCustomerInput.put("email", "foo@bar.com");
-    this.validNewCustomerInput.put("street", "Foo Street");
-    this.validNewCustomerInput.put("number", "123B");
-    this.validNewCustomerInput.put("city", "Bay Bar");
-    this.validNewCustomerInput.put("zip", "000000-000");
+    this.validNewCustomerInput.put("name", CustomerFixtures.VALID_NAME);
+    this.validNewCustomerInput.put("email", CustomerFixtures.VALID_EMAIL);
+    this.validNewCustomerInput.put("street", CustomerFixtures.VALID_STREET);
+    this.validNewCustomerInput.put("number", CustomerFixtures.VALID_NUMBER);
+    this.validNewCustomerInput.put("city", CustomerFixtures.VALID_CITY);
+    this.validNewCustomerInput.put("zip", CustomerFixtures.VALID_ZIP);
 
     this.invalidNewCustomerInput.put("name", "");
 
@@ -156,7 +156,7 @@ class CustomerRestControllerIT {
         .andExpect(status().isOk())
         .andDo(
           document(
-            "customers-getbyid", 
+            "customers-getbyid",
             preprocessRequest(prettyPrint()), 
             preprocessResponse(prettyPrint()), 
             pathParameters(parameterWithName("id").description("Customer Id")),
@@ -188,7 +188,7 @@ class CustomerRestControllerIT {
 
       customerDataAccess.create(validCustomer);
 
-      mockMvc.perform(get("/customers?name={customerName}", testCustomerValuesFactory.validName).accept(MediaTypes.HAL_FORMS_JSON_VALUE))
+      mockMvc.perform(get("/customers?name={customerName}", CustomerFixtures.VALID_NAME).accept(MediaTypes.HAL_FORMS_JSON_VALUE))
         .andExpect(status().isOk())
         .andDo(
           document(

@@ -4,7 +4,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>POC - Clean Architecture Spring Multi Module</title>
-<date>2022-09-07</date>
+<date>2022-09-27</date>
 <author>
 <personname>
 <firstname>Bruno</firstname>
@@ -188,14 +188,14 @@ Content-Length: 201
 <title>Request structure</title>
 <programlisting language="http" linenumbering="unnumbered">POST /customers HTTP/1.1
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 145
+Content-Length: 139
 Host: localhost:8080
 
 {
   "zip" : "000000-000",
-  "number" : "123B",
-  "city" : "Bay Bar",
-  "street" : "Foo Street",
+  "number" : "123-A",
+  "city" : "city",
+  "street" : "street",
   "name" : "Foo Bar",
   "email" : "foo@bar.com"
 }</programlisting>
@@ -249,14 +249,14 @@ Host: localhost:8080
 <section xml:id="_example_response_2">
 <title>Example response</title>
 <programlisting language="http" linenumbering="unnumbered">HTTP/1.1 201 Created
-Location: /a77cc8c6-3767-4520-813d-5258af22b89e
+Location: /91f9d915-d1ea-4eb8-97d1-cfabdffc5085
 Content-Type: application/prs.hal-forms+json
 Content-Length: 129
 
 {
   "_links" : {
     "edit" : {
-      "href" : "http://localhost:8080/customers/a77cc8c6-3767-4520-813d-5258af22b89e"
+      "href" : "http://localhost:8080/customers/91f9d915-d1ea-4eb8-97d1-cfabdffc5085"
     }
   }
 }</programlisting>
@@ -288,9 +288,9 @@ Content-Length: 129
     -H 'Content-Type: application/hal+json;charset=UTF-8' \
     -d '{
   "zip" : "000000-000",
-  "number" : "123B",
-  "city" : "Bay Bar",
-  "street" : "Foo Street",
+  "number" : "123-A",
+  "city" : "city",
+  "street" : "street",
   "name" : "Foo Bar",
   "email" : "foo@bar.com"
 }'</programlisting>
@@ -427,7 +427,24 @@ Content-Length: 1533
 <programlisting language="http" linenumbering="unnumbered">GET /customers?name=Foo%20Bar HTTP/1.1
 Accept: application/prs.hal-forms+json
 Host: localhost:8080</programlisting>
-<simpara>Unresolved directive in api-guide.adoc - include::/home/tacca/Development/github/poc_cleanarch_spring_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customers-findbyname/path-parameters.adoc[]</simpara>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Parameter</entry>
+<entry align="left" valign="top">Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>name</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Customer name to search</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
 </section>
 <section xml:id="_curl_request_4">
 <title>CURL request</title>
@@ -548,14 +565,14 @@ Content-Length: 1942
 <title>Request structure</title>
 <programlisting language="http" linenumbering="unnumbered">PUT /customers/e3119506-030a-4877-a219-389ef21118a4 HTTP/1.1
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 145
+Content-Length: 139
 Host: localhost:8080
 
 {
   "zip" : "000000-000",
-  "number" : "123B",
-  "city" : "Bay Bar",
-  "street" : "Foo Street",
+  "number" : "123-A",
+  "city" : "city",
+  "street" : "street",
   "name" : "Foo Bar",
   "email" : "foo@bar.com"
 }</programlisting>
@@ -631,9 +648,9 @@ Host: localhost:8080
     -H 'Content-Type: application/hal+json;charset=UTF-8' \
     -d '{
   "zip" : "000000-000",
-  "number" : "123B",
-  "city" : "Bay Bar",
-  "street" : "Foo Street",
+  "number" : "123-A",
+  "city" : "city",
+  "street" : "street",
   "name" : "Foo Bar",
   "email" : "foo@bar.com"
 }'</programlisting>
@@ -642,16 +659,16 @@ Host: localhost:8080
 <title>Example response</title>
 <programlisting language="http" linenumbering="unnumbered">HTTP/1.1 200 OK
 Content-Type: application/prs.hal-forms+json
-Content-Length: 1539
+Content-Length: 1533
 
 {
   "id" : "e3119506-030a-4877-a219-389ef21118a4",
   "name" : "Foo Bar",
   "email" : "foo@bar.com",
   "active" : false,
-  "street" : "Foo Street",
-  "number" : "123B",
-  "city" : "Bay Bar",
+  "street" : "street",
+  "number" : "123-A",
+  "city" : "city",
   "zip" : "000000-000",
   "_links" : {
     "self" : {

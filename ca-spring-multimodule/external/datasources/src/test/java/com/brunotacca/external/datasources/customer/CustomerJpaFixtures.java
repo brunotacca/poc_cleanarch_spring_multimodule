@@ -4,25 +4,25 @@ import java.util.UUID;
 
 import com.brunotacca.domain.entities.customer.Address;
 import com.brunotacca.domain.entities.customer.Customer;
-import com.brunotacca.domain.entities.customer.CustomerFactory;
+import com.brunotacca.domain.entities.customer.CustomerFixtures;
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.external.datasources.customer.entity.AddressJpaEntity;
 import com.brunotacca.external.datasources.customer.entity.CustomerJpaEntity;
 
-public class TestCustomerValuesFactory {
+public class CustomerJpaFixtures {
 
-  private final CustomerFactory customerFactory = new CustomerFactory();
+  private final CustomerFixtures customerFixtures = new CustomerFixtures();
 
-  public final UUID validId = UUID.fromString("e3119506-030a-4877-a219-389ef21118a4");
-  public final String validName = "Foo Bar";
-  public final String validEmail = "foo@bar.com";
-  public final String validStreet = "street";
-  public final String validNumber = "123-A";
-  public final String validZip = "000000-000";
-  public final String validCity = "city";
+  public final UUID validId = CustomerFixtures.VALID_ID;
+  public final String validName = CustomerFixtures.VALID_NAME;
+  public final String validEmail = CustomerFixtures.VALID_EMAIL;
+  public final String validStreet = CustomerFixtures.VALID_STREET;
+  public final String validNumber = CustomerFixtures.VALID_NUMBER;
+  public final String validZip = CustomerFixtures.VALID_ZIP;
+  public final String validCity = CustomerFixtures.VALID_CITY;
 
   public Customer getValidCustomer(boolean active) throws BusinessException {
-    return customerFactory.recreateExistingCustomer(validId, validName, validEmail, active, getValidAddress());
+    return customerFixtures.getValidCustomer(active);
   }
 
   public CustomerJpaEntity getValidCustomerJpa(boolean active) {
@@ -34,8 +34,7 @@ public class TestCustomerValuesFactory {
   }
 
   public Address getValidAddress() throws BusinessException {
-    return customerFactory.createAddress(validStreet, validNumber, validZip, validCity);
+    return customerFixtures.getValidAddress();
   }
-
 
 }

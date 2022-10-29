@@ -38,7 +38,7 @@ class CustomerDataAccessImplTest {
 
   private CustomerJpaEntityMapper customerJpaEntityMapperMock = Mockito.mock(CustomerJpaEntityMapper.class);
 
-  private final TestCustomerValuesFactory testCustomerValuesFactory = new TestCustomerValuesFactory();
+  private final CustomerJpaFixtures customerJpaFixtureTestFactory = new CustomerJpaFixtures();
 
   private Customer validCustomer;
   private CustomerJpaEntity validCustomerJpa;
@@ -48,8 +48,8 @@ class CustomerDataAccessImplTest {
   void setUp() throws BusinessException, DataAccessException {
     customerDataAccess = new CustomerDataAccessImpl(customerRepositoryMock, customerJpaEntityMapperMock);
 
-    validCustomer = testCustomerValuesFactory.getValidCustomer(true);
-    validCustomerJpa  = testCustomerValuesFactory.getValidCustomerJpa(true);
+    validCustomer = customerJpaFixtureTestFactory.getValidCustomer(true);
+    validCustomerJpa  = customerJpaFixtureTestFactory.getValidCustomerJpa(true);
     validCustomerJpaList = List.of(validCustomerJpa, validCustomerJpa);
 
     doReturn(Optional.of(validCustomerJpa)).when(customerRepositoryMock).findById(any());

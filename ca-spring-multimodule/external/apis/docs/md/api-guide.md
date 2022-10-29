@@ -188,14 +188,14 @@ A `POST` request is used to access customer creation.
 
     POST /customers HTTP/1.1
     Content-Type: application/hal+json;charset=UTF-8
-    Content-Length: 145
+    Content-Length: 139
     Host: localhost:8080
 
     {
       "zip" : "000000-000",
-      "number" : "123B",
-      "city" : "Bay Bar",
-      "street" : "Foo Street",
+      "number" : "123-A",
+      "city" : "city",
+      "street" : "street",
       "name" : "Foo Bar",
       "email" : "foo@bar.com"
     }
@@ -250,14 +250,14 @@ A `POST` request is used to access customer creation.
 ### Example response
 
     HTTP/1.1 201 Created
-    Location: /a77cc8c6-3767-4520-813d-5258af22b89e
+    Location: /91f9d915-d1ea-4eb8-97d1-cfabdffc5085
     Content-Type: application/prs.hal-forms+json
     Content-Length: 129
 
     {
       "_links" : {
         "edit" : {
-          "href" : "http://localhost:8080/customers/a77cc8c6-3767-4520-813d-5258af22b89e"
+          "href" : "http://localhost:8080/customers/91f9d915-d1ea-4eb8-97d1-cfabdffc5085"
         }
       }
     }
@@ -290,9 +290,9 @@ resource</p></td>
         -H 'Content-Type: application/hal+json;charset=UTF-8' \
         -d '{
       "zip" : "000000-000",
-      "number" : "123B",
-      "city" : "Bay Bar",
-      "street" : "Foo Street",
+      "number" : "123-A",
+      "city" : "city",
+      "street" : "street",
       "name" : "Foo Bar",
       "email" : "foo@bar.com"
     }'
@@ -433,8 +433,24 @@ A `GET` request is also used to find customers by name.
     Accept: application/prs.hal-forms+json
     Host: localhost:8080
 
-Unresolved directive in api-guide.adoc -
-include::/home/tacca/Development/github/poc\_cleanarch\_spring\_multimodule/ca-spring-multimodule/external/apis/target/generated-snippets/customers-findbyname/path-parameters.adoc\[\]
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p><code>name</code></p></td>
+<td style="text-align: left;"><p>Customer name to search</p></td>
+</tr>
+</tbody>
+</table>
 
 ### CURL request
 
@@ -556,14 +572,14 @@ A `PUT` request is used to access customer update.
 
     PUT /customers/e3119506-030a-4877-a219-389ef21118a4 HTTP/1.1
     Content-Type: application/hal+json;charset=UTF-8
-    Content-Length: 145
+    Content-Length: 139
     Host: localhost:8080
 
     {
       "zip" : "000000-000",
-      "number" : "123B",
-      "city" : "Bay Bar",
-      "street" : "Foo Street",
+      "number" : "123-A",
+      "city" : "city",
+      "street" : "street",
       "name" : "Foo Bar",
       "email" : "foo@bar.com"
     }
@@ -643,9 +659,9 @@ A `PUT` request is used to access customer update.
         -H 'Content-Type: application/hal+json;charset=UTF-8' \
         -d '{
       "zip" : "000000-000",
-      "number" : "123B",
-      "city" : "Bay Bar",
-      "street" : "Foo Street",
+      "number" : "123-A",
+      "city" : "city",
+      "street" : "street",
       "name" : "Foo Bar",
       "email" : "foo@bar.com"
     }'
@@ -654,16 +670,16 @@ A `PUT` request is used to access customer update.
 
     HTTP/1.1 200 OK
     Content-Type: application/prs.hal-forms+json
-    Content-Length: 1539
+    Content-Length: 1533
 
     {
       "id" : "e3119506-030a-4877-a219-389ef21118a4",
       "name" : "Foo Bar",
       "email" : "foo@bar.com",
       "active" : false,
-      "street" : "Foo Street",
-      "number" : "123B",
-      "city" : "Bay Bar",
+      "street" : "street",
+      "number" : "123-A",
+      "city" : "city",
       "zip" : "000000-000",
       "_links" : {
         "self" : {

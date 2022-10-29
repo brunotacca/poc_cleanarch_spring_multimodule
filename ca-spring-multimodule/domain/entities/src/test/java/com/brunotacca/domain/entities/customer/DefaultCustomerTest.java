@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.UUID;
 
@@ -44,7 +46,14 @@ class DefaultCustomerTest {
     assertEquals(validName, created.getName());
     assertEquals(validEmail, created.getEmail());
     assertEquals(validAddress, created.getAddress());
-}
+  }
+
+  @Test
+  void shouldCallAddressValidationWhenCreatingCustomer() throws BusinessException {
+    new DefaultCustomer(UUID.randomUUID(), validName, validEmail, validAddress);
+
+    verify(validAddress, times(1)).validate();
+  }
 
   @Nested
   class CustomerValidationShouldThrow {

@@ -18,7 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
-import com.brunotacca.external.datasources.customer.CustomerJpaFixtureFactory;
+import com.brunotacca.external.datasources.customer.CustomerJpaFixtures;
 import com.brunotacca.external.datasources.customer.entity.CustomerJpaEntity;
 
 @DataJpaTest
@@ -27,7 +27,7 @@ import com.brunotacca.external.datasources.customer.entity.CustomerJpaEntity;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 class CustomerRepositoryTest {
 
-  private final CustomerJpaFixtureFactory testCustomerValuesFactory = new CustomerJpaFixtureFactory();
+  private final CustomerJpaFixtures testCustomerValuesFactory = new CustomerJpaFixtures();
   private CustomerJpaEntity validCustomerJpa = testCustomerValuesFactory.getValidCustomerJpa(true);
 
   @Autowired

@@ -15,12 +15,14 @@
 
   <dependencies>
   
-    <!-- compile -->
+    <!-- compile internal -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>domain-usecases</artifactId>
       <version>${project.version}</version>
     </dependency>
+
+    <!-- compile external -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

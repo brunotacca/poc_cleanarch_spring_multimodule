@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import com.brunotacca.domain.entities.customer.Customer;
+import com.brunotacca.domain.entities.customer.CustomerFixtures;
 import com.brunotacca.domain.entities.shared.exceptions.BusinessException;
 import com.brunotacca.domain.usecases.CustomDisplayNameGenerator;
 import com.brunotacca.domain.usecases.customer.dto.CustomerIdDTO;
@@ -25,14 +26,12 @@ import com.brunotacca.domain.usecases.shared.exceptions.DomainException;
 @DisplayNameGeneration(CustomDisplayNameGenerator.IndicativeSentences.class)
 class ActivateCustomerUseCaseTest {
   
-  private final CustomerFixtures customerFixtures = new CustomerFixtures(); 
-
   private CustomerDataAccess customerDataAccessMock = mock(CustomerDataAccess.class);
   private ActivateCustomerUseCase activateCustomerUseCase = new ActivateCustomerUseCase(customerDataAccessMock);
 
   private final Customer customerMock = mock(Customer.class);
 
-  private final UUID validId = UUID.fromString("e3119506-030a-4877-a219-389ef21118a4");
+  private final UUID validId = CustomerFixtures.VALID_ID;
   private CustomerIdDTO validInputDTO = new CustomerIdDTO(validId);
 
   @BeforeEach
